@@ -13,7 +13,7 @@ import android.support.design.widget.TabLayout;
 
 import in.co.iodev.formykerala.R;
 
-public class counter extends Fragment {
+public class DonorHomeActivity extends Fragment {
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 4;

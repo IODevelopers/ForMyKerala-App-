@@ -8,6 +8,17 @@ public class DataModel {
     String District;
     String Battery_percentage;
     String TimeIndex;
+String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
 
     public String getAlternateContactNumber() {
         return AlternateContactNumber;
