@@ -9,6 +9,15 @@ public class DataModel {
     String Battery_percentage;
     String TimeIndex;
 String phoneNumber;
+String OTP;
+
+    public String getOTP() {
+        return OTP;
+    }
+
+    public void setOTP(String OTP) {
+        this.OTP = OTP;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

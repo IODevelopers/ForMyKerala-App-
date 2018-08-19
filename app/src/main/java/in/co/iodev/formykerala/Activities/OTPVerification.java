@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -19,11 +20,14 @@ import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 
 public class OTPVerification extends AppCompatActivity {
     EditText phone;
     Gson gson = new Gson();
     SharedPreferences sharedPref;
+    Boolean flag=true;
 
 
     String StringData,request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp",TimeIndex;
@@ -32,6 +36,15 @@ public class OTPVerification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
+        sharedPref=getDefaultSharedPreferences(getApplicationContext());
+        if(sharedPref.getString("TimeIndex","").equals("")){
+            request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp";
+        }
+        else {
+            request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/resend-otp";
+            flag=false;
+        }
+
     }
 
     public void verify(View view) {
@@ -39,6 +52,10 @@ public class OTPVerification extends AppCompatActivity {
         StringData=phone.getText().toString();
         DataModel d=new DataModel();
         d.setPhoneNumber(StringData);
+        if(!flag)
+        {
+            d.setTimeIndex(sharedPref.getString("TimeIndex",""));
+        }
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
@@ -71,16 +88,15 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
     // onPostExecute displays the results of the AsyncTask.
     @Override
     protected void onPostExecute(String result) {
-        JSONArray response;
+        JSONObject response;
         JSONObject responseObject;
         try {
-            response = new JSONArray(result);
-            responseObject = response.getJSONObject(0);
-            Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
+            responseObject = new JSONObject(result);
+             Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
            SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
             editor.apply();
-
+            startActivity(new Intent(getApplicationContext(),OTPValidation.class));
             finish();
 
         } catch (JSONException e) {
