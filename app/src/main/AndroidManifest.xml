@@ -10,16 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
-
-        </activity>
-        <activity android:name=".Activities.RecieverHome" />
-        <activity android:name=".Activities.OTPVerification" />
-        <activity android:name=".Activities.GoogleLogin">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
