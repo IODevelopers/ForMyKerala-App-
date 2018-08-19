@@ -24,6 +24,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import in.co.iodev.formykerala.HTTPPost;
 import in.co.iodev.formykerala.R;
 
 public class OTPVerification extends AppCompatActivity {
@@ -49,11 +50,12 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-
+         String response;
         // params comes from the execute() call: params[0] is the url.
         try {
             try {
-                return HttpPost2(urls[0]);
+                response= HTTPPost.getJsonResponse(urls[0],null);
+                return response;
             } catch (Exception e) {
                 e.printStackTrace();
                 return "Error!";
@@ -69,49 +71,6 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
     }
 
-    private String HttpPost2(String myUrl) throws IOException {
-        String result = "";
 
-        URL url = new URL(myUrl);
-
-        // 1. create HttpURLConnection Error!
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-        OutputStream os = conn.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(StringData);
-        writer.flush();
-        writer.close();
-        os.close();
-
-        // 4. make POST request to the given URL
-
-        conn.connect();
-
-        Log.d("Response from second", conn.getResponseMessage().toString());
-        int responseCode = conn.getResponseCode();
-        Log.d("Response Code:", String.valueOf(responseCode));
-        if (responseCode == HttpsURLConnection.HTTP_OK) {
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            conn.getInputStream()));
-            StringBuffer sb = new StringBuffer("");
-            String line = "";
-            while ((line = in.readLine()) != null) {
-
-                sb.append(line);
-                break;
-            }
-            in.close();
-            return conn.getResponseMessage() + "";
-
-        } else {
-            return null;
-        }
-        // 5. return response message
-
-    }
 }}
 
