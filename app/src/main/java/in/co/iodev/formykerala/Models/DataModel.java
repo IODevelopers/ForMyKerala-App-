@@ -8,8 +8,9 @@ public class DataModel {
     String District;
     String Battery_percentage;
     String TimeIndex;
-String phoneNumber;
-String OTP;
+    String phoneNumber;
+    String OTP;
+
 
     public String getOTP() {
         return OTP;

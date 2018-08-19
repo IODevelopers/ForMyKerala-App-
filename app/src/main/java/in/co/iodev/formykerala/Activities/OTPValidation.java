@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Trace;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.TRUE;
 
 public class OTPValidation extends AppCompatActivity {
     SharedPreferences sharedPref;
@@ -80,7 +82,12 @@ public class OTPValidation extends AppCompatActivity {
             try {
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
+                if(responseObject.getString("Message").equals("Success")){
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("Login",TRUE);
+                    editor.apply();
 
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }    }
