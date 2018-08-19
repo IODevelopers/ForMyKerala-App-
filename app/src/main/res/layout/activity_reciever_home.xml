@@ -24,5 +24,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="188dp"
         android:onClick="view_items"
-        android:text="REQESTED ITEMS" />
+        android:text="REQESTED ITEMS NEW" />
 </RelativeLayout>
