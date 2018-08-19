@@ -10,7 +10,31 @@ public class DataModel {
     String TimeIndex;
     String phoneNumber;
     String OTP;
+    String Name,Address,Taluk;
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getTaluk() {
+        return Taluk;
+    }
+
+    public void setTaluk(String taluk) {
+        Taluk = taluk;
+    }
 
     public String getOTP() {
         return OTP;

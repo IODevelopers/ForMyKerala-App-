@@ -17,11 +17,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-</activity>
-        <activity android:name=".Activities.OTPValidation">
-
-
         </activity>
+        <activity android:name=".Activities.OTPValidation"></activity>
+        <activity android:name=".Activities.RecieverDetails"></activity>
     </application>
 
 </manifest>

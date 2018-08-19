@@ -21,6 +21,8 @@ import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
+import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 
 
 public class OTPVerification extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class OTPVerification extends AppCompatActivity {
     Boolean flag=true;
 
 
-    String StringData,request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp",TimeIndex;
+    String StringData,request_post_url=Generate_OTP,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,10 @@ public class OTPVerification extends AppCompatActivity {
         setContentView(R.layout.activity_otpverification);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
-            request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp";
+            request_post_url=Generate_OTP;
         }
         else {
-            request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/resend-otp";
+            request_post_url=Resend_OTP;
             flag=false;
         }
 
