@@ -20,6 +20,7 @@ import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 
 public class RecieverDetails extends AppCompatActivity {
     EditText name,address,district,taluk;
@@ -27,7 +28,7 @@ public class RecieverDetails extends AppCompatActivity {
     Gson gson = new Gson();
     String StringData;
     SharedPreferences sharedPref;
-    String request_post_url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp",TimeIndex;
+    String request_post_url=Register_Receivers,TimeIndex;
 
 
     @Override
