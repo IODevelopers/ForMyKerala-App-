@@ -24,7 +24,6 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
 import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 
-
 public class OTPVerification extends AppCompatActivity {
     EditText phone;
     Gson gson = new Gson();

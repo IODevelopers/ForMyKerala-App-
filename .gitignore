@@ -8,4 +8,4 @@
 /build
 /captures
 .externalNativeBuild
-/app/src/main/java/in/co/iodev/formykerala/Class/APIS.java
+/app/src/main/java/in/co/iodev/formykerala/Constants/Constants.java
