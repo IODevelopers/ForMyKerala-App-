@@ -4,25 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.RecieverHome">
+    tools:context=".Activities.OTPVerification">
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="152dp"
-        android:onClick="request"
-        android:text="REQUEST ITEMS" />
+        android:layout_marginTop="196dp"
+        android:text="TextView"
+        tools:text="Enter OTP" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:ems="15"
+        android:inputType="phone" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="188dp"
-        android:onClick="view_items"
-        android:text="REQESTED ITE" />
+        android:layout_marginBottom="143dp"
+        android:onClick="verify"
+        android:text="Verify" />
 </RelativeLayout>
