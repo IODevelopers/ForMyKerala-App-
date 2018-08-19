@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -26,10 +27,11 @@ import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 
 public class OTPVerification extends AppCompatActivity {
     EditText phone;
+    Button submit;
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
-
+    DataModel d;
 
     String StringData,request_post_url=Generate_OTP,TimeIndex;
 
@@ -37,6 +39,8 @@ public class OTPVerification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
+        phone=findViewById(R.id.phone);
+        submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
             request_post_url=Generate_OTP;
@@ -45,13 +49,18 @@ public class OTPVerification extends AppCompatActivity {
             request_post_url=Resend_OTP;
             flag=false;
         }
-
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verify();
+            }
+        });
     }
 
-    public void verify(View view) {
-        phone=findViewById(R.id.phone);
+    public void verify() {
+
         StringData=phone.getText().toString();
-        DataModel d=new DataModel();
+        d=new DataModel();
         d.setPhoneNumber(StringData);
         if(!flag)
         {
@@ -96,9 +105,10 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
            SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
+            editor.putString("PhoneNumber", d.getPhoneNumber());
             editor.apply();
             startActivity(new Intent(getApplicationContext(),OTPValidation.class));
-            finish();
+
 
         } catch (JSONException e) {
             e.printStackTrace();

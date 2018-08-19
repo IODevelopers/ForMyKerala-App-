@@ -1,34 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.OTPVerification">
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:elevation="5dp"
+        >
 
-    <TextView
-        android:id="@+id/textView"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryBlue">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@mipmap/back" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="222dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="50dp"
+                android:paddingBottom="30dp"
+                android:src="@mipmap/logootp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <EditText
+        android:layout_gravity="center"
+        android:id="@+id/country_code"
+        android:layout_marginTop="50dp"
+        android:hint="India(+91)"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="196dp"
-        android:text="TextView"
-        tools:text="Enter OTP" />
-
+        android:layout_centerVertical="true"
+        android:ems="15"
+        android:inputType="phone" />
     <EditText
+        android:layout_gravity="center"
         android:id="@+id/phone"
+        android:layout_marginTop="20dp"
+        android:hint="Your Phone Number"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:ems="15"
         android:inputType="phone" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="143dp"
-        android:onClick="verify"
-        android:text="Verify" />
-</RelativeLayout>
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="100px"
+        >
+        <Button
+            android:id="@+id/request_otp_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Submit"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="#4885ED"/>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+</ScrollView>
