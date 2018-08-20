@@ -31,6 +31,7 @@
             android:id="@+id/edit_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="6"
