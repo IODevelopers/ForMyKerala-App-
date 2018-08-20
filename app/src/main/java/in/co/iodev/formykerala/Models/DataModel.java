@@ -10,7 +10,16 @@ public class DataModel {
     String TimeIndex;
     String PhoneNumber;
     String OTP;
+    String PIN;
     String Name,Address,Taluk;
+
+    public String getPIN() {
+        return PIN;
+    }
+
+    public void setPIN(String PIN) {
+        this.PIN = PIN;
+    }
 
     public String getName() {
         return Name;

@@ -3,8 +3,8 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +23,9 @@ import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Pin_Selection;
-import static in.co.iodev.formykerala.Constants.Constants.Verify_OTP;
 import static java.lang.Boolean.TRUE;
 
-public class PinSelection extends AppCompatActivity {
+public class PinReset extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText otp1,otp2,otp3,otp4;
     Button verify;
@@ -105,7 +104,7 @@ public class PinSelection extends AppCompatActivity {
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                     editor.putBoolean("Login",TRUE);
                     editor.apply();
-                    startActivity(new Intent(PinSelection.this,ReceiverDetails.class));
+                    startActivity(new Intent(PinReset.this,ReceiverDetails.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();

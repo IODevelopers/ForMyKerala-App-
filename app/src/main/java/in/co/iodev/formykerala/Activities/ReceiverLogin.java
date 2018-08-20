@@ -23,6 +23,7 @@ import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
+import static in.co.iodev.formykerala.Constants.Constants.Receiver_Login;
 import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 import static java.lang.Boolean.FALSE;
 
@@ -35,7 +36,7 @@ public class ReceiverLogin extends AppCompatActivity {
     DataModel d;
     EditText otp1,otp2,otp3,otp4;
 
-    String StringData,StringData1,request_post_url="",TimeIndex;
+    String StringData,StringData1,request_post_url=Receiver_Login,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class ReceiverLogin extends AppCompatActivity {
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
+        sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
         if(sharedPref.getBoolean("Login",FALSE
         ))
@@ -63,13 +65,7 @@ public class ReceiverLogin extends AppCompatActivity {
         }
         submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-        if(sharedPref.getString("TimeIndex","").equals("")){
-            request_post_url=Generate_OTP;
-        }
-        else {
-            request_post_url=Resend_OTP;
-            flag=false;
-        }
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +88,7 @@ public class ReceiverLogin extends AppCompatActivity {
 
         d=new DataModel();
         d.setPhoneNumber(StringData);
-        d.setOTP(StringData1);
+        d.setPIN(StringData1);
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
@@ -102,7 +98,12 @@ public class ReceiverLogin extends AppCompatActivity {
 
     }
 
-private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+    public void forgot(View view) {
+       startActivity(new Intent(ReceiverLogin.this,ForgotPin.class));
+
+    }
+
+    private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
@@ -129,13 +130,15 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
         JSONObject responseObject;
         try {
             responseObject = new JSONObject(result);
+            Log.i("jisjoe",result.toString());
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
-           SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-            editor.putString("PhoneNumber", d.getPhoneNumber());
-            editor.apply();
-            startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
-
+           if(responseObject.getString("Message").equals("Success")) {
+               SharedPreferences.Editor editor = sharedPref.edit();
+               editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
+               editor.putString("PhoneNumber", d.getPhoneNumber());
+               editor.apply();
+               startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+           }
 
         } catch (JSONException e) {
             e.printStackTrace();

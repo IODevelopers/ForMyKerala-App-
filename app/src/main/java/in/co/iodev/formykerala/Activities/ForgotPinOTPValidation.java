@@ -3,8 +3,8 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,24 +22,22 @@ import in.co.iodev.formykerala.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static in.co.iodev.formykerala.Constants.Constants.Pin_Selection;
 import static in.co.iodev.formykerala.Constants.Constants.Verify_OTP;
-import static java.lang.Boolean.TRUE;
 
-public class PinSelection extends AppCompatActivity {
+public class ForgotPinOTPValidation extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText otp1,otp2,otp3,otp4;
     Button verify;
     Gson gson = new Gson();
 
 
-    String StringData,request_post_url=Pin_Selection,TimeIndex;
+    String StringData,request_post_url=Verify_OTP,TimeIndex;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pinselection);
+        setContentView(R.layout.activity_otpvalidation);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -64,8 +62,7 @@ public class PinSelection extends AppCompatActivity {
     public void verify() {
         StringData=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
         DataModel d=new DataModel();
-        d.setPIN(StringData);
-        d.setPhoneNumber(sharedPref.getString("PhoneNumber",""));
+        d.setOTP(StringData);
         d.setTimeIndex(TimeIndex);
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
@@ -101,23 +98,17 @@ public class PinSelection extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("Login",TRUE);
-                    editor.apply();
-                    startActivity(new Intent(PinSelection.this,ReceiverDetails.class));
+                           startActivity(new Intent(ForgotPinOTPValidation.this,PinReset.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
-        }
+            }    }
 
 
-    }
-}
+    }}
 
 

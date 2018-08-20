@@ -9,6 +9,7 @@ public class Constants {
     public static String Generate_OTP="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/generate-otp";
     public static String Resend_OTP="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/otp/resend-otp";
     public static String Register_Receivers="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/register";
+    public static String Receiver_Login="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/login";
     public static String Pin_Selection="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/pin/create-pin";
 
 }
