@@ -40,6 +40,8 @@
         <activity android:name=".Activities.DOTPValidation"></activity>
         <activity android:name=".Activities.DPinSelection"></activity>
         <activity android:name=".Activities.DOTPVerification"></activity>
+        <activity android:name=".Activities.DForgotPinOTPValidation"></activity>
+        <activity android:name=".Activities.DPinReset"></activity>
 
     </application>
 

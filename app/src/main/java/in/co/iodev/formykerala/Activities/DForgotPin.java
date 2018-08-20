@@ -21,6 +21,7 @@ import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.DForgot_PIN_Generate;
 import static in.co.iodev.formykerala.Constants.Constants.Forgot_PIN_Generate;
 import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP_Forget;
 
@@ -32,7 +33,7 @@ public class DForgotPin extends AppCompatActivity {
     Boolean flag=true;
     DataModel d;
 
-    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
+    String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +134,7 @@ public class DForgotPin extends AppCompatActivity {
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
-                startActivity(new Intent(getApplicationContext(),ForgotPinOTPValidation.class));
+                startActivity(new Intent(getApplicationContext(),DForgotPinOTPValidation.class));
 
 
             } catch (JSONException e) {
