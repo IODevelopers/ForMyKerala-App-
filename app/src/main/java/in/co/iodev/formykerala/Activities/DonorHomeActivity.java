@@ -1,22 +1,19 @@
 package in.co.iodev.formykerala.Activities;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.design.widget.TabLayout;
 
 import in.co.iodev.formykerala.R;
 
-public class DonorHomeActivity extends Fragment {
+public class DonorHomeActivity extends FragmentActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static int NUM_PAGES = 4;
+    private static int NUM_PAGES = 3;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -25,23 +22,13 @@ public class DonorHomeActivity extends Fragment {
 
 
     @Override
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_donor_home, container, false);
-
-
-
-
-        return rootView;
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-        mViewPager = (ViewPager) view.findViewById(R.id.container);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_donor_home);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager)findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -59,26 +46,25 @@ public class DonorHomeActivity extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-           /* switch (position)
+            switch (position)
             {
                 case 0:
 
-                  *//*  tokens tab1=new tokens();*//*
+                    EditItemFragment tab1=new EditItemFragment();
 
                     return tab1;
                 case 1:
 
-                   *//* jobs tab2=new jobs();*//*
+                  EditQuantityFragment tab2=new EditQuantityFragment();
                     return tab2;
                 case 2:
 
-                    *//*search tab3=new search();*//*
+                   AcceptedItemFragment tab3=new AcceptedItemFragment();
                     return tab3;
 
                 default: return null;
 
             }
-*/           return null;
 
         }
 
