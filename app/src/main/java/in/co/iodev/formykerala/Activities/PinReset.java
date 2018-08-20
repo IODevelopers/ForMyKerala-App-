@@ -22,6 +22,7 @@ import in.co.iodev.formykerala.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Forgot_Reset_PIN;
 import static in.co.iodev.formykerala.Constants.Constants.Pin_Selection;
 import static java.lang.Boolean.TRUE;
 
@@ -32,7 +33,7 @@ public class PinReset extends AppCompatActivity {
     Gson gson = new Gson();
 
 
-    String StringData,request_post_url=Pin_Selection,TimeIndex;
+    String StringData,request_post_url=Forgot_Reset_PIN,TimeIndex;
 
 
     @Override

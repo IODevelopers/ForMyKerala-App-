@@ -28,10 +28,12 @@
         <activity android:name=".Activities.ReceiverRequirementsStatus">
 
         </activity>
+        <activity android:name=".Activities.ReceiverDetails"></activity>
         <activity android:name=".Activities.AcceptorsView"></activity>
         <activity android:name=".Activities.PinReset">
         </activity>
         <activity android:name=".Activities.ForgotPinOTPValidation"></activity>
+        <activity android:name=".Activities.ForgotPin"></activity>
     </application>
 
 </manifest>
