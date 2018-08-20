@@ -8,6 +8,15 @@ public class DataModel {
     String District;
     String Battery_percentage;
     String TimeIndex;
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
     String PhoneNumber;
     String OTP;
     String PIN;
@@ -53,13 +62,6 @@ public class DataModel {
         this.OTP = OTP;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.PhoneNumber = phoneNumber;
-    }
 
 
 
