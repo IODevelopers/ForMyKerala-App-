@@ -46,6 +46,7 @@ public class RecieverDetails extends AppCompatActivity {
     }
 
     public void next(View view) {
+        Log.i("jisjoe","jisjoe");
         Name=name.getText().toString();
         Address=address.getText().toString();
         District=district.getText().toString();
@@ -54,6 +55,7 @@ public class RecieverDetails extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Please provide all fields", Toast.LENGTH_LONG).show();
         }
         else {
+
             DataModel d=new DataModel();
             d.setName(Name);
             d.setAddress(Address);
@@ -61,7 +63,10 @@ public class RecieverDetails extends AppCompatActivity {
             d.setTaluk(Taluk);
             d.setTimeIndex(TimeIndex);
             StringData=gson.toJson(d);
+            Log.i("jisjoe",""+StringData);
+
             new HTTPAsyncTask2().execute(request_post_url);
+
 
         }
 
@@ -94,15 +99,22 @@ public class RecieverDetails extends AppCompatActivity {
             try {
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
-             //   if(responseObject.getString("Message").equals("Success"))
+                SharedPreferences.Editor editor = sharedPref.edit();
+
+                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
+                editor.commit();
+            //   if(responseObject.getString("Message").equals("Success"))
            //     startActivity(new Intent(getApplicationContext(),OTPValidation.class));
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }    }
+            }
+        }
 
 
-    }}
+
+    }
+}
 
 

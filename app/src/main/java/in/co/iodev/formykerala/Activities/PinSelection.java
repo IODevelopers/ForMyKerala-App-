@@ -25,7 +25,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Verify_OTP;
 import static java.lang.Boolean.TRUE;
 
-public class OTPValidation extends AppCompatActivity {
+public class PinSelection extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText otp1,otp2,otp3,otp4;
     Button verify;
@@ -38,7 +38,7 @@ public class OTPValidation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otpvalidation);
+        setContentView(R.layout.activity_pinselection);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -99,10 +99,13 @@ public class OTPValidation extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {
-                           startActivity(new Intent(OTPValidation.this,PinSelection.class));
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("Login",TRUE);
+                    editor.apply();
+                    startActivity(new Intent(PinSelection.this,RecieverDetails.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {
