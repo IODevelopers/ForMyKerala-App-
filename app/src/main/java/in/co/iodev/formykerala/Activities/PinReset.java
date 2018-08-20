@@ -62,15 +62,20 @@ public class PinReset extends AppCompatActivity {
     }
 
     public void verify() {
-        StringData=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
-        DataModel d=new DataModel();
-        d.setPIN(StringData);
-        d.setPhoneNumber(sharedPref.getString("PhoneNumber",""));
-        d.setTimeIndex(TimeIndex);
-        StringData=gson.toJson(d);
-        Log.i("jisjoe",StringData);
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
+            Toast.makeText(PinReset.this,"Please Enter Valid PIN",Toast.LENGTH_LONG).show();
+        }
+        else {
+            StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
+            DataModel d = new DataModel();
+            d.setPIN(StringData);
+            d.setPhoneNumber(sharedPref.getString("PhoneNumber", ""));
+            d.setTimeIndex(TimeIndex);
+            StringData = gson.toJson(d);
+            Log.i("jisjoe", StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+            new HTTPAsyncTask2().execute(request_post_url);
+        }
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 

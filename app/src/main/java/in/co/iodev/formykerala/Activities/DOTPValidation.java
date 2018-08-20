@@ -71,7 +71,7 @@ public class DOTPValidation extends AppCompatActivity {
                 d.setTimeIndex(TimeIndex);
                 d.setPhoneNumber(sharedPref.getString("PhoneNumber",""));
                 StringData=gson.toJson(d);
-                new HTTPAsyncTask2().execute(Resend_OTP);
+                new HTTPAsyncTask3().execute(Resend_OTP);
 
 
             }
@@ -96,14 +96,19 @@ public class DOTPValidation extends AppCompatActivity {
     }
 
     public void verify() {
-        StringData=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
-        DataModel d=new DataModel();
-        d.setOTP(StringData);
-        d.setTimeIndex(TimeIndex);
-        StringData=gson.toJson(d);
-        Log.i("jisjoe",StringData);
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
+            Toast.makeText(DOTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+        }
+        else {
+            StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
+            DataModel d = new DataModel();
+            d.setOTP(StringData);
+            d.setTimeIndex(TimeIndex);
+            StringData = gson.toJson(d);
+            Log.i("jisjoe", StringData);
 
-        new HTTPAsyncTask2().execute(Verify_OTP);
+            new HTTPAsyncTask2().execute(Verify_OTP);
+        }
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
@@ -134,11 +139,45 @@ public class DOTPValidation extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {
-                           startActivity(new Intent(DOTPValidation.this,DPinSelection.class));
+                    startActivity(new Intent(DOTPValidation.this,DPinSelection.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
                 }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }    }
+
+
+    } private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response;
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                try {
+                    response= HTTPPostGet.getJsonResponse(urls[0],StringData);
+                    Log.i("jisjoe",response.toString());
+                    return response;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "Error!";
+                }
+            } catch (Exception e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            JSONObject responseObject= null;
+            try {
+                responseObject = new JSONObject(result);
+                Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
