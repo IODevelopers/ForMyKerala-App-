@@ -29,13 +29,13 @@ import static java.lang.Boolean.FALSE;
 
 public class DonorLogin extends AppCompatActivity {
     EditText phone;
-    Button submit,register;
+    Button submit;
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
     DataModel d;
     EditText otp1,otp2,otp3,otp4;
-    TextView forgot;
+    TextView forgot,register;
 
     String StringData,StringData1,request_post_url=Donor_Login,TimeIndex;
 
