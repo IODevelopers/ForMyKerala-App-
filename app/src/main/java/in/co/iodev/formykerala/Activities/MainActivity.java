@@ -21,14 +21,22 @@ SharedPreferences sharedPref;
         setContentView(R.layout.activity_main);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
-        if(sharedPref.getBoolean("Login",FALSE
-        ))
+        if(sharedPref.getBoolean("Login",FALSE))
         {
             if(sharedPref.getBoolean("Edited",FALSE))
                 startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
             else
                 startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
 
+
+        }
+        else if (sharedPref.getBoolean("DLogin",FALSE))
+        {
+           /* if(sharedPref.getBoolean("DEdited",FALSE))
+                startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+            else
+                startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
+*/
 
         }
         receiver=findViewById(R.id.role_receiver);
@@ -51,6 +59,6 @@ SharedPreferences sharedPref;
         startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
     }
     public void donor() {
-
+        startActivity(new Intent(MainActivity.this,DonorLogin.class));
     }
 }

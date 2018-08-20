@@ -49,7 +49,7 @@ public class DonorDetails extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("jisjoe","jisjoe");
+                Log.i("jisjoe","jisjoeDONOR");
                 Name=name.getText().toString();
                 Address=address.getText().toString();
                 District=district.getText().toString();
