@@ -19,7 +19,6 @@ public class OTPTextEditor implements TextWatcher
 
     @Override
     public void afterTextChanged(Editable editable) {
-        // TODO Auto-generated method stub
         String text = editable.toString();
         switch(Editview.getId())
         {

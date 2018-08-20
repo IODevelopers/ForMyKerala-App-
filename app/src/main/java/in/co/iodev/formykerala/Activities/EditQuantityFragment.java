@@ -187,16 +187,16 @@ public class EditQuantityFragment extends Fragment {
                 String[] split=reg.split(",");
                 Log.d("ResponseitemA",split[0].toString()+split[1]+split.length);
                 finalHolder.ProductName.setText(String.valueOf(object.getString("Name")));
-                String data=null;
+                String data="";
                 for (int i=0;i<split.length;i++) {
                     if (split.length>1)
-                    data = split[i] + "\n";
+                        data+=split[i].toString() + " \n";
                     else
-                        data = split[0];
+                        data += split[0].toString();
                 }
-                Log.d("ResponseitemA",data);
+                Log.d("Responseitem2",data);
 
-                finalHolder.Quantity.setText(reg);
+                finalHolder.Quantity.setText(data);
                    /* if(items.has(holder.ProductName.getText().toString())) {
                         Log.d("Items",items.getString(holder.ProductName.getText().toString()));
                         holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
