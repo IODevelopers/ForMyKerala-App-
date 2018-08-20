@@ -106,9 +106,8 @@ public class DonorDetails extends AppCompatActivity {
             try {
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
-
-              //if(responseObject.getString("Message").equals("Success"))
-            //   startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class));
+                if(responseObject.getString("Message").equals("Success"))
+                     startActivity(new Intent(getApplicationContext(),DonorSelectItems.class));
 
 
             } catch (JSONException e) {

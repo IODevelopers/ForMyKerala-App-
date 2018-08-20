@@ -17,9 +17,13 @@ public class Constants {
     public static String DPin_Selection="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/pin/create-pin";
     public static String Forgot_PIN_Generate =  "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/forget";
     public static String DForgot_PIN_Generate =  "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/forget";
-
     public static String Forgot_Reset_PIN =  "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/pin/forget-create-pin";
     public static String DForgot_Reset_PIN =  "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/forget/create-pin";
+    public static String Send_Donation_items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/set-donation-items";
+    public static String Get_Donation_items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/get-donor-items";
+    public static String Get_Donor_accepted_Items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accepted-request";
+    public static String Get_Biased_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/getbaisedrequest";
+    public static String Accept_Request = "   https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accept-request";
 
 }
 

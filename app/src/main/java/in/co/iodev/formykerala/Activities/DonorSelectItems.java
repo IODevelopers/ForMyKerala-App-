@@ -43,11 +43,11 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-public class ReceiverSelectRequirement extends AppCompatActivity {
+public class DonorSelectItems extends AppCompatActivity {
 
     SharedPreferences sharedPref;
     String url= Constants.Get_Item_list;
-    String url2=Constants.Register_Case;
+    String url2=Constants.Send_Donation_items;
     ArrayList Mainproducts,products;
     ListView product_request_list;
     String TimeIndex;
@@ -61,7 +61,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reciever_select_requirement);
+        setContentView(R.layout.activity_donor_select_items);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
         TimeIndex=sharedPref.getString("TimeIndex","");
@@ -80,11 +80,12 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 JSONObject timeindex=new JSONObject();
                 try {
                     timeindex.put("TimeIndex",TimeIndex);
-                    timeindex.put("Items",items);
+                    timeindex.put("DonationItems",items);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 StringData=timeindex.toString();
+                Log.d("seby",StringData.toString());
                 submit=true;
                 new HTTPAsyncTask2().execute(url);
             }
@@ -287,10 +288,10 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
                     editor.putBoolean("Edited", TRUE);
                     editor.commit();
-                    startActivity(new Intent(ReceiverSelectRequirement.this,ReceiverRequirementsStatus.class));
+                     startActivity(new Intent(DonorSelectItems.this,DonorHomeActivity.class));
 
                     submit=false;
-                    ReceiverSelectRequirement.this.finish();
+                   DonorSelectItems.this.finish();
 
                 }
 
