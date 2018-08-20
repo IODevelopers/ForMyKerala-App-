@@ -23,12 +23,11 @@ import in.co.iodev.formykerala.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
+import static in.co.iodev.formykerala.Constants.Constants.Donor_Login;
 import static in.co.iodev.formykerala.Constants.Constants.Receiver_Login;
-import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 import static java.lang.Boolean.FALSE;
 
-public class ReceiverLogin extends AppCompatActivity {
+public class DonorLogin extends AppCompatActivity {
     EditText phone;
     Button submit,register;
     Gson gson = new Gson();
@@ -38,7 +37,7 @@ public class ReceiverLogin extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4;
     TextView forgot;
 
-    String StringData,StringData1,request_post_url=Receiver_Login,TimeIndex;
+    String StringData,StringData1,request_post_url=Donor_Login,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +55,12 @@ public class ReceiverLogin extends AppCompatActivity {
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
-        if(sharedPref.getBoolean("Login",FALSE
-        ))
+        if(sharedPref.getBoolean("Login",FALSE))
         {
-            if(sharedPref.getBoolean("Edited",FALSE))
-            startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
-            else
-                startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
+           // if(sharedPref.getBoolean("Edited",FALSE))
+        //    startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+         //   else
+          //      startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
 
 
         }
@@ -79,12 +77,12 @@ public class ReceiverLogin extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReceiverLogin.this,OTPVerification.class));
+                startActivity(new Intent(DonorLogin.this,DOTPVerification.class));
             }
         });  forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReceiverLogin.this,ForgotPin.class));
+                startActivity(new Intent(DonorLogin.this,DForgotPin.class));
             }
         });
     }
@@ -107,7 +105,7 @@ public class ReceiverLogin extends AppCompatActivity {
     }
 
     public void forgot(View view) {
-       startActivity(new Intent(ReceiverLogin.this,ForgotPin.class));
+       startActivity(new Intent(DonorLogin.this,DForgotPin.class));
 
     }
 
@@ -145,7 +143,7 @@ public class ReceiverLogin extends AppCompatActivity {
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
                editor.apply();
-               startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+               startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
            }
 
         } catch (JSONException e) {

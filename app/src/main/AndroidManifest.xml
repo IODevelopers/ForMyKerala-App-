@@ -24,9 +24,10 @@
         <activity android:name=".Activities.PinSelection"></activity>
         <activity android:name=".Activities.ReceiverLogin">
         </activity>
+        <activity android:name=".Activities.DonorLogin">
+        </activity>
         <activity android:name=".Activities.ReceiverSelectRequirement"></activity>
         <activity android:name=".Activities.ReceiverRequirementsStatus">
-
         </activity>
         <activity android:name=".Activities.ReceiverDetails"></activity>
         <activity android:name=".Activities.AcceptorsView"></activity>
@@ -34,6 +35,11 @@
         </activity>
         <activity android:name=".Activities.ForgotPinOTPValidation"></activity>
         <activity android:name=".Activities.ForgotPin"></activity>
+        <activity android:name=".Activities.DonorDetails"></activity>
+        <activity android:name=".Activities.DForgotPin"></activity>
+        <activity android:name=".Activities.DOTPValidation"></activity>
+        <activity android:name=".Activities.DPinSelection"></activity>
+
     </application>
 
 </manifest>

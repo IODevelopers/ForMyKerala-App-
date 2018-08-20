@@ -3,8 +3,8 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,16 +21,17 @@ import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Register_Donors;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 
-public class ReceiverDetails extends AppCompatActivity {
+public class DonorDetails extends AppCompatActivity {
     EditText name,address,district,taluk;
     String Name,Address,District,Taluk;
     Gson gson = new Gson();
     Button next;
     String StringData;
     SharedPreferences sharedPref;
-    String request_post_url=Register_Receivers,TimeIndex;
+    String request_post_url=Register_Donors,TimeIndex;
 
 
     @Override
@@ -109,8 +110,8 @@ public class ReceiverDetails extends AppCompatActivity {
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
 
-              if(responseObject.getString("Message").equals("Success"))
-               startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class));
+              //if(responseObject.getString("Message").equals("Success"))
+            //   startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class));
 
 
             } catch (JSONException e) {

@@ -172,12 +172,12 @@
         android:background="#4885ED"/>
 </android.support.v7.widget.CardView>
     <TextView
+        android:id="@+id/forg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:paddingLeft="8dp"
-        android:onClick="forgot"
         android:text="Forgot PIN?" />
 
 </LinearLayout>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:background="@android:color/white"
     android:layout_height="match_parent"
-    tools:context=".Activities.ReceiverDetails">
-
+>
 
     <LinearLayout
         android:id="@+id/form_layout"
@@ -163,7 +162,6 @@
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@android:color/white"
                 android:gravity="center_vertical|center_horizontal|center"
-                android:onClick="next"
                 android:text="Submit"
                 android:textColor="@color/colorPrimaryBlue"/>
 

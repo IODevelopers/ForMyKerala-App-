@@ -51,8 +51,6 @@ SharedPreferences sharedPref;
         startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
     }
     public void donor() {
-/*
-        startActivity(new Intent(MainActivity.this,ReceiverRoleSelectActivity.class));
-*/
+
     }
 }
