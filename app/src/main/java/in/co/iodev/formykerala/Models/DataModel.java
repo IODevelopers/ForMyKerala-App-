@@ -8,7 +8,7 @@ public class DataModel {
     String District;
     String Battery_percentage;
     String TimeIndex;
-    String phoneNumber;
+    String PhoneNumber;
     String OTP;
     String Name,Address,Taluk;
 
@@ -45,11 +45,11 @@ public class DataModel {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return PhoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.PhoneNumber = phoneNumber;
     }
 
 

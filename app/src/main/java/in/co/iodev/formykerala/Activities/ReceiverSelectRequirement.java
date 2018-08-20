@@ -45,36 +45,29 @@ import static java.lang.Boolean.TRUE;
 
 public class ReceiverSelectRequirement extends AppCompatActivity {
 
-SharedPreferences sharedPref;
-String url= Constants.Get_Item_list;
-String url2=Constants.Register_Case;
-ArrayList Mainproducts,products;
-ListView product_request_list;
-String TimeIndex;
-String StringData;
-Product_Request_Adapter adapter;
-Boolean submit=false;
-Button submit_button;
-ImageView search_button;
-EditText item_search;
-Map<String,String> items;
+    SharedPreferences sharedPref;
+    String url= Constants.Get_Item_list;
+    String url2=Constants.Register_Case;
+    ArrayList Mainproducts,products;
+    ListView product_request_list;
+    String TimeIndex;
+    String StringData;
+    Product_Request_Adapter adapter;
+    Boolean submit=false;
+    Button submit_button;
+    ImageView search_button;
+    EditText item_search;
+    JSONObject items;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciever_select_requirement);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
-/*
-        if(sharedPref.getBoolean("Login",FALSE))
-        {
-            Toast.makeText(getApplicationContext(),"LOGGED IN ALREADY--REDIRECT",Toast.LENGTH_LONG).show();
-        }*/
         TimeIndex=sharedPref.getString("TimeIndex","");
 
-       items=new HashMap<>();
+        items=new JSONObject();
 
-
-        Toast.makeText(getApplicationContext(),StringData,Toast.LENGTH_LONG).show();
         product_request_list=findViewById(R.id.product_request_listview);
         adapter=new Product_Request_Adapter();
         new HTTPAsyncTask2().execute(url);
@@ -96,25 +89,25 @@ Map<String,String> items;
                 new HTTPAsyncTask2().execute(url);
             }
         });
-       search_button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               search();
-           }
-       });
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search();
+            }
+        });
     }
 
     private void search() {
         if(!item_search.getText().toString().equals(""))
         {products.clear();
-        for (int i=0;i<Mainproducts.size();i++)
-        {
-            if(Mainproducts.get(i).equals(item_search.getText().toString()))
+            for (int i=0;i<Mainproducts.size();i++)
             {
-                products.add(Mainproducts.get(i));
+                if(Mainproducts.get(i).equals(item_search.getText().toString()))
+                {
+                    products.add(Mainproducts.get(i));
 
-            }
-        }}
+                }
+            }}
         else {
             products.clear();
             products.addAll(Mainproducts);
@@ -131,7 +124,7 @@ Map<String,String> items;
     public void view_items(View view) {
     }
 
-   private class Product_Request_Adapter extends BaseAdapter {
+    private class Product_Request_Adapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -167,9 +160,9 @@ Map<String,String> items;
             try {
                 final ViewHolder1 finalHolder = holder;
                 holder.ProductName.setText(String.valueOf(products.get(position)));
-                if(items.containsKey(holder.ProductName.getText().toString())) {
-                   Log.d("Items",items.get(holder.ProductName.getText()));
-                    holder.Quantity.setText(items.get(holder.ProductName.getText().toString()));
+                if(items.has(holder.ProductName.getText().toString())) {
+                    Log.d("Items",items.getString(holder.ProductName.getText().toString()));
+                    holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
                     holder.selected.setChecked(true);
 
                 }
@@ -180,14 +173,18 @@ Map<String,String> items;
                 holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                        if(isChecked)
+                        try
+                        {if(isChecked)
                         {
                             items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
 
                         }
                         else
                         {
-                            items.remove(finalHolder.ProductName.getText());
+                            items.remove(finalHolder.ProductName.getText().toString());
+                        }}
+                        catch (Exception e){
+
                         }
 
                     }
@@ -241,59 +238,66 @@ Map<String,String> items;
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
-    @Override
-    protected String doInBackground(String... urls) {
-        String response=null;
-              // params comes from the execute() call: params[0] is the url.
-        try {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response=null;
+            // params comes from the execute() call: params[0] is the url.
             try {
+                try {
 
-                if (!submit)
-                    response= HTTPGet.getJsonResponse(urls[0]);
-                else
-                    response= HTTPPostGet.getJsonResponse(url2,StringData);
-                Log.i("jisjoe",response.toString());
-                return response;
+                    if (!submit)
+                        response= HTTPGet.getJsonResponse(urls[0]);
+                    else
+                        response= HTTPPostGet.getJsonResponse(url2,StringData);
+                    Log.i("jisjoe",response.toString());
+                    return response;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "Error!";
+                }
             } catch (Exception e) {
-                e.printStackTrace();
-                return "Error!";
+                return "Unable to retrieve web page. URL may be invalid.";
             }
-        } catch (Exception e) {
-            return "Unable to retrieve web page. URL may be invalid.";
         }
-    }
 
-    // onPostExecute displays the results of the AsyncTask.
-    @Override
-    protected void onPostExecute(String result) {
-        JSONObject responseObject= null;
-        try {
-            if (!submit)
-            {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            JSONObject responseObject= null;
+            try {
+                if (!submit)
+                {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
 
-            products = new ArrayList<String>();
-            Mainproducts=new ArrayList<String>();
-            if (parentObject!= null) {
-                for (int i=0;i<parentObject.length();i++){
-                    products.add(parentObject.getString(i));
-                    Mainproducts.add(parentObject.getString(i));
+                    products = new ArrayList<String>();
+                    Mainproducts=new ArrayList<String>();
+                    if (parentObject!= null) {
+                        for (int i=0;i<parentObject.length();i++){
+                            products.add(parentObject.getString(i));
+                            Mainproducts.add(parentObject.getString(i));
+
+                        }
+                    }
+
+                    Log.d("Responseitem",products.toString());
+                    product_request_list.setAdapter(adapter);}
+                else
+                {Log.d("Responseitem",result);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+
+                    editor.putBoolean("Edited", TRUE);
+                    editor.commit();
+                    startActivity(new Intent(ReceiverSelectRequirement.this,ReceiverRequirementsStatus.class));
+
+                    submit=false;
+                    ReceiverSelectRequirement.this.finish();
 
                 }
-            }
-
-            Log.d("Responseitem",products.toString());
-            product_request_list.setAdapter(adapter);}
-            else
-            {Log.d("Responseitem",result);
-            submit=false;
-
-            }
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }    }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }    }
 
 
-}
+    }
 }

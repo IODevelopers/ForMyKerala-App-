@@ -22,6 +22,7 @@ import in.co.iodev.formykerala.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Pin_Selection;
 import static in.co.iodev.formykerala.Constants.Constants.Verify_OTP;
 import static java.lang.Boolean.TRUE;
 
@@ -32,7 +33,7 @@ public class PinSelection extends AppCompatActivity {
     Gson gson = new Gson();
 
 
-    String StringData,request_post_url=Verify_OTP,TimeIndex;
+    String StringData,request_post_url=Pin_Selection,TimeIndex;
 
 
     @Override
@@ -64,6 +65,7 @@ public class PinSelection extends AppCompatActivity {
         StringData=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
         DataModel d=new DataModel();
         d.setOTP(StringData);
+        d.setPhoneNumber(sharedPref.getString("PhoneNumber",""));
         d.setTimeIndex(TimeIndex);
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
@@ -100,9 +102,10 @@ public class PinSelection extends AppCompatActivity {
                 if(responseObject.getString("Message").equals("Success"))
                 {
                     SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                     editor.putBoolean("Login",TRUE);
                     editor.apply();
-                    startActivity(new Intent(PinSelection.this,RecieverDetails.class));
+                    startActivity(new Intent(PinSelection.this,ReceiverDetails.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();

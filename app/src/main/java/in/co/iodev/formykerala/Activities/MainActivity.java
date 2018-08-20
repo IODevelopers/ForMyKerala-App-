@@ -31,9 +31,11 @@ Button receiver,donor;
     }
 
     public void receiver() {
-        startActivity(new Intent(MainActivity.this,ReceiverRoleSelectActivity.class));
+        startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
     }
     public void donor() {
+/*
         startActivity(new Intent(MainActivity.this,ReceiverRoleSelectActivity.class));
+*/
     }
 }

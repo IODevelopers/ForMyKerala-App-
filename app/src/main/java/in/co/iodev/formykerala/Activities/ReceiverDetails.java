@@ -22,7 +22,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 
-public class RecieverDetails extends AppCompatActivity {
+public class ReceiverDetails extends AppCompatActivity {
     EditText name,address,district,taluk;
     String Name,Address,District,Taluk;
     Gson gson = new Gson();
@@ -103,8 +103,8 @@ public class RecieverDetails extends AppCompatActivity {
 
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                 editor.commit();
-            //   if(responseObject.getString("Message").equals("Success"))
-           //     startActivity(new Intent(getApplicationContext(),OTPValidation.class));
+              if(responseObject.getString("Message").equals("Success"))
+               startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class));
 
 
             } catch (JSONException e) {
