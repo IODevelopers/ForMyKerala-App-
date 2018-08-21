@@ -208,6 +208,10 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
                     }
                 });
+                if(finalHolder.Quantity.getText().toString().equals(""))
+                {
+                    finalHolder.selected.setChecked(FALSE);
+                }
 
             }catch (Exception e){
             }

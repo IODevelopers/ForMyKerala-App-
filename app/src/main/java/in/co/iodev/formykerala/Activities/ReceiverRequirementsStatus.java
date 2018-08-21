@@ -31,18 +31,20 @@ import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.TRUE;
 
 public class ReceiverRequirementsStatus extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     SharedPreferences sharedPref;
-    String url= Constants.Get_all_cases;
-    ArrayList Mainproducts,products;
+    String url= Constants.Get_Receivers_Requirement;
+    JSONArray Mainproducts,products;
     ListView product_status_list;
     String TimeIndex;
     String StringData;
     Product_Request_Adapter adapter;
     ImageView search_button;
     Button check_status;
+    Boolean submit=false;
     EditText item_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +61,20 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
-        new HTTPAsyncTask2().execute(url);
+
         search_button=findViewById(R.id.search_button);
         check_status=findViewById(R.id.check_status);
         item_search=findViewById(R.id.item_search);
         JSONObject timeindex=new JSONObject();
-       /* try {
+        try {
             timeindex.put("TimeIndex",TimeIndex);
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
+
         StringData=timeindex.toString();
-        search_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                search();
-            }
-        });
+        new HTTPAsyncTask2().execute(url);
         check_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,24 +86,6 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
     }
 
-    private void search() {
-        if(!item_search.getText().toString().equals(""))
-        {products.clear();
-            for (int i=0;i<Mainproducts.size();i++)
-            {
-                if(Mainproducts.get(i).equals(item_search.getText().toString()))
-                {
-                    products.add(Mainproducts.get(i));
-
-                }
-            }}
-        else {
-            products.clear();
-            products.addAll(Mainproducts);
-        }
-        product_status_list.setAdapter(adapter);
-
-    }
 
     public void request(View view) {
 
@@ -113,18 +93,22 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
     public void view_items(View view) {
     }
-
     private class Product_Request_Adapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-
-            return products.size();
+            return products.length();
         }
 
         @Override
         public Object getItem(int position) {
-            return products.get(position);
+            Object o=null;
+            try {
+                o= products.get(position);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return o;
         }
 
         @Override
@@ -139,7 +123,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
             if(view == null) {
                 view = getLayoutInflater().inflate(R.layout.product_status_list_item,parent,false);
-                holder = new ViewHolder1(view);
+                holder =new ViewHolder1(view);
                 view.setTag(holder);
             }
             else {
@@ -149,7 +133,21 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
             try {
                 final ViewHolder1 finalHolder = holder;
-                holder.ProductName.setText(String.valueOf(products.get(position)));
+                final JSONObject object=new JSONObject(String.valueOf(products.getJSONObject(position)));
+                Log.d("seby",object.toString());
+                finalHolder.ProductName.setText(String.valueOf(object.getString("name")));
+                finalHolder.Quantity.setText(String.valueOf(object.getString("number")));
+                   /* if(items.has(holder.ProductName.getText().toString())) {
+                        Log.d("Items",items.getString(holder.ProductName.getText().toString()));
+                        holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
+                        holder.selected.setChecked(true);
+
+                    }
+                    else {
+                        holder.selected.setChecked(FALSE);
+                        holder.Quantity.setText("");
+                    }*/
+
 
 
             }catch (Exception e){
@@ -161,23 +159,22 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }
     }
     private class ViewHolder1 {
-        TextView ProductName,RequestedQuantity;
-
-
+        TextView ProductName;
+        TextView Quantity;
 
         public ViewHolder1(View v) {
-            ProductName = (TextView) v.findViewById(R.id.product_name);
-            RequestedQuantity = (TextView) v.findViewById(R.id.requested_quantity);
+        ProductName = (TextView) v.findViewById(R.id.product_name);
+        Quantity=v.findViewById(R.id.requested_quantity);
 
 
 
 
 
 
-
-
-        }
     }
+}
+
+
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
@@ -187,8 +184,11 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
+                    if(!submit)
                         response= HTTPPostGet.getJsonResponse(url,StringData);
-                    Log.i("jisjoe",response.toString());
+                    else
+                        response= HTTPPostGet.getJsonResponse(url,StringData);
+                    Log.d("sj",StringData.toString());
                     return response;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -204,21 +204,28 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
             try {
-              JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
+                if (!submit)
+                {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
 
-                    products = new ArrayList<String>();
-                    Mainproducts=new ArrayList<String>();
-                    if (parentObject!= null) {
-                        for (int i=0;i<parentObject.length();i++){
-                            products.add(parentObject.getString(i));
-                            Mainproducts.add(parentObject.getString(i));
+                    products = new JSONArray();
+                    Mainproducts=new JSONArray();
+                    products=parentObject;
+                    Mainproducts=parentObject;
 
-                        }
-                    }
-                    Log.d("Responseitem",result.toString());
                     Log.d("Responseitem",products.toString());
                     product_status_list.setAdapter(adapter);
+                }
+                else
+                {Log.d("Responseitem",result);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("Edited", TRUE);
+                    editor.commit();
 
+
+                    submit=false;
+
+
+                }
 
 
             } catch (JSONException e) {

@@ -141,7 +141,6 @@ public class EditQuantityFragment extends Fragment {
 
         @Override
         public int getCount() {
-            Toast.makeText(getContext(),String.valueOf(products.length()),Toast.LENGTH_SHORT).show();
             return products.length();
         }
 
@@ -149,7 +148,7 @@ public class EditQuantityFragment extends Fragment {
         public Object getItem(int position) {
             Object o=null;
             try {
-                Toast.makeText(getContext(),products.get(position).toString(),Toast.LENGTH_SHORT).show();
+
 
                 o= products.get(position);
             } catch (JSONException e) {
@@ -305,8 +304,14 @@ public class EditQuantityFragment extends Fragment {
                    product_request_list.setAdapter(adapter);
                 }
                 else
-                {Log.d("ResponseitemA",result);
+                {  JSONObject jsonObject=new JSONObject(result);
+                    if(jsonObject.getString("Message").equals("Success")) {
+
+                    }
+                    Toast.makeText(getContext(),jsonObject.getString("Message"),Toast.LENGTH_SHORT).show();
                     submit=false;
+
+
 
 
                 }
@@ -350,11 +355,12 @@ public class EditQuantityFragment extends Fragment {
                     try { JSONObject object=products.getJSONObject(position);
                         Log.d("sj",object.getString("ReceiverTimeIndex"));
                         data.put("Donor_TimeIndex",TimeIndex);
-                        data.put("Request_TimeIndex",object.get("ReceiverTimeIndex"));
+                        data.put("Request_TimeIndex",object.get("TimeIndex"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    StringData=data.toString();
                     submit=true;
                     new HTTPAsyncTask2().execute(url);
                     DialogBox.super.dismiss();

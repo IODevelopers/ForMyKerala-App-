@@ -285,12 +285,14 @@ import static java.lang.Boolean.TRUE;
                         }
                     else
                     {Log.d("Responseitem",result);
-                        SharedPreferences.Editor editor = sharedPref.edit();
+                       JSONObject jsonObject=new JSONObject(result);
+                       if(jsonObject.getString("Message").equals("Success")) {
+                           SharedPreferences.Editor editor = sharedPref.edit();
 
-                        editor.putBoolean("Edited", TRUE);
-                        editor.commit();
-
-
+                           editor.putBoolean("Edited", TRUE);
+                           editor.commit();
+                       }
+                        Toast.makeText(getContext(),jsonObject.getString("Message"),Toast.LENGTH_SHORT).show();
                         submit=false;
 
 
