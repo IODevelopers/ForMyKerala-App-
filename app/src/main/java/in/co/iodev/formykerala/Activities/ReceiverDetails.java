@@ -45,6 +45,7 @@ public class ReceiverDetails extends AppCompatActivity {
     String request_post_url=Register_Receivers,TimeIndex;
     ImageView back;
     Context context;
+    ProgressBarHider hider;
 
 
     @Override
@@ -58,6 +59,7 @@ public class ReceiverDetails extends AppCompatActivity {
         taluk=findViewById(R.id.taluk);
         next=findViewById(R.id.button6);
         back=findViewById(R.id.back_button);
+        hider=new ProgressBarHider(next.getRootView(),next);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
         context=this;
@@ -111,7 +113,6 @@ public class ReceiverDetails extends AppCompatActivity {
 
 
                 }*/
-                ProgressBarHider hider=new ProgressBarHider(next.getRootView(),next);
                 hider.show();
             }
         });
@@ -142,6 +143,9 @@ public class ReceiverDetails extends AppCompatActivity {
                     e.printStackTrace();
                     return "Error!";
                 }
+                finally {
+                    hider.hide();
+                }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
@@ -157,6 +161,7 @@ public class ReceiverDetails extends AppCompatActivity {
             JSONObject response;
             JSONObject responseObject;
             try {
+                hider.hide();
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
 

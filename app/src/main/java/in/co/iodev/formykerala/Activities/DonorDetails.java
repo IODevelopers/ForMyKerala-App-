@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
@@ -38,6 +39,7 @@ public class DonorDetails extends AppCompatActivity {
     SharedPreferences sharedPref;
     String request_post_url=Register_Donors,TimeIndex;
     Context context;
+    ProgressBarHider hider;
 
 
     @Override
@@ -49,6 +51,7 @@ public class DonorDetails extends AppCompatActivity {
         district=findViewById(R.id.district);
         taluk=findViewById(R.id.taluk);
         next=findViewById(R.id.button6);
+        hider=new ProgressBarHider(next.getRootView(),next);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
         context=this;
@@ -72,6 +75,7 @@ public class DonorDetails extends AppCompatActivity {
                     StringData=gson.toJson(d);
                     Log.i("jisjoe",""+StringData);
 
+                    hider.show();
                     new HTTPAsyncTask2().execute(request_post_url);
 
 
@@ -106,6 +110,9 @@ public class DonorDetails extends AppCompatActivity {
                     e.printStackTrace();
                     return "Error!";
                 }
+                finally {
+                    hider.hide();
+                }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
@@ -121,6 +128,7 @@ public class DonorDetails extends AppCompatActivity {
             JSONObject response;
             JSONObject responseObject;
             try {
+                hider.hide();
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success")) {
