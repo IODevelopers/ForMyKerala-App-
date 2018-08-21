@@ -245,10 +245,10 @@ public class EditItemFragment extends Fragment {
         }
 
         private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-
+            String response=null;
             @Override
             protected String doInBackground(String... urls) {
-                String response=null;
+
                 // params comes from the execute() call: params[0] is the url.
                 try {
                     try {
@@ -293,7 +293,7 @@ public class EditItemFragment extends Fragment {
                         }
                     else
                     {Log.d("Responseitem",result);
-                       JSONObject jsonObject=new JSONObject(result);
+                       JSONObject jsonObject=new JSONObject(response);
                        if(jsonObject.getString("Message").equals("Success")) {
                            SharedPreferences.Editor editor = sharedPref.edit();
 

@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -35,6 +36,7 @@ public class DonorLogin extends AppCompatActivity {
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
+    ProgressBarHider hider;
     DataModel d;
     ImageView back;
     EditText otp1,otp2,otp3,otp4;
@@ -75,6 +77,7 @@ public class DonorLogin extends AppCompatActivity {
 
         }
         submit=findViewById(R.id.request_otp_button);
+        hider=new ProgressBarHider(submit.getRootView(),submit);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +101,7 @@ public class DonorLogin extends AppCompatActivity {
     }
 
     public void verify() {
-
+         hider.show();
         StringData=phone.getText().toString();
         StringData1=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
 
@@ -154,6 +157,7 @@ public class DonorLogin extends AppCompatActivity {
     // onPostExecute displays the results of the AsyncTask.
     @Override
     protected void onPostExecute(String result) {
+        hider.hide();
         JSONObject response;
         JSONObject responseObject;
         try {

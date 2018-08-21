@@ -26,6 +26,7 @@ import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class AcceptorsView extends AppCompatActivity {
@@ -74,7 +75,13 @@ public class AcceptorsView extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("Login",FALSE);
+                editor.commit();
+                sharedPref.edit().apply();
+
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
 
             }
 

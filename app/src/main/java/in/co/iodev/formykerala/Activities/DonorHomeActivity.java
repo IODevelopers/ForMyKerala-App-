@@ -1,5 +1,7 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +13,9 @@ import android.support.design.widget.TabLayout;
 import android.widget.Toast;
 
 import in.co.iodev.formykerala.R;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.FALSE;
 
 public class DonorHomeActivity extends FragmentActivity {
     private static ViewPager mPager;
@@ -100,8 +105,14 @@ public class DonorHomeActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+            SharedPreferences sharedPref=getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("DLogin",FALSE);
+            editor.commit();
+            sharedPref.edit().apply();
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
 
         this.doubleBackToExitPressedOnce = true;

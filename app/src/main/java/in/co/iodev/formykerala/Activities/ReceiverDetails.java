@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,41 +19,50 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
+import in.co.iodev.formykerala.Controllers.HTTPGet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static in.co.iodev.formykerala.Constants.Constants.Get_District;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 import static java.lang.Boolean.TRUE;
 
 public class ReceiverDetails extends AppCompatActivity {
     EditText name,address;
     Spinner district,taluk;
+    JSONObject object;
     String Name,Address,District,Taluk;
     Gson gson = new Gson();
     Button next;
     String StringData;
     SharedPreferences sharedPref;
-    String request_post_url=Register_Receivers,TimeIndex;
+    String request_post_url=Register_Receivers,url2=Get_District,TimeIndex;
     ImageView back;
     Context context;
+    ArrayAdapter<String> adapter;
     ProgressBarHider hider;
+    Boolean submit=false;
 
-
+    ArrayList<String> districts;
+    ArrayList<String> taluks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciever_details);
-
+        districts=new ArrayList<String>();
+        new HTTPAsyncTask2().execute(url2);
         name=findViewById(R.id.name);
         address=findViewById(R.id.address);
         district=findViewById(R.id.district);
@@ -63,39 +73,46 @@ public class ReceiverDetails extends AppCompatActivity {
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
         context=this;
-        ArrayList a=new ArrayList();
-        String[] districts={"kottayam","kollam","kasargod","kochi"};
-        JSONObject object=new JSONObject();
-        try {
-            object.put("seby","12");
-            object.put("jerry","13");
-            object.put("seby","15");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Iterator<String> iter = object.keys();
-        while (iter.hasNext()) {
-            String key = iter.next();
-            Log.d("iter",key);
-            try {
-                Object value = object.get(key);
-            } catch (JSONException e) {
-                // Something went wrong!
-            }
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        adapter= new ArrayAdapter<String>(this,
                 R.layout.spinner_layout, districts);
         adapter.setDropDownViewResource(R.layout.drop_down_tems);
-        district.setAdapter(adapter);
+       district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               taluks = new ArrayList<>();
+               try {
+                   JSONArray array=new JSONObject(object.toString()).getJSONArray(district.getSelectedItem().toString());
+                   Log.d("array1",array.toString());
+                   for (int j=0; j<array.length(); j++) {
+                       taluks.add( array.getString(j) );
+
+               }
+                   Log.d("array1",taluks.toString());
+
+               }catch (JSONException e) {
+                   e.printStackTrace();
+               }
+               ArrayAdapter<String> adapter1=new ArrayAdapter<String>(getApplicationContext(),
+                       R.layout.spinner_layout, taluks);
+               adapter.setDropDownViewResource(R.layout.drop_down_tems);
+               taluk.setAdapter(adapter1);
+           }
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
+       });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             /*   Log.i("jisjoe","jisjoe");
+               Log.i("jisjoe","jisjoe");
                 Name=name.getText().toString();
                 Address=address.getText().toString();
-                District=district.getText().toString();
-                Taluk=taluk.getText().toString();
-                if(Name.equals("")||Address.equals("")||District.equals("")||Taluk.equals("")){
+                District=district.getSelectedItem().toString();
+                Taluk=taluk.getSelectedItem().toString();
+                /*District=district.getText().toString();
+                Taluk=taluk.getText().toString();*/
+                if(Name.equals("")||Address.equals("")){
                     Toast.makeText(getApplicationContext(),"Please provide all fields", Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -108,11 +125,11 @@ public class ReceiverDetails extends AppCompatActivity {
                     d.setTimeIndex(TimeIndex);
                     StringData=gson.toJson(d);
                     Log.i("jisjoe",""+StringData);
-
+                    submit=true;
                     new HTTPAsyncTask2().execute(request_post_url);
 
 
-                }*/
+                }
                 hider.show();
             }
         });
@@ -129,13 +146,16 @@ public class ReceiverDetails extends AppCompatActivity {
 
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-
+        String response;
         @Override
         protected String doInBackground(String... urls) {
-            String response;
+
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
+                    if(!submit)
+                        response= HTTPGet.getJsonResponse(url2);
+                    else
                     response= HTTPPostGet.getJsonResponse(urls[0],StringData);
                     Log.i("jisjoe",response.toString());
                     return response;
@@ -158,11 +178,32 @@ public class ReceiverDetails extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            JSONObject response;
-            JSONObject responseObject;
+
             try {
+                JSONObject responseObject=new JSONObject(response);
                 hider.hide();
-                responseObject = new JSONObject(result);
+                if(!submit)
+                {
+                    object=new JSONObject(result);
+                    Log.d("Array", String.valueOf(object));
+
+                    Iterator<String> iter = object.keys();
+                    while (iter.hasNext()) {
+                        String key = iter.next();
+                        districts.add(key);
+
+                        try {
+                            Log.d("taluk",object.get(key).toString());
+                        } catch (JSONException e) {
+                            // Something went wrong!
+                        }
+                        Log.d("iter",districts.toString());
+                    }
+                    district.setAdapter(adapter);
+                }
+                else
+                {
+
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
 
               if(responseObject.getString("Message").equals("Success")) {
@@ -171,7 +212,7 @@ public class ReceiverDetails extends AppCompatActivity {
                    editor.apply();
                   startActivity(new Intent(getApplicationContext(), ReceiverSelectRequirement.class));
 
-              }
+              }}
 
             } catch (JSONException e) {
                 e.printStackTrace();
