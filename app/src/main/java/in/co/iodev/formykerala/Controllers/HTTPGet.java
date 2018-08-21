@@ -1,4 +1,4 @@
-package in.co.iodev.formykerala;
+package in.co.iodev.formykerala.Controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -20,15 +20,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Forgot_PIN_Generate;
-import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
 import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP_Forget;
-import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 
 public class ForgotPin extends AppCompatActivity {
     EditText phone;

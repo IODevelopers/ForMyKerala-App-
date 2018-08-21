@@ -3,7 +3,6 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.cardemulation.CardEmulation;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,15 +23,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
-import in.co.iodev.formykerala.OTPTextEditor;
+import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 import static in.co.iodev.formykerala.Constants.Constants.Verify_OTP;
-import static java.lang.Boolean.TRUE;
 
 public class OTPValidation extends AppCompatActivity {
     SharedPreferences sharedPref;

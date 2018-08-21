@@ -1,8 +1,10 @@
-package in.co.iodev.formykerala;
+package in.co.iodev.formykerala.Controllers;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
+import in.co.iodev.formykerala.R;
 
 /**
  * Created by seby on 8/19/2018.

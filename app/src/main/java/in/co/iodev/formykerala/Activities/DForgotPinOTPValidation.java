@@ -19,9 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
-import in.co.iodev.formykerala.OTPTextEditor;
+import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;

@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,8 +21,12 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
@@ -29,7 +35,8 @@ import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 import static java.lang.Boolean.TRUE;
 
 public class ReceiverDetails extends AppCompatActivity {
-    EditText name,address,district,taluk;
+    EditText name,address;
+    Spinner district,taluk;
     String Name,Address,District,Taluk;
     Gson gson = new Gson();
     Button next;
@@ -54,10 +61,34 @@ public class ReceiverDetails extends AppCompatActivity {
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
         context=this;
+        ArrayList a=new ArrayList();
+        String[] districts={"kottayam","kollam","kasargod","kochi"};
+        JSONObject object=new JSONObject();
+        try {
+            object.put("seby","12");
+            object.put("jerry","13");
+            object.put("seby","15");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Iterator<String> iter = object.keys();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            Log.d("iter",key);
+            try {
+                Object value = object.get(key);
+            } catch (JSONException e) {
+                // Something went wrong!
+            }
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_layout, districts);
+        adapter.setDropDownViewResource(R.layout.drop_down_tems);
+        district.setAdapter(adapter);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("jisjoe","jisjoe");
+             /*   Log.i("jisjoe","jisjoe");
                 Name=name.getText().toString();
                 Address=address.getText().toString();
                 District=district.getText().toString();
@@ -79,7 +110,9 @@ public class ReceiverDetails extends AppCompatActivity {
                     new HTTPAsyncTask2().execute(request_post_url);
 
 
-                }
+                }*/
+                ProgressBarHider hider=new ProgressBarHider(next.getRootView(),next);
+                hider.show();
             }
         });
     back.setOnClickListener(new View.OnClickListener() {

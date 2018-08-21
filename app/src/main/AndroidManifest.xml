@@ -13,13 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.OTPVerification"></activity>
+
         <activity android:name=".Activities.OTPValidation"></activity>
         <activity android:name=".Activities.ReceiverRoleSelectActivity"></activity>
         <activity android:name=".Activities.PinSelection"></activity>
@@ -30,7 +27,14 @@
         <activity android:name=".Activities.ReceiverSelectRequirement"></activity>
         <activity android:name=".Activities.ReceiverRequirementsStatus">
         </activity>
-        <activity android:name=".Activities.ReceiverDetails"></activity>
+        <activity android:name=".Activities.ReceiverDetails">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".Activities.AcceptorsView">
 
         </activity>

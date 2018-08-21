@@ -20,13 +20,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Donors;
-import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
 import static java.lang.Boolean.TRUE;
 
 public class DonorDetails extends AppCompatActivity {

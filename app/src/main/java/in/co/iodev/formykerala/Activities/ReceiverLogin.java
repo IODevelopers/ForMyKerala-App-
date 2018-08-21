@@ -19,15 +19,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
-import in.co.iodev.formykerala.OTPTextEditor;
+import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP;
 import static in.co.iodev.formykerala.Constants.Constants.Receiver_Login;
-import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 import static java.lang.Boolean.FALSE;
 
 public class ReceiverLogin extends AppCompatActivity {

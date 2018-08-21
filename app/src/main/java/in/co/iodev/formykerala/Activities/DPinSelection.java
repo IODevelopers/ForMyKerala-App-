@@ -20,14 +20,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
-import in.co.iodev.formykerala.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
-import in.co.iodev.formykerala.OTPTextEditor;
+import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.DPin_Selection;
-import static in.co.iodev.formykerala.Constants.Constants.Pin_Selection;
 import static java.lang.Boolean.TRUE;
 
 public class DPinSelection extends AppCompatActivity {
