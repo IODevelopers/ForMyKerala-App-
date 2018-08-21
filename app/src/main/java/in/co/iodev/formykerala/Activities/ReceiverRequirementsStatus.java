@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import in.co.iodev.formykerala.Constants.Constants;
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
@@ -46,6 +48,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     Button check_status;
     Boolean submit=false;
     EditText item_search;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         search_button=findViewById(R.id.search_button);
         check_status=findViewById(R.id.check_status);
         item_search=findViewById(R.id.item_search);
+        context=this;
         JSONObject timeindex=new JSONObject();
         try {
             timeindex.put("TimeIndex",TimeIndex);
@@ -198,7 +202,11 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

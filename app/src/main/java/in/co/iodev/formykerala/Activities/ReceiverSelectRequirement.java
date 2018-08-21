@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -35,6 +36,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import in.co.iodev.formykerala.Constants.Constants;
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPGet;
 import in.co.iodev.formykerala.HTTPPost;
 import in.co.iodev.formykerala.HTTPPostGet;
@@ -58,6 +60,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
     ImageView search_button;
     EditText item_search;
     JSONObject items;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         TimeIndex=sharedPref.getString("TimeIndex","");
 
         items=new JSONObject();
-
+        context=this;
         product_request_list=findViewById(R.id.product_request_listview);
         adapter=new Product_Request_Adapter();
         new HTTPAsyncTask2().execute(url);
@@ -264,7 +267,11 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

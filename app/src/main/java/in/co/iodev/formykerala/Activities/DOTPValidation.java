@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.OTPTextEditor;
@@ -35,6 +37,7 @@ public class DOTPValidation extends AppCompatActivity {
     Button verify,resend_otp;
     Gson gson = new Gson();
     CardView otp_resend;
+    Context context;
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
@@ -49,6 +52,7 @@ public class DOTPValidation extends AppCompatActivity {
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
         verify=findViewById(R.id.otp_verify);
+        context=this;
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
@@ -129,7 +133,11 @@ public class DOTPValidation extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
@@ -169,7 +177,11 @@ public class DOTPValidation extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
