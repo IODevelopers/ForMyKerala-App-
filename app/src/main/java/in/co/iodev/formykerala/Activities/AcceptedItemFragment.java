@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
@@ -71,7 +73,7 @@ public class AcceptedItemFragment extends Fragment {
 
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
         adapter=new Product_Request_Adapter();
-        new HTTPAsyncTask2().execute(url);
+        new HTTPAsyncTask3().execute(url);
 
 
     }
@@ -145,24 +147,27 @@ public class AcceptedItemFragment extends Fragment {
 
 
             try {
-                ViewHolder1 finalHolder = holder;
+                final ViewHolder1 finalHolder = holder;
+
                 JSONObject object=products.getJSONObject(position);
                 JSONObject object1=object.getJSONObject("Items");
-                String s=object1.toString();
-                String reg = s.substring(s.indexOf("{")+1,s.indexOf("}"));
-                String[] split=reg.split(",");
-                Log.d("ResponseitemA",split[0].toString()+split[1]+split.length);
-                finalHolder.ProductName.setText(String.valueOf(object.getString("Name")));
-                String data="";
-                for (int i=0;i<split.length;i++) {
-                    if (split.length>1)
-                        data+=split[i].toString() + " \n";
-                    else
-                        data += split[0].toString();
-                }
-                Log.d("Responseitem2",data);
+                String product="",qty="";
+                Iterator<String> iter = object1.keys();
+                while (iter.hasNext()) {
+                    String key = iter.next();
 
-                finalHolder.Quantity.setText(data);
+                    product+="\n"+key;
+
+                    try {
+                        qty+="\n"+object1.get(key);
+                    } catch (JSONException e) {
+                        // Something went wrong!
+                    }}
+
+                finalHolder.ProductName.setText(String.valueOf(object.getString("Name")));
+
+                finalHolder.Quantity.setText(qty);
+                finalHolder.Product.setText(product);
                 finalHolder.Phone.setText(object.getString("PhoneNumber"));
                    /* if(items.has(holder.ProductName.getText().toString())) {
                         Log.d("Items",items.getString(holder.ProductName.getText().toString()));
@@ -186,13 +191,14 @@ public class AcceptedItemFragment extends Fragment {
         }
     }
     private class ViewHolder1 {
-        TextView ProductName,Quantity,Phone;
+        TextView ProductName,Quantity,Product,Phone;
 
 
 
         public ViewHolder1(View v) {
             ProductName = (TextView) v.findViewById(R.id.product_name);
             Quantity=v.findViewById(R.id.requested_quantity);
+            Product=v.findViewById(R.id.products);
             Phone=v.findViewById(R.id.phone_no);
 
 
@@ -203,7 +209,7 @@ public class AcceptedItemFragment extends Fragment {
         }
     }
 
-    private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+    private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -215,7 +221,7 @@ public class AcceptedItemFragment extends Fragment {
                         response= HTTPPostGet.getJsonResponse(url,StringData);
                     else
                         response= HTTPPostGet.getJsonResponse(url2,StringData);
-                    Log.d("sj",StringData.toString());
+                    Log.d("sj2",StringData.toString());
                     return response;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -236,7 +242,7 @@ public class AcceptedItemFragment extends Fragment {
             JSONObject responseObject= null;
             try {
                 if (!submit)
-                { Log.d("Responseitem",result.toString());
+                { Log.d("Responseitem1",result.toString());
 
 
                     JSONArray parentObject = new JSONArray(result);

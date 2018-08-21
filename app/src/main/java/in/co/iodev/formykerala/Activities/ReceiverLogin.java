@@ -127,9 +127,10 @@ public class ReceiverLogin extends AppCompatActivity {
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
+        String response;
     @Override
     protected String doInBackground(String... urls) {
-         String response;
+
         // params comes from the execute() call: params[0] is the url.
         try {
             try {
@@ -155,11 +156,10 @@ public class ReceiverLogin extends AppCompatActivity {
     // onPostExecute displays the results of the AsyncTask.
     @Override
     protected void onPostExecute(String result) {
-        JSONObject response;
         JSONObject responseObject;
         try {
             hider.hide();
-            responseObject = new JSONObject(result);
+            responseObject = new JSONObject(response);
             Log.i("jisjoe",result.toString());
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
            if(responseObject.getString("Message").equals("Success")) {

@@ -29,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
@@ -173,23 +175,26 @@ public class EditQuantityFragment extends Fragment {
 
             try {
                 final ViewHolder1 finalHolder = holder;
+
                 JSONObject object=products.getJSONObject(position);
                 JSONObject object1=object.getJSONObject("Items");
-                String s=object1.toString();
-                String reg = s.substring(s.indexOf("{")+1,s.indexOf("}"));
-                String[] split=reg.split(",");
-                Log.d("ResponseitemA",split[0].toString()+split[1]+split.length);
-                finalHolder.ProductName.setText(String.valueOf(object.getString("Name")));
-                String data="";
-                for (int i=0;i<split.length;i++) {
-                    if (split.length>1)
-                        data+=split[i].toString() + " \n";
-                    else
-                        data += split[0].toString();
-                }
-                Log.d("Responseitem2",data);
+                String product="",qty="";
+                Iterator<String> iter = object1.keys();
+                while (iter.hasNext()) {
+                    String key = iter.next();
 
-                finalHolder.Quantity.setText(data);
+                    product+="\n"+key;
+
+                    try {
+                       qty+="\n"+object1.get(key);
+                    } catch (JSONException e) {
+                        // Something went wrong!
+                    }}
+
+                finalHolder.ProductName.setText(String.valueOf(object.getString("Name")));
+
+                finalHolder.Quantity.setText(qty);
+                finalHolder.Product.setText(product);
                    /* if(items.has(holder.ProductName.getText().toString())) {
                         Log.d("Items",items.getString(holder.ProductName.getText().toString()));
                         holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
@@ -242,13 +247,14 @@ public class EditQuantityFragment extends Fragment {
     }
     private class ViewHolder1 {
         TextView ProductName;
-        TextView Quantity;
+        TextView Quantity,Product;
 
 
 
         public ViewHolder1(View v) {
             ProductName = (TextView) v.findViewById(R.id.product_name);
             Quantity=v.findViewById(R.id.requested_quantity);
+            Product=v.findViewById(R.id.products);
 
 
 
@@ -298,7 +304,7 @@ public class EditQuantityFragment extends Fragment {
                     Mainproducts=new JSONArray();
                     Mainproducts=parentObject;
                     products=parentObject;
-
+                    Log.d("msg",products.toString());
                    product_request_list.setAdapter(adapter);
                 }
                 else

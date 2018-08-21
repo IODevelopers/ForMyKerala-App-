@@ -78,7 +78,7 @@ public class EditItemFragment extends Fragment {
 
             product_request_list=view.findViewById(R.id.donor_items_edit_listview);
             adapter=new Product_Request_Adapter();
-            new HTTPAsyncTask2().execute(url);
+            new HTTPAsyncTask1().execute(url);
             submit_button=view.findViewById(R.id.donor_items_submit);
             hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
             submit_button.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class EditItemFragment extends Fragment {
                     Log.d("sj",StringData.toString());
 
                     hider.show();
-                    new HTTPAsyncTask2().execute(url2);
+                    new HTTPAsyncTask1().execute(url2);
                 }
             });
 
@@ -244,7 +244,7 @@ public class EditItemFragment extends Fragment {
             }
         }
 
-        private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        private class HTTPAsyncTask1 extends AsyncTask<String, Void, String> {
             String response=null;
             @Override
             protected String doInBackground(String... urls) {

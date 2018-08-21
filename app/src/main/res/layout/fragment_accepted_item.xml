@@ -46,7 +46,7 @@
                         android:layout_weight="6"
                         android:gravity="center"
                         android:text="Receiver"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -54,7 +54,15 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Product:Quanity"
+                        android:text="Product"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="6"
+                        android:gravity="center"
+                        android:text="Quantity"
                         android:textSize="12sp" />
 
 
@@ -66,7 +74,7 @@
                         android:layout_weight="6"
                         android:gravity="center"
                         android:text="Phone"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>

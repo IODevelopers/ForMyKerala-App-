@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:layout_marginTop="12dp"
             android:id="@+id/product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,6 +23,15 @@
             android:textStyle="bold"
             android:text="Name" />
         <TextView
+            android:id="@+id/products"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="6"
+            android:textSize="20sp"
+            ></TextView>
+        <TextView
             android:id="@+id/requested_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,5 +40,6 @@
             android:layout_weight="6"
             android:textSize="20sp"
             ></TextView>
+
     </LinearLayout>
 </LinearLayout>

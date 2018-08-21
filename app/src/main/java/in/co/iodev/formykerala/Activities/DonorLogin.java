@@ -174,6 +174,7 @@ public class DonorLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
+               editor.putBoolean("DLogin", true);
                editor.apply();
                startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
            }
