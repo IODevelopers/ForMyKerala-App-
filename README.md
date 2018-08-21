@@ -10,7 +10,7 @@ The app was developed in order to help rehabilitate the refugees into proper hou
 ## Contributors
 
 # Android Development: 
-  Jiss Joe Mathew(jisjoemathew@gmail.com)
+  Jis Joe Mathew(jisjoemathew@gmail.com)
   Seby Joseph(sjkappen@gmail.com)
   
   

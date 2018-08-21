@@ -28,9 +28,24 @@
                             <entry key="launcher">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../register.png" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/Logo Merged 2.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -57,9 +72,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/Logo 512.png" />
-                                      <entry key="outputName" value="ic_launcher_round" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/Logo Merged 2.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -76,11 +90,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>

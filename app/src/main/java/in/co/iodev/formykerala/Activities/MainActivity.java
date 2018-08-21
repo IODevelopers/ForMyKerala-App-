@@ -32,11 +32,11 @@ SharedPreferences sharedPref;
         }
         else if (sharedPref.getBoolean("DLogin",FALSE))
         {
-           /* if(sharedPref.getBoolean("DEdited",FALSE))
-                startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+            if(sharedPref.getBoolean("DEdited",FALSE))
+                startActivity(new Intent(getApplicationContext(),DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
             else
                 startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
-*/
+
 
         }
         receiver=findViewById(R.id.role_receiver);
