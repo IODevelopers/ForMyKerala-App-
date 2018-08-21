@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
@@ -36,6 +38,7 @@ public class DonorDetails extends AppCompatActivity {
     ImageView back;
     SharedPreferences sharedPref;
     String request_post_url=Register_Donors,TimeIndex;
+    Context context;
 
 
     @Override
@@ -49,6 +52,7 @@ public class DonorDetails extends AppCompatActivity {
         next=findViewById(R.id.button6);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
+        context=this;
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +111,11 @@ public class DonorDetails extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

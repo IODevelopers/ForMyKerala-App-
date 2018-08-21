@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import in.co.iodev.formykerala.Constants.Constants;
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
@@ -44,13 +46,14 @@ public class AcceptorsView extends AppCompatActivity {
     ImageView back;
     Button logout;
     Boolean submit=false;
+    Context context;
     EditText item_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceptors_view);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-
+        context=this;
 /*
         if(sharedPref.getBoolean("Login",FALSE))
         {
@@ -201,7 +204,11 @@ public class AcceptorsView extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

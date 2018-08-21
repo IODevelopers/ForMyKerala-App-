@@ -1,6 +1,7 @@
 package in.co.iodev.formykerala.Activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.lang.UCharacter;
@@ -34,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.co.iodev.formykerala.Constants.Constants;
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPGet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.R;
@@ -58,6 +60,7 @@ public class EditItemFragment extends Fragment {
         ImageView search_button;
         EditText item_search;
         JSONObject items;
+        Context context;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class EditItemFragment extends Fragment {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             sharedPref=getDefaultSharedPreferences(getContext());
-
+            context=this.getContext();
             TimeIndex=sharedPref.getString("TimeIndex","");
 
             items=new JSONObject();
@@ -270,7 +273,11 @@ public class EditItemFragment extends Fragment {
                     return "Unable to retrieve web page. URL may be invalid.";
                 }
             }
-
+            @Override
+            protected void onPreExecute() {
+                CheckInternet CI=new CheckInternet();
+                CI.isOnline(context);
+            }
             // onPostExecute displays the results of the AsyncTask.
             @Override
             protected void onPostExecute(String result) {

@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.cardemulation.CardEmulation;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.OTPTextEditor;
@@ -39,6 +41,8 @@ public class OTPValidation extends AppCompatActivity {
     Gson gson = new Gson();
     CardView otp_resend;
 ImageView back;
+    Context context;
+
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
 
@@ -51,6 +55,7 @@ ImageView back;
         otp2=findViewById(R.id.otp2);
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
+        context=this;
         verify=findViewById(R.id.otp_verify);
         back=findViewById(R.id.back_button);
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
@@ -146,6 +151,11 @@ ImageView back;
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
 
         // onPostExecute displays the results of the AsyncTask.
         @Override
@@ -186,7 +196,11 @@ ImageView back;
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

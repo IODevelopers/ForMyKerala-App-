@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
@@ -34,6 +36,7 @@ public class OTPVerification extends AppCompatActivity {
     Boolean flag=true;
     DataModel d;
     ImageView back;
+    Context context;
 
     String StringData,request_post_url=Generate_OTP,TimeIndex;
 
@@ -44,6 +47,7 @@ public class OTPVerification extends AppCompatActivity {
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
         back=findViewById(R.id.back_button);
+        context=this;
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
             request_post_url=Generate_OTP;
@@ -109,7 +113,11 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
             return "Unable to retrieve web page. URL may be invalid.";
         }
     }
-
+    @Override
+    protected void onPreExecute() {
+        CheckInternet CI=new CheckInternet();
+        CI.isOnline(context);
+    }
     // onPostExecute displays the results of the AsyncTask.
     @Override
     protected void onPostExecute(String result) {

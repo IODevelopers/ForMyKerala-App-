@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.OTPTextEditor;
@@ -38,7 +40,7 @@ public class DonorLogin extends AppCompatActivity {
     ImageView back;
     EditText otp1,otp2,otp3,otp4;
     TextView forgot,register;
-
+    Context context;
     String StringData,StringData1,request_post_url=Donor_Login,TimeIndex;
 
     @Override
@@ -63,6 +65,7 @@ public class DonorLogin extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        context=this;
         if(sharedPref.getBoolean("Login",FALSE))
         {
            // if(sharedPref.getBoolean("Edited",FALSE))
@@ -142,6 +145,11 @@ public class DonorLogin extends AppCompatActivity {
         } catch (Exception e) {
             return "Unable to retrieve web page. URL may be invalid.";
         }
+    }
+    @Override
+    protected void onPreExecute() {
+        CheckInternet CI=new CheckInternet();
+        CI.isOnline(context);
     }
 
     // onPostExecute displays the results of the AsyncTask.

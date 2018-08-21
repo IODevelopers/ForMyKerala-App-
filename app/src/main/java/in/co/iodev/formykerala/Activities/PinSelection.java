@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.OTPTextEditor;
@@ -34,6 +36,7 @@ public class PinSelection extends AppCompatActivity {
     Button verify;
     Gson gson = new Gson();
     ImageView back;
+    Context context;
 
 
     String StringData,request_post_url=Pin_Selection,TimeIndex;
@@ -50,6 +53,7 @@ public class PinSelection extends AppCompatActivity {
         otp4=findViewById(R.id.otp4);
         back=findViewById(R.id.back_button);
         verify=findViewById(R.id.otp_verify);
+        context=this;
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
@@ -105,7 +109,11 @@ public class PinSelection extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

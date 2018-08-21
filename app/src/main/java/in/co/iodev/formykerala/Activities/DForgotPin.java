@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
@@ -34,6 +36,7 @@ public class DForgotPin extends AppCompatActivity {
     Boolean flag=true;
     ImageView back;
     DataModel d;
+    Context context;
 
     String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
@@ -45,6 +48,8 @@ public class DForgotPin extends AppCompatActivity {
         back=findViewById(R.id.back_button);
         submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
+        context=this;
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +97,11 @@ public class DForgotPin extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
@@ -138,7 +147,11 @@ public class DForgotPin extends AppCompatActivity {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

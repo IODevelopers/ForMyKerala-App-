@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -37,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.co.iodev.formykerala.Constants.Constants;
+import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.HTTPGet;
 import in.co.iodev.formykerala.HTTPPostGet;
 import in.co.iodev.formykerala.R;
@@ -59,10 +61,12 @@ public class EditQuantityFragment extends Fragment {
     ImageView search_button;
     EditText item_search;
     JSONObject items;
+    Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_edit_quantity, container, false);
     }
     @Override
@@ -71,7 +75,7 @@ public class EditQuantityFragment extends Fragment {
         sharedPref=getDefaultSharedPreferences(getContext());
 
         TimeIndex=sharedPref.getString("TimeIndex","");
-
+        context=this.getContext();
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
         try {
@@ -286,7 +290,11 @@ public class EditQuantityFragment extends Fragment {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
