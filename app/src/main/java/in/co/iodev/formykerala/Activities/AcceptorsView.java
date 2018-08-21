@@ -41,6 +41,7 @@ public class AcceptorsView extends AppCompatActivity {
     String StringData;
     Product_Request_Adapter adapter;
     ImageView search_button;
+    ImageView back;
     Button logout;
     Boolean submit=false;
     EditText item_search;
@@ -60,6 +61,7 @@ public class AcceptorsView extends AppCompatActivity {
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
         logout=findViewById(R.id.logout);
+        back=findViewById(R.id.back_button);
 
         JSONObject timeindex=new JSONObject();
        try {
@@ -78,6 +80,12 @@ public class AcceptorsView extends AppCompatActivity {
 
             }
 
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
         });
     }
 
@@ -229,6 +237,13 @@ public class AcceptorsView extends AppCompatActivity {
             }    }
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AcceptorsView.this,ReceiverRequirementsStatus.class));
+        AcceptorsView.this.finish();
+        super.onBackPressed();
     }
 
 }

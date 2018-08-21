@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class DOTPVerification extends AppCompatActivity {
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
+    ImageView back;
     DataModel d;
 
     String StringData,request_post_url=Generate_OTP,TimeIndex;
@@ -40,6 +42,7 @@ public class DOTPVerification extends AppCompatActivity {
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
+        back=findViewById(R.id.back_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
             request_post_url=Generate_OTP;
@@ -48,6 +51,12 @@ public class DOTPVerification extends AppCompatActivity {
             request_post_url=Resend_OTP;
             flag=false;
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +83,13 @@ public class DOTPVerification extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DOTPVerification.this,DonorLogin.class));
+        DOTPVerification.this.finish();
+        super.onBackPressed();
+    }
 private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
     @Override

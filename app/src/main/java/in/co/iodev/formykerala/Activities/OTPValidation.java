@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,7 +38,7 @@ public class OTPValidation extends AppCompatActivity {
     Button verify,resend_otp;
     Gson gson = new Gson();
     CardView otp_resend;
-
+ImageView back;
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
 
@@ -51,6 +52,7 @@ public class OTPValidation extends AppCompatActivity {
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
         verify=findViewById(R.id.otp_verify);
+        back=findViewById(R.id.back_button);
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
@@ -78,6 +80,12 @@ public class OTPValidation extends AppCompatActivity {
 
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -97,6 +105,13 @@ public class OTPValidation extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(OTPValidation.this,OTPVerification.class));
+        OTPValidation.this.finish();
+        super.onBackPressed();
+    }
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
             Toast.makeText(OTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();

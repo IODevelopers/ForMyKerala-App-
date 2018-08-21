@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -58,6 +59,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
     ImageView search_button;
     EditText item_search;
     JSONObject items;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         submit_button=findViewById(R.id.submit_button);
         search_button=findViewById(R.id.search_button);
         item_search=findViewById(R.id.item_search);
+        back=findViewById(R.id.back_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +96,12 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 search();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
@@ -304,5 +313,25 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
             }    }
 
 
+    }
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

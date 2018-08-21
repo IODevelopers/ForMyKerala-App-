@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ public class ForgotPinOTPValidation extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4;
     Button verify;
     Gson gson = new Gson();
+    ImageView back;
 
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
@@ -55,10 +57,23 @@ public class ForgotPinOTPValidation extends AppCompatActivity {
             }
         });
         TimeIndex=sharedPref.getString("TimeIndex","");
+        back=findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ForgotPinOTPValidation.this,ForgotPin.class));
+        ForgotPinOTPValidation.this.finish();
+        super.onBackPressed();
+    }
     public void verify() {
         StringData=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
         DataModel d=new DataModel();

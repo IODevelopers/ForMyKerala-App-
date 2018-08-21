@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText otp1,otp2,otp3,otp4;
     Button verify;
+    ImageView back;
     Gson gson = new Gson();
 
 
@@ -39,6 +41,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpvalidation);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
+        back=findViewById(R.id.back_button);
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
         otp3=findViewById(R.id.otp3);
@@ -55,6 +58,12 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
             }
         });
         TimeIndex=sharedPref.getString("TimeIndex","");
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            onBackPressed();
+            }
+        });
 
 
     }
@@ -74,6 +83,15 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
             new HTTPAsyncTask2().execute(request_post_url);
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DForgotPinOTPValidation.this,DForgotPin.class));
+        DForgotPinOTPValidation.this.finish();
+        super.onBackPressed();
+    }
+
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
         @Override

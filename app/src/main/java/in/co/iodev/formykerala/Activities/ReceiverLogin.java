@@ -111,6 +111,14 @@ public class ReceiverLogin extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ReceiverLogin.this,MainActivity.class));
+        ReceiverLogin.this.finish();
+        super.onBackPressed();
+    }
+
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
     @Override

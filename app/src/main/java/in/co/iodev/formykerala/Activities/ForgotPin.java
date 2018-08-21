@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -33,6 +35,7 @@ public class ForgotPin extends AppCompatActivity {
     SharedPreferences sharedPref;
     Boolean flag=true;
     DataModel d;
+    ImageView back;
 
     String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
@@ -43,11 +46,17 @@ public class ForgotPin extends AppCompatActivity {
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-
+        back=findViewById(R.id.back_button);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 verify();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
@@ -143,5 +152,15 @@ public class ForgotPin extends AppCompatActivity {
             }    }
 
 
-    }}
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ForgotPin.this,ReceiverLogin.class));
+        ForgotPin.this.finish();
+        super.onBackPressed();
+    }
+}
 

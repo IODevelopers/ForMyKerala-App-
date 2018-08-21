@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,6 +33,7 @@ public class DonorDetails extends AppCompatActivity {
     Gson gson = new Gson();
     Button next;
     String StringData;
+    ImageView back;
     SharedPreferences sharedPref;
     String request_post_url=Register_Donors,TimeIndex;
 
@@ -39,7 +42,7 @@ public class DonorDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donor_details);
-
+        back=findViewById(R.id.back_button);
         name=findViewById(R.id.name);
         district=findViewById(R.id.district);
         taluk=findViewById(R.id.taluk);
@@ -70,6 +73,12 @@ public class DonorDetails extends AppCompatActivity {
 
 
                 }
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
@@ -120,6 +129,26 @@ public class DonorDetails extends AppCompatActivity {
 
 
 
+    }
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
 

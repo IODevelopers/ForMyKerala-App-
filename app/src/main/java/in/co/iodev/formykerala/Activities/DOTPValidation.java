@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,6 +36,7 @@ public class DOTPValidation extends AppCompatActivity {
     Button verify,resend_otp;
     Gson gson = new Gson();
     CardView otp_resend;
+    ImageView back;
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
@@ -61,6 +63,7 @@ public class DOTPValidation extends AppCompatActivity {
         });
         otp_resend=findViewById(R.id.resend_otp);
         resend_otp=findViewById(R.id.otp_resend);
+        back=findViewById(R.id.back_button);
         long delay=60000;
         new Timer().schedule(new resendotp(),delay);
         TimeIndex=sharedPref.getString("TimeIndex","");
@@ -74,6 +77,12 @@ public class DOTPValidation extends AppCompatActivity {
                 new HTTPAsyncTask3().execute(Resend_OTP);
 
 
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
@@ -110,6 +119,16 @@ public class DOTPValidation extends AppCompatActivity {
             new HTTPAsyncTask2().execute(Verify_OTP);
         }
     }
+    boolean doubleBackToExitPressedOnce = false;
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DOTPValidation.this,DonorLogin.class));
+        DOTPValidation.this.finish();
+        super.onBackPressed();
+    }
+
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
         @Override

@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,7 +33,7 @@ public class DPinReset extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4;
     Button verify;
     Gson gson = new Gson();
-
+    ImageView back;
 
     String StringData,request_post_url=DForgot_Reset_PIN,TimeIndex;
 
@@ -45,6 +47,7 @@ public class DPinReset extends AppCompatActivity {
         otp2=findViewById(R.id.otp2);
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
+        back=findViewById(R.id.back_button);
         verify=findViewById(R.id.otp_verify);
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
@@ -57,6 +60,12 @@ public class DPinReset extends AppCompatActivity {
             }
         });
         TimeIndex=sharedPref.getString("TimeIndex","");
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -85,8 +94,8 @@ public class DPinReset extends AppCompatActivity {
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
-                    response= HTTPPostGet.getJsonResponse(urls[0],StringData);
-                    Log.i("jisjoe",response.toString());
+                    response = HTTPPostGet.getJsonResponse(urls[0], StringData);
+                    Log.i("jisjoe", response.toString());
                     return response;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -100,29 +109,46 @@ public class DPinReset extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            JSONObject responseObject= null;
+            JSONObject responseObject = null;
             try {
                 responseObject = new JSONObject(result);
-                Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
-                if(responseObject.getString("Message").equals("Success"))
-                {
+                Toast.makeText(getApplicationContext(), responseObject.getString("Message"), Toast.LENGTH_LONG).show();
+                if (responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("Login",TRUE);
+                    editor.putBoolean("Login", TRUE);
                     editor.apply();
-                    startActivity(new Intent(DPinReset.this,DonorLogin.class));
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(DPinReset.this, DonorLogin.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), responseObject.getString("Message"), Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
+        boolean doubleBackToExitPressedOnce = false;
+
+        @Override
+        public void onBackPressed() {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+        }
+
 }
 
 

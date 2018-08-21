@@ -3,12 +3,14 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -32,6 +34,7 @@ public class ReceiverDetails extends AppCompatActivity {
     String StringData;
     SharedPreferences sharedPref;
     String request_post_url=Register_Receivers,TimeIndex;
+    ImageView back;
 
 
     @Override
@@ -44,6 +47,7 @@ public class ReceiverDetails extends AppCompatActivity {
         district=findViewById(R.id.district);
         taluk=findViewById(R.id.taluk);
         next=findViewById(R.id.button6);
+        back=findViewById(R.id.back_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
         next.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +78,12 @@ public class ReceiverDetails extends AppCompatActivity {
                 }
             }
         });
-
+    back.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onBackPressed();
+        }
+    });
     }
 
     public void next(View view) {
@@ -125,6 +134,26 @@ public class ReceiverDetails extends AppCompatActivity {
 
 
 
+    }
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
 

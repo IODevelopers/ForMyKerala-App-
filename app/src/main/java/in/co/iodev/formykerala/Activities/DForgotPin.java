@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ public class DForgotPin extends AppCompatActivity {
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
+    ImageView back;
     DataModel d;
 
     String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
@@ -40,9 +42,15 @@ public class DForgotPin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
+        back=findViewById(R.id.back_button);
         submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +110,16 @@ public class DForgotPin extends AppCompatActivity {
             }    }
 
 
-    }private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DForgotPin.this,DonorLogin.class));
+        DForgotPin.this.finish();
+        super.onBackPressed();
+    }
+
+    private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {

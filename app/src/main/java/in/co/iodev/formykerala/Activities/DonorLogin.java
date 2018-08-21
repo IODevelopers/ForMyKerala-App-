@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class DonorLogin extends AppCompatActivity {
     SharedPreferences sharedPref;
     Boolean flag=true;
     DataModel d;
+    ImageView back;
     EditText otp1,otp2,otp3,otp4;
     TextView forgot,register;
 
@@ -49,12 +51,18 @@ public class DonorLogin extends AppCompatActivity {
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
         forgot=findViewById(R.id.forg);
+        back=findViewById(R.id.back_button);
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         if(sharedPref.getBoolean("Login",FALSE))
         {
            // if(sharedPref.getBoolean("Edited",FALSE))
@@ -102,6 +110,13 @@ public class DonorLogin extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DonorLogin.this,MainActivity.class));
+        DonorLogin.this.finish();
+        super.onBackPressed();
     }
 
     public void forgot(View view) {
