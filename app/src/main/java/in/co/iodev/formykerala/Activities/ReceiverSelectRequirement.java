@@ -289,7 +289,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
 
-                    editor.putBoolean("Edited", TRUE);
+                    editor.putBoolean("EditedR", TRUE);
                     editor.commit();
                     startActivity(new Intent(ReceiverSelectRequirement.this,ReceiverRequirementsStatus.class));
 

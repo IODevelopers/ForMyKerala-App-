@@ -23,20 +23,28 @@ SharedPreferences sharedPref;
 
         if(sharedPref.getBoolean("Login",FALSE))
         {
-            if(sharedPref.getBoolean("Edited",FALSE))
+            if(sharedPref.getBoolean("EditedR",FALSE))
                 startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
             else
-                startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
+                if(sharedPref.getBoolean("Edited",FALSE)){
+                    startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO SELECT ITEMS
 
+                }
+                else
+                startActivity(new Intent(getApplicationContext(),ReceiverDetails.class)); //TO ADD NEW REQUEST
 
         }
-        else if (sharedPref.getBoolean("DLogin",FALSE))
+        else if(sharedPref.getBoolean("DLogin",FALSE))
         {
-            if(sharedPref.getBoolean("DEdited",FALSE))
+            if(sharedPref.getBoolean("DEditedR",FALSE))
                 startActivity(new Intent(getApplicationContext(),DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
             else
-                startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
+            if(sharedPref.getBoolean("DEdited",FALSE)){
+                startActivity(new Intent(getApplicationContext(),DonorSelectItems.class)); //TO SELECT ITEMS
 
+            }
+            else
+                startActivity(new Intent(getApplicationContext(),DonorDetails.class)); //TO ADD NEW REQUEST
 
         }
         receiver=findViewById(R.id.role_receiver);

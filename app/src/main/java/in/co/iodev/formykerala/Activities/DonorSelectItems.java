@@ -289,10 +289,9 @@ public class DonorSelectItems extends AppCompatActivity {
                 else
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
-
-                    editor.putBoolean("Edited", TRUE);
-                    editor.commit();
-                     startActivity(new Intent(DonorSelectItems.this,DonorHomeActivity.class));
+                    editor.putBoolean("DEditedR", TRUE);
+                    editor.apply();
+                    startActivity(new Intent(DonorSelectItems.this,DonorHomeActivity.class));
 
                     submit=false;
                    DonorSelectItems.this.finish();

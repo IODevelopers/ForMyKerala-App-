@@ -110,7 +110,7 @@ public class DPinReset extends AppCompatActivity {
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                     editor.putBoolean("Login",TRUE);
                     editor.apply();
-                    startActivity(new Intent(DPinReset.this,DonorDetails.class));
+                    startActivity(new Intent(DPinReset.this,DonorLogin.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();

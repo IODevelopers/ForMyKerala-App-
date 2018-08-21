@@ -23,6 +23,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Donors;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
+import static java.lang.Boolean.TRUE;
 
 public class DonorDetails extends AppCompatActivity {
     EditText name,address,district,taluk;
@@ -106,10 +107,12 @@ public class DonorDetails extends AppCompatActivity {
             try {
                 responseObject = new JSONObject(result);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
-                if(responseObject.getString("Message").equals("Success"))
-                     startActivity(new Intent(getApplicationContext(),DonorSelectItems.class));
-
-
+                if(responseObject.getString("Message").equals("Success")) {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("DEdited", TRUE);
+                    editor.apply();
+                    startActivity(new Intent(getApplicationContext(), DonorSelectItems.class));
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -110,7 +110,7 @@ public class PinReset extends AppCompatActivity {
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                     editor.putBoolean("Login",TRUE);
                     editor.apply();
-                    startActivity(new Intent(PinReset.this,ReceiverDetails.class));
+                    startActivity(new Intent(PinReset.this,ReceiverLogin.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
