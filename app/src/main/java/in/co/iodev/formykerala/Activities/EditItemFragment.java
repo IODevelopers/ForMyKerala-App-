@@ -3,11 +3,13 @@ package in.co.iodev.formykerala.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.lang.UCharacter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,7 +41,9 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-    public class EditItemFragment extends Fragment {
+import static java.lang.Boolean.TYPE;
+
+public class EditItemFragment extends Fragment {
 
         SharedPreferences sharedPref;
         String url= Constants.Get_Donation_items;
@@ -186,7 +190,7 @@ import static java.lang.Boolean.TRUE;
                         holder.selected.setChecked(FALSE);
                         holder.Quantity.setText("");
                     }*/
-
+                    holder.Quantity.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                     holder.Quantity.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
