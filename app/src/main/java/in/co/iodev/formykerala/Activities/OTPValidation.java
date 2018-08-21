@@ -24,6 +24,7 @@ import java.util.TimerTask;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -40,6 +41,7 @@ public class OTPValidation extends AppCompatActivity {
     CardView otp_resend;
 ImageView back;
     Context context;
+    ProgressBarHider hider;
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
@@ -55,6 +57,8 @@ ImageView back;
         otp4=findViewById(R.id.otp4);
         context=this;
         verify=findViewById(R.id.otp_verify);
+        hider=new ProgressBarHider(verify.getRootView(),verify);
+
         back=findViewById(R.id.back_button);
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
@@ -120,6 +124,7 @@ ImageView back;
             Toast.makeText(OTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
         }
         else {
+            hider.show();
             StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
             DataModel d = new DataModel();
             d.setOTP(StringData);
@@ -131,10 +136,10 @@ ImageView back;
         }
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -144,6 +149,8 @@ ImageView back;
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                }finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -158,9 +165,10 @@ ImageView back;
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            hider.hide();
             JSONObject responseObject= null;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {

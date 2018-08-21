@@ -140,7 +140,14 @@
                 android:elevation="5dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="100px">
-
+                <ProgressBar
+                    android:visibility="invisible"
+                    android:id="@+id/pgbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/white"
+                    android:textColor="@color/colorPrimaryBlue"/>
                 <Button
                     android:id="@+id/otp_verify"
                     android:layout_width="match_parent"

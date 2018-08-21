@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class ReceiverLogin extends AppCompatActivity {
     TextView forgot,register;
     Context context;
     ProgressBarHider hider;
+    ImageView back;
 
     String StringData,StringData1,request_post_url=Receiver_Login,TimeIndex;
 
@@ -59,6 +61,13 @@ public class ReceiverLogin extends AppCompatActivity {
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         context=this;
+        back=findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if(sharedPref.getBoolean("Login",FALSE
         ))
@@ -98,16 +107,19 @@ public class ReceiverLogin extends AppCompatActivity {
 
         StringData=phone.getText().toString();
         StringData1=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")||StringData.equals("")){
+            Toast.makeText(ReceiverLogin.this,"Please Enter Valid Phone and PIN",Toast.LENGTH_LONG).show();
+        }
+        else {
+            d = new DataModel();
+            d.setPhoneNumber(StringData);
+            d.setPIN(StringData1);
+            StringData = gson.toJson(d);
+            Log.i("jisjoe", StringData);
 
-        d=new DataModel();
-        d.setPhoneNumber(StringData);
-        d.setPIN(StringData1);
-        StringData=gson.toJson(d);
-        Log.i("jisjoe",StringData);
-
-        hider.show();
-        new HTTPAsyncTask2().execute(request_post_url);
-
+            hider.show();
+            new HTTPAsyncTask2().execute(request_post_url);
+        }
 
 
     }
@@ -126,11 +138,10 @@ public class ReceiverLogin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-
         String response;
+
     @Override
     protected String doInBackground(String... urls) {
-
         // params comes from the execute() call: params[0] is the url.
         try {
             try {

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
@@ -36,6 +37,9 @@ public class DForgotPin extends AppCompatActivity {
     ImageView back;
     DataModel d;
     Context context;
+    ProgressBarHider hider;
+
+
 
     String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
@@ -48,6 +52,8 @@ public class DForgotPin extends AppCompatActivity {
         submit=findViewById(R.id.request_otp_button);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         context=this;
+        hider=new ProgressBarHider(submit.getRootView(),submit);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,24 +70,30 @@ public class DForgotPin extends AppCompatActivity {
     }
 
     public void verify() {
+        hider.show();
 
         StringData=phone.getText().toString();
-        d=new DataModel();
-        d.setPhoneNumber(StringData);
-        StringData=gson.toJson(d);
-        Log.i("jisjoe",StringData);
+        if(StringData.equals(""))
+        {
+            Toast.makeText(DForgotPin.this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+        }
+        else {
+            d = new DataModel();
+            d.setPhoneNumber(StringData);
+            StringData = gson.toJson(d);
+            Log.i("jisjoe", StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+            new HTTPAsyncTask2().execute(request_post_url);
 
-
+        }
 
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -91,6 +103,8 @@ public class DForgotPin extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                } finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -104,10 +118,10 @@ public class DForgotPin extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            JSONObject response;
+            hider.hide();
             JSONObject responseObject;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success")){
                     new HTTPAsyncTask3().execute(request_post_url1);

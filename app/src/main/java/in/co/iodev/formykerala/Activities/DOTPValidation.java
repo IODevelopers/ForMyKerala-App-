@@ -24,6 +24,7 @@ import java.util.TimerTask;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -40,6 +41,7 @@ public class DOTPValidation extends AppCompatActivity {
     CardView otp_resend;
     ImageView back;
     Context context;
+    ProgressBarHider hider;
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
@@ -68,6 +70,8 @@ public class DOTPValidation extends AppCompatActivity {
         otp_resend=findViewById(R.id.resend_otp);
         resend_otp=findViewById(R.id.otp_resend);
         back=findViewById(R.id.back_button);
+        hider=new ProgressBarHider(verify.getRootView(),verify);
+
         long delay=60000;
         new Timer().schedule(new resendotp(),delay);
         TimeIndex=sharedPref.getString("TimeIndex","");
@@ -113,6 +117,7 @@ public class DOTPValidation extends AppCompatActivity {
             Toast.makeText(DOTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
         }
         else {
+            hider.show();
             StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
             DataModel d = new DataModel();
             d.setOTP(StringData);
@@ -134,10 +139,10 @@ public class DOTPValidation extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -147,6 +152,8 @@ public class DOTPValidation extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                }finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -161,8 +168,9 @@ public class DOTPValidation extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
+            hider.hide();
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {

@@ -183,7 +183,7 @@ public class DonorDetails extends AppCompatActivity {
                 hider.hide();
                 if(!submit)
                 {
-                    object=new JSONObject(result);
+                    object=new JSONObject(response);
                     Log.d("Array", String.valueOf(object));
 
                     Iterator<String> iter = object.keys();

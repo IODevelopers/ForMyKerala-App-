@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     EditText item_search;
     Context context;
     ImageView back;
+    ProgressDialog progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +191,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
 
+
         @Override
         protected String doInBackground(String... urls) {
             String response=null;
@@ -203,6 +208,9 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                     e.printStackTrace();
                     return "Error!";
                 }
+                finally {
+                    progress.cancel();
+                }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
@@ -211,10 +219,17 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
+            progress=new ProgressDialog(ReceiverRequirementsStatus.this);
+            progress.setMessage("Loading...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
+
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            progress.cancel();
             JSONObject responseObject= null;
             try {
                 if (!submit)

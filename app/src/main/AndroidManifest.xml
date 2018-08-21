@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
 
@@ -20,12 +21,21 @@
         <activity android:name=".Activities.OTPValidation"></activity>
         <activity android:name=".Activities.ReceiverRoleSelectActivity"></activity>
         <activity android:name=".Activities.PinSelection"></activity>
-        <activity android:name=".Activities.ReceiverLogin">
+        <activity android:name=".Activities.ReceiverLogin"
+            android:windowSoftInputMode="stateHidden"
+
+            >
         </activity>
-        <activity android:name=".Activities.DonorLogin">
+        <activity android:name=".Activities.DonorLogin"
+            android:windowSoftInputMode="stateHidden"
+            >
         </activity>
         <activity android:name=".Activities.ReceiverSelectRequirement"></activity>
-        <activity android:name=".Activities.ReceiverRequirementsStatus">
+        <activity android:name=".Activities.ReceiverRequirementsStatus"
+            android:windowSoftInputMode="stateHidden"
+
+            >
+
         </activity>
         <activity android:name=".Activities.ReceiverDetails">
 

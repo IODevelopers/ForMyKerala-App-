@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -34,6 +35,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
     ImageView back;
     Gson gson = new Gson();
     Context context;
+    ProgressBarHider hider;
 
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
@@ -49,6 +51,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         otp3=findViewById(R.id.otp3);
         otp4=findViewById(R.id.otp4);
         verify=findViewById(R.id.otp_verify);
+        hider=new ProgressBarHider(verify.getRootView(),verify);
         context=this;
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
@@ -76,6 +79,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
             Toast.makeText(DForgotPinOTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
         }
         else {
+            hider.show();
             StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
             DataModel d = new DataModel();
             d.setOTP(StringData);
@@ -96,10 +100,10 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -109,6 +113,8 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                }finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -122,9 +128,10 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            hider.hide();
             JSONObject responseObject= null;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {

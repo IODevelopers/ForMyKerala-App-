@@ -79,6 +79,7 @@
                                     android:layout_height="match_parent"
                                     android:background="@android:color/transparent"
                                     android:gravity="center"
+
                                     android:hint="Search your items"
                                     android:textColor="@android:color/black"
                                     android:textStyle="bold" />

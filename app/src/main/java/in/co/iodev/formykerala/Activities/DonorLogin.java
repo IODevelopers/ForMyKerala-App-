@@ -47,7 +47,7 @@ public class DonorLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reciever_login);
+        setContentView(R.layout.activity_donor_login);
         phone=findViewById(R.id.phone);
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -136,10 +136,10 @@ public class DonorLogin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
-    @Override
+        @Override
     protected String doInBackground(String... urls) {
-         String response;
         // params comes from the execute() call: params[0] is the url.
         try {
             try {
@@ -149,6 +149,9 @@ public class DonorLogin extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
                 return "Error!";
+            }
+            finally {
+                hider.hide();
             }
         } catch (Exception e) {
             return "Unable to retrieve web page. URL may be invalid.";
@@ -164,10 +167,9 @@ public class DonorLogin extends AppCompatActivity {
     @Override
     protected void onPostExecute(String result) {
         hider.hide();
-        JSONObject response;
         JSONObject responseObject;
         try {
-            responseObject = new JSONObject(result);
+            responseObject = new JSONObject(response);
             Log.i("jisjoe",result.toString());
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
            if(responseObject.getString("Message").equals("Success")) {

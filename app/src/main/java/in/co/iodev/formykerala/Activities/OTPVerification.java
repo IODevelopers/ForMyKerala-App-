@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
@@ -35,6 +36,7 @@ public class OTPVerification extends AppCompatActivity {
     DataModel d;
     ImageView back;
     Context context;
+    ProgressBarHider hider;
 
     String StringData,request_post_url=Generate_OTP,TimeIndex;
 
@@ -45,6 +47,8 @@ public class OTPVerification extends AppCompatActivity {
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
         back=findViewById(R.id.back_button);
+        hider=new ProgressBarHider(submit.getRootView(),submit);
+
         context=this;
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
@@ -71,17 +75,21 @@ public class OTPVerification extends AppCompatActivity {
     public void verify() {
 
         StringData=phone.getText().toString();
-        d=new DataModel();
-        d.setPhoneNumber(StringData);
-        if(!flag)
-        {
-            d.setTimeIndex(sharedPref.getString("TimeIndex",""));
+        if(StringData.equals("")){
+            Toast.makeText(OTPVerification.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
         }
-        StringData=gson.toJson(d);
-        Log.i("jisjoe",StringData);
+        else {
+            hider.show();
+            d = new DataModel();
+            d.setPhoneNumber(StringData);
+            if (!flag) {
+                d.setTimeIndex(sharedPref.getString("TimeIndex", ""));
+            }
+            StringData = gson.toJson(d);
+            Log.i("jisjoe", StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
-
+            new HTTPAsyncTask2().execute(request_post_url);
+        }
 
 
     }
@@ -93,10 +101,10 @@ public class OTPVerification extends AppCompatActivity {
         super.onBackPressed();
     }
 private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+    String response;
 
     @Override
     protected String doInBackground(String... urls) {
-         String response;
         // params comes from the execute() call: params[0] is the url.
         try {
             try {
@@ -106,6 +114,8 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
             } catch (Exception e) {
                 e.printStackTrace();
                 return "Error!";
+            }finally {
+                hider.hide();
             }
         } catch (Exception e) {
             return "Unable to retrieve web page. URL may be invalid.";
@@ -119,10 +129,10 @@ private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
     // onPostExecute displays the results of the AsyncTask.
     @Override
     protected void onPostExecute(String result) {
-        JSONObject response;
+        hider.hide();
         JSONObject responseObject;
         try {
-            responseObject = new JSONObject(result);
+            responseObject = new JSONObject(response);
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
              if(responseObject.getString("Message").equals("Success")) {
                  SharedPreferences.Editor editor = sharedPref.edit();

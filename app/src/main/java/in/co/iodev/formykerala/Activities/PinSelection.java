@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -36,7 +37,7 @@ public class PinSelection extends AppCompatActivity {
     Gson gson = new Gson();
     ImageView back;
     Context context;
-
+ProgressBarHider hider;
 
     String StringData,request_post_url=Pin_Selection,TimeIndex;
 
@@ -52,6 +53,8 @@ public class PinSelection extends AppCompatActivity {
         otp4=findViewById(R.id.otp4);
         back=findViewById(R.id.back_button);
         verify=findViewById(R.id.otp_verify);
+        hider=new ProgressBarHider(verify.getRootView(),verify);
+
         context=this;
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
@@ -78,6 +81,7 @@ public class PinSelection extends AppCompatActivity {
             Toast.makeText(PinSelection.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
         }
         else {
+            hider.show();
             StringData = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
             DataModel d = new DataModel();
             d.setPIN(StringData);
@@ -90,10 +94,10 @@ public class PinSelection extends AppCompatActivity {
         }
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -103,6 +107,8 @@ public class PinSelection extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                }finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -116,9 +122,10 @@ public class PinSelection extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            hider.hide();
             JSONObject responseObject = null;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(), responseObject.getString("Message"), Toast.LENGTH_LONG).show();
                 if (responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();

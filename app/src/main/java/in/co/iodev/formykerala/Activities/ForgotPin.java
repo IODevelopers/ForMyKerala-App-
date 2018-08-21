@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.R;
 
@@ -34,6 +35,8 @@ public class ForgotPin extends AppCompatActivity {
     Gson gson = new Gson();
     SharedPreferences sharedPref;
     Boolean flag=true;
+    ProgressBarHider hider;
+
     DataModel d;
     ImageView back;
     Context context;
@@ -49,6 +52,8 @@ public class ForgotPin extends AppCompatActivity {
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         back=findViewById(R.id.back_button);
         context=this;
+        hider=new ProgressBarHider(submit.getRootView(),submit);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +70,7 @@ public class ForgotPin extends AppCompatActivity {
     }
 
     public void verify() {
+        hider.show();
 
         StringData=phone.getText().toString();
         d=new DataModel();
@@ -79,10 +85,10 @@ public class ForgotPin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -105,10 +111,9 @@ public class ForgotPin extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            JSONObject response;
-            JSONObject responseObject;
+             JSONObject responseObject;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success")){
                     new HTTPAsyncTask3().execute(request_post_url1);
@@ -120,10 +125,10 @@ public class ForgotPin extends AppCompatActivity {
 
 
     }private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
+        String response;
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -133,6 +138,8 @@ public class ForgotPin extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "Error!";
+                }finally {
+                    hider.hide();
                 }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -146,10 +153,10 @@ public class ForgotPin extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            JSONObject response;
+            hider.hide();
             JSONObject responseObject;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));

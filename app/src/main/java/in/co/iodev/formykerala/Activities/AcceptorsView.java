@@ -1,5 +1,6 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,8 @@ public class AcceptorsView extends AppCompatActivity {
     Boolean submit=false;
     Context context;
     EditText item_search;
+    ProgressDialog progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,6 +205,9 @@ public class AcceptorsView extends AppCompatActivity {
                     e.printStackTrace();
                     return "Error!";
                 }
+                finally {
+                    progress.cancel();
+                }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
@@ -210,11 +216,17 @@ public class AcceptorsView extends AppCompatActivity {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
+            progress=new ProgressDialog(AcceptorsView.this);
+            progress.setMessage("Loading...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
+            progress.cancel();
             try {
                 if (!submit)
                 {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
