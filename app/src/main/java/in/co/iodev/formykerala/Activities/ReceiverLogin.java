@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
 import in.co.iodev.formykerala.R;
@@ -38,6 +39,7 @@ public class ReceiverLogin extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4;
     TextView forgot,register;
     Context context;
+    ProgressBarHider hider;
 
     String StringData,StringData1,request_post_url=Receiver_Login,TimeIndex;
 
@@ -69,6 +71,7 @@ public class ReceiverLogin extends AppCompatActivity {
 
         }
         submit=findViewById(R.id.request_otp_button);
+        hider=new ProgressBarHider(submit.getRootView(),submit);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +105,7 @@ public class ReceiverLogin extends AppCompatActivity {
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
+        hider.show();
         new HTTPAsyncTask2().execute(request_post_url);
 
 
@@ -136,6 +140,9 @@ public class ReceiverLogin extends AppCompatActivity {
                 e.printStackTrace();
                 return "Error!";
             }
+            finally {
+                hider.hide();
+            }
         } catch (Exception e) {
             return "Unable to retrieve web page. URL may be invalid.";
         }
@@ -151,6 +158,7 @@ public class ReceiverLogin extends AppCompatActivity {
         JSONObject response;
         JSONObject responseObject;
         try {
+            hider.hide();
             responseObject = new JSONObject(result);
             Log.i("jisjoe",result.toString());
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();

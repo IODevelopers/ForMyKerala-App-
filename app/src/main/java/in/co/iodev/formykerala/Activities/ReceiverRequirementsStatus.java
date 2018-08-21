@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -44,6 +45,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     Boolean submit=false;
     EditText item_search;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -95,6 +95,16 @@
                     android:text="Submit"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
+
+                <ProgressBar
+                    android:visibility="invisible"
+                    android:id="@+id/pgbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/white"
+                    android:textColor="@color/colorPrimaryBlue"/>
+
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>

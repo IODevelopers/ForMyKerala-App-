@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -49,6 +50,8 @@ public class EditItemFragment extends Fragment {
         EditText item_search;
         JSONObject items;
         Context context;
+        ProgressBarHider hider;
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class EditItemFragment extends Fragment {
             adapter=new Product_Request_Adapter();
             new HTTPAsyncTask2().execute(url);
             submit_button=view.findViewById(R.id.donor_items_submit);
+            hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
             submit_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -93,6 +97,7 @@ public class EditItemFragment extends Fragment {
                     submit=true;
                     Log.d("sj",StringData.toString());
 
+                    hider.show();
                     new HTTPAsyncTask2().execute(url2);
                 }
             });
@@ -257,6 +262,9 @@ public class EditItemFragment extends Fragment {
                         e.printStackTrace();
                         return "Error!";
                     }
+                    finally {
+                        hider.hide();
+                    }
                 } catch (Exception e) {
                     return "Unable to retrieve web page. URL may be invalid.";
                 }
@@ -271,6 +279,7 @@ public class EditItemFragment extends Fragment {
             protected void onPostExecute(String result) {
                 JSONObject responseObject= null;
                 try {
+                    hider.hide();
                     if (!submit)
                     {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
 
