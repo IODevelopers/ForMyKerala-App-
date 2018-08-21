@@ -45,6 +45,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     Boolean submit=false;
     EditText item_search;
     Context context;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"LOGGED IN ALREADY--REDIRECT",Toast.LENGTH_LONG).show();
         }*/
         TimeIndex=sharedPref.getString("TimeIndex","");
+        back=findViewById(R.id.back_button);
 
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
@@ -83,6 +85,12 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
             }
 
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
         });
 
     }
