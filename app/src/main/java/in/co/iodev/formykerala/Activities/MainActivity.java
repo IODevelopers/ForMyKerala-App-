@@ -23,28 +23,36 @@ SharedPreferences sharedPref;
 
         if(sharedPref.getBoolean("Login",FALSE))
         {
-            if(sharedPref.getBoolean("EditedR",FALSE))
-                startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+            if(sharedPref.getBoolean("EditedR",FALSE)) {
+                startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+                MainActivity.this.finish();
+            }
             else
                 if(sharedPref.getBoolean("Edited",FALSE)){
                     startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO SELECT ITEMS
-
+                    MainActivity.this.finish();
                 }
-                else
-                startActivity(new Intent(getApplicationContext(),ReceiverDetails.class)); //TO ADD NEW REQUEST
+                else {
+                    startActivity(new Intent(getApplicationContext(), ReceiverDetails.class)); //TO ADD NEW REQUEST
+                    MainActivity.this.finish();
+                }
 
         }
         else if(sharedPref.getBoolean("DLogin",FALSE))
         {
-            if(sharedPref.getBoolean("DEditedR",FALSE))
-                startActivity(new Intent(getApplicationContext(),DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
+            if(sharedPref.getBoolean("DEditedR",FALSE)) {
+                startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
+                MainActivity.this.finish();
+            }
             else
             if(sharedPref.getBoolean("DEdited",FALSE)){
                 startActivity(new Intent(getApplicationContext(),DonorSelectItems.class)); //TO SELECT ITEMS
-
+                MainActivity.this.finish();
             }
-            else
+            else{
                 startActivity(new Intent(getApplicationContext(),DonorDetails.class)); //TO ADD NEW REQUEST
+                MainActivity.this.finish();
+                 }
 
         }
         receiver=findViewById(R.id.role_receiver);
@@ -65,8 +73,10 @@ SharedPreferences sharedPref;
 
     public void receiver() {
         startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
+        MainActivity.this.finish();
     }
     public void donor() {
         startActivity(new Intent(MainActivity.this,DonorLogin.class));
+        MainActivity.this.finish();
     }
 }

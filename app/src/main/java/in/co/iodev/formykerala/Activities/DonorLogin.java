@@ -95,6 +95,12 @@ public class DonorLogin extends AppCompatActivity {
                 startActivity(new Intent(DonorLogin.this,DForgotPin.class));
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     public void verify() {
