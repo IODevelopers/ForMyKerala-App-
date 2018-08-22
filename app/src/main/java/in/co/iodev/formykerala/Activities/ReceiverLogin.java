@@ -29,6 +29,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Receiver_Login;
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 public class ReceiverLogin extends AppCompatActivity {
     EditText phone;
@@ -69,16 +70,7 @@ public class ReceiverLogin extends AppCompatActivity {
             }
         });
 
-        if(sharedPref.getBoolean("Login",FALSE
-        ))
-        {
-            if(sharedPref.getBoolean("Edited",FALSE))
-            startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
-            else
-                startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
 
-
-        }
         submit=findViewById(R.id.request_otp_button);
         hider=new ProgressBarHider(submit.getRootView(),submit);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
@@ -177,8 +169,13 @@ public class ReceiverLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
+               editor.putBoolean("EditedR", TRUE);
+               editor.putBoolean("Login", TRUE);
+
+
                editor.apply();
                startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+               ReceiverLogin.this.finish();
            }
 
         } catch (JSONException e) {

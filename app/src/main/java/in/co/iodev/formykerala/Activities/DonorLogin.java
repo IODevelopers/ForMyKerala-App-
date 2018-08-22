@@ -177,8 +177,10 @@ public class DonorLogin extends AppCompatActivity {
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
                editor.putBoolean("DLogin", true);
+               editor.putBoolean("DEditedR", true);
                editor.apply();
                startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
+               DonorLogin.this.finish();
            }
 
         } catch (JSONException e) {
