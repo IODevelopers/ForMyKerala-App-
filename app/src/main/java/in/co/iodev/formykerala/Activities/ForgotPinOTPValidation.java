@@ -131,7 +131,7 @@ public class ForgotPinOTPValidation extends AppCompatActivity {
             hider.hide();
             JSONObject responseObject= null;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {

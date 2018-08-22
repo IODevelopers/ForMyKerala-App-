@@ -8,16 +8,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryBlue">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:fillViewport="true"
+       android:background="@color/colorPrimaryBlue">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="10dp">
+            android:paddingBottom="30dp">
 
             <ImageView
                 android:id="@+id/back_button"
@@ -39,14 +37,15 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -57,29 +56,32 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
                         app:cardCornerRadius="20dp">
+
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:background="#D3D3D3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:orientation="horizontal">
-                        <ImageView
-                            android:id="@+id/search_button"
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@mipmap/search"
-                            android:background="@android:color/transparent"/>
-                        <EditText
-                            android:id="@+id/item_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:lines="1"
-                            android:hint="Search your items"
-                            android:textColor="@android:color/black"
-                            android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/search_button"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@android:color/transparent"
+                                android:src="@mipmap/search" />
+
+                            <EditText
+                                android:id="@+id/item_search"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="center"
+                                android:hint="Search your items"
+                                android:lines="1"
+                                android:textColor="@android:color/black"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
@@ -134,44 +136,43 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:dividerHeight="0dp"
                         android:divider="@android:color/transparent"
-                        ></ListView>
+                        android:dividerHeight="0dp"></ListView>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
-            <android.support.v7.widget.CardView
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"
-                android:layout_marginTop="580dp"
-                android:elevation="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="20dp">
-
-                <Button
-
-                    android:id="@+id/submit_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:text="Submit"
-                    android:textColor="@color/colorPrimaryBlue"
-                    android:textStyle="bold" />
-
-                <ProgressBar
-                    android:visibility="invisible"
-                    android:id="@+id/pgbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/white"
-                    android:textColor="@color/colorPrimaryBlue"/>
-
-            </android.support.v7.widget.CardView></RelativeLayout>
     </ScrollView>
+    <android.support.v7.widget.CardView
+       android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
 
+        android:elevation="10dp"
+        android:layout_marginBottom="15dp"
+        app:cardCornerRadius="20dp">
+
+        <Button
+
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:text="Submit"
+            android:textColor="@color/colorPrimaryBlue"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/pgbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/white"
+            android:textColor="@color/colorPrimaryBlue"/>
+
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

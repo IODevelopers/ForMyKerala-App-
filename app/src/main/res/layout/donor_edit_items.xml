@@ -14,21 +14,22 @@
         <TextView
             android:id="@+id/product_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_weight="6"
+            android:gravity="center"
+            android:text="Name"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Name" />
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/requested_quantity"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_weight="6"
-            android:textSize="20sp"
-            ></EditText>
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"></EditText>
     </LinearLayout>
 </LinearLayout>
