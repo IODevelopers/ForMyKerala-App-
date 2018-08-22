@@ -184,10 +184,10 @@ ImageView back;
 
 
     } private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
-
+        String response;
         @Override
         protected String doInBackground(String... urls) {
-            String response;
+
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -212,7 +212,7 @@ ImageView back;
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
             try {
-                responseObject = new JSONObject(result);
+                responseObject = new JSONObject(response);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
 
 

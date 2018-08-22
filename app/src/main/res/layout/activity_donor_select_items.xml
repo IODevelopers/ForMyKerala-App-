@@ -37,7 +37,7 @@
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="20dp">
 
                     <LinearLayout
@@ -56,19 +56,22 @@
                             android:layout_marginRight="20dp"
                             android:layout_marginTop="20dp"
                             app:cardCornerRadius="20dp">
+
                             <LinearLayout
-                                android:background="#D3D3D3"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="#D3D3D3"
                                 android:orientation="horizontal">
+
                                 <ImageView
                                     android:id="@+id/search_button"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_gravity="center"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
-                                    android:src="@mipmap/search"
-                                    android:background="@android:color/transparent"/>
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:src="@mipmap/search" />
+
                                 <EditText
                                     android:id="@+id/item_search"
                                     android:layout_width="match_parent"
@@ -132,9 +135,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:dividerHeight="0dp"
                             android:divider="@android:color/transparent"
-                            ></ListView>
+                            android:dividerHeight="0dp"></ListView>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
