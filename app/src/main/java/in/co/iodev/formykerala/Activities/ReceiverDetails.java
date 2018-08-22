@@ -210,7 +210,11 @@ public class ReceiverDetails extends AppCompatActivity {
                   SharedPreferences.Editor editor = sharedPref.edit();
                   editor.putBoolean("Edited", TRUE);
                    editor.apply();
-                  startActivity(new Intent(getApplicationContext(), ReceiverSelectRequirement.class));
+                  Intent intent = new Intent(ReceiverDetails.this, ReceiverSelectRequirement.class);
+                  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                  startActivity(intent);
+                  finish();
 
               }}
 

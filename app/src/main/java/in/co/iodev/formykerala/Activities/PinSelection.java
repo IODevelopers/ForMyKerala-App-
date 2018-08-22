@@ -132,7 +132,12 @@ ProgressBarHider hider;
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                     editor.putBoolean("Login", TRUE);
                     editor.apply();
-                    startActivity(new Intent(PinSelection.this, ReceiverDetails.class));
+                    Intent intent = new Intent(PinSelection.this, ReceiverDetails.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                    finish();
+
                 } else {
                     Toast.makeText(getApplicationContext(), responseObject.getString("Message"), Toast.LENGTH_LONG).show();
                 }

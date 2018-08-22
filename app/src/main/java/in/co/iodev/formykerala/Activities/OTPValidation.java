@@ -172,7 +172,11 @@ ImageView back;
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success"))
                 {
-                    startActivity(new Intent(OTPValidation.this,PinSelection.class));
+                    Intent intent = new Intent(OTPValidation.this, PinSelection.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();

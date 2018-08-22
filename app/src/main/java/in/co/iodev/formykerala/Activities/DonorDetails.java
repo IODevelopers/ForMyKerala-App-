@@ -210,7 +210,11 @@ public class DonorDetails extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean("DEdited", TRUE);
                     editor.apply();
-                    startActivity(new Intent(getApplicationContext(), DonorSelectItems.class));
+                    Intent intent = new Intent(DonorDetails.this, DonorSelectItems.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                    finish();
                 }}}
              catch (JSONException e) {
                 e.printStackTrace();}

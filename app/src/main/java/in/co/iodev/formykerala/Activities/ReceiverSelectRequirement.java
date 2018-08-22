@@ -306,7 +306,11 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
                     editor.putBoolean("EditedR", TRUE);
                     editor.commit();
-                    startActivity(new Intent(ReceiverSelectRequirement.this,ReceiverRequirementsStatus.class));
+                    Intent intent = new Intent(ReceiverSelectRequirement.this, ReceiverRequirementsStatus.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+
 
                     submit=false;
                     ReceiverSelectRequirement.this.finish();

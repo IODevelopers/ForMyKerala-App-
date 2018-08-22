@@ -80,6 +80,9 @@ public class AcceptorsView extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("Login",FALSE);
+                editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+
                 editor.commit();
                 sharedPref.edit().apply();
 

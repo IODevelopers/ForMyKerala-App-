@@ -307,7 +307,10 @@ public class DonorSelectItems extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean("DEditedR", TRUE);
                     editor.apply();
-                    startActivity(new Intent(DonorSelectItems.this,DonorHomeActivity.class));
+                    Intent intent = new Intent(DonorSelectItems.this, DonorHomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
 
                     submit=false;
                    DonorSelectItems.this.finish();

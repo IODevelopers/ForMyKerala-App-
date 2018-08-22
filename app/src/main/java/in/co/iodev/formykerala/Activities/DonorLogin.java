@@ -179,8 +179,10 @@ public class DonorLogin extends AppCompatActivity {
                editor.putBoolean("DLogin", true);
                editor.putBoolean("DEditedR", true);
                editor.apply();
-               startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
-               DonorLogin.this.finish();
+               Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
+               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                DonorLogin.this.finish();
            }
 
         } catch (JSONException e) {
