@@ -109,7 +109,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         {products.clear();
             for (int i=0;i<Mainproducts.size();i++)
             {
-                if(Mainproducts.get(i).equals(item_search.getText().toString()))
+                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString()))
                 {
                     products.add(Mainproducts.get(i));
 
@@ -252,7 +252,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response=null;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {

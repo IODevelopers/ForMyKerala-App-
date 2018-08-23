@@ -130,7 +130,7 @@ public class ReceiverLogin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-        String response;
+        String response="Network Error";
 
     @Override
     protected String doInBackground(String... urls) {
@@ -174,7 +174,7 @@ public class ReceiverLogin extends AppCompatActivity {
 
 
                editor.apply();
-               startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
+               startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); //TO VIEW ADDED REQUESTS
                ReceiverLogin.this.finish();
            }
 

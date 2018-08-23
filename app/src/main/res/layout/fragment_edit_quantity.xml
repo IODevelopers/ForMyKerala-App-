@@ -66,6 +66,14 @@
                         android:gravity="center"
                         android:text="Quantity"
                         android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="6"
+                        android:gravity="center"
+                        android:text="Status"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 

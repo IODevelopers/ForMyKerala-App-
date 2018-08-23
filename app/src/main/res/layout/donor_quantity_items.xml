@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="6"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:text="Name" />
         <TextView
@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="6"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:paddingBottom="12dp"
             ></TextView>
         <TextView
@@ -39,9 +39,19 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="6"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:paddingBottom="12dp"
             ></TextView>
+        <TextView
 
+            android:id="@+id/Status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="6"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="Verified" />
     </LinearLayout>
 </LinearLayout>

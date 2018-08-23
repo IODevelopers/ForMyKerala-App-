@@ -213,7 +213,7 @@ public class AcceptedItemFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response=null;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {

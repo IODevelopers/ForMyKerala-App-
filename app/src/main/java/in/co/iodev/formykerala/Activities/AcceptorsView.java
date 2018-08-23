@@ -80,13 +80,14 @@ public class AcceptorsView extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("Login",FALSE);
-                editor.putBoolean("Edited",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
                 editor.putBoolean("EditedR",FALSE);
-
+*/
                 editor.commit();
                 sharedPref.edit().apply();
 
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
 
             }
@@ -136,7 +137,7 @@ public class AcceptorsView extends AppCompatActivity {
            ViewHolder1 holder = null;
 
             if(view == null) {
-                view = getLayoutInflater().inflate(R.layout.product_status_list_item,parent,false);
+                view = getLayoutInflater().inflate(R.layout.accepted_donor_items,parent,false);
                 holder = new ViewHolder1(view);
                 view.setTag(holder);
             }
@@ -194,7 +195,7 @@ public class AcceptorsView extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response=null;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {

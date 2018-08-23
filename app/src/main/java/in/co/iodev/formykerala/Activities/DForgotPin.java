@@ -90,7 +90,8 @@ public class DForgotPin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-        String response;
+
+        String response="Network Error";
 
         @Override
         protected String doInBackground(String... urls) {
@@ -145,7 +146,7 @@ public class DForgotPin extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -177,7 +178,7 @@ public class DForgotPin extends AppCompatActivity {
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
-                startActivity(new Intent(getApplicationContext(),DForgotPinOTPValidation.class));
+                startActivity(new Intent(DForgotPin.this,DForgotPinOTPValidation.class));
 
 
             } catch (JSONException e) {
