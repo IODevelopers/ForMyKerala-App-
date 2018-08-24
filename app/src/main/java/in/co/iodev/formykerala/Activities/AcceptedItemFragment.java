@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.util.Iterator;
 
 import in.co.iodev.formykerala.Constants.Constants;
@@ -257,7 +258,7 @@ public class AcceptedItemFragment extends Fragment {
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
 
-                    editor.putBoolean("Edited", TRUE);
+                    editor.putBoolean(TimeIndex+"Edited", TRUE);
                     editor.commit();
 
 

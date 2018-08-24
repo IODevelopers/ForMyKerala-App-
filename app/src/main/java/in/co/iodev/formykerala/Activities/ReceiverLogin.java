@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
+
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
@@ -167,10 +169,11 @@ public class ReceiverLogin extends AppCompatActivity {
              Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
            if(responseObject.getString("Message").equals("Success")) {
                SharedPreferences.Editor editor = sharedPref.edit();
+               String TimeIndex=responseObject.getString("TimeIndex");
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
-               editor.putBoolean("EditedR", TRUE);
-               editor.putBoolean("Login", TRUE);
+               editor.putBoolean(TimeIndex+"EditedR", TRUE);
+               editor.putBoolean(TimeIndex+"Login", TRUE);
 
 
                editor.apply();

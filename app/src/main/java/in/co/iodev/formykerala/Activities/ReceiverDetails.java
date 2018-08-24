@@ -208,7 +208,7 @@ public class ReceiverDetails extends AppCompatActivity {
 
               if(responseObject.getString("Message").equals("Success")) {
                   SharedPreferences.Editor editor = sharedPref.edit();
-                  editor.putBoolean("Edited", TRUE);
+                  editor.putBoolean(TimeIndex+"Edited", TRUE);
                    editor.apply();
                   Intent intent = new Intent(ReceiverDetails.this, ReceiverSelectRequirement.class);
                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -246,7 +246,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                 else
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putBoolean("Edited", TRUE);
+                    editor.putBoolean(TimeIndex+"Edited", TRUE);
                     editor.commit();
 
 

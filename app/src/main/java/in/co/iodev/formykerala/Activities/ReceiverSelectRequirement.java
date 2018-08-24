@@ -304,7 +304,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
 
-                    editor.putBoolean("EditedR", TRUE);
+                    editor.putBoolean(TimeIndex+"EditedR", TRUE);
                     editor.commit();
                     Intent intent = new Intent(ReceiverSelectRequirement.this, ReceiverRequirementsStatus.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -316,6 +316,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     ReceiverSelectRequirement.this.finish();
 
                 }
+
 
 
             } catch (JSONException e) {

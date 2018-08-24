@@ -133,7 +133,8 @@ public class DPinSelection extends AppCompatActivity {
                 {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("DLogin",TRUE);
+                    String TimeIndex=responseObject.getString("TimeIndex");
+                    editor.putBoolean(TimeIndex+"DLogin",TRUE);
                     editor.apply();
                     Intent intent = new Intent(DPinSelection.this, DonorDetails.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

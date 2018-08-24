@@ -134,7 +134,6 @@ public class PinReset extends AppCompatActivity {
                 {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("Login",TRUE);
                     editor.apply();
                     Intent intent = new Intent(PinReset.this, ReceiverLogin.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

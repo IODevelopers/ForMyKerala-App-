@@ -67,15 +67,7 @@ public class DonorLogin extends AppCompatActivity {
             }
         });
         context=this;
-        if(sharedPref.getBoolean("Login",FALSE))
-        {
-           // if(sharedPref.getBoolean("Edited",FALSE))
-        //    startActivity(new Intent(getApplicationContext(),ReceiverRequirementsStatus.class)); //TO VIEW ADDED REQUESTS
-         //   else
-          //      startActivity(new Intent(getApplicationContext(),ReceiverSelectRequirement.class)); //TO VIEW ADDED REQUESTS
 
-
-        }
         submit=findViewById(R.id.request_otp_button);
         hider=new ProgressBarHider(submit.getRootView(),submit);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
@@ -176,8 +168,8 @@ public class DonorLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
-               editor.putBoolean("DLogin", true);
-               editor.putBoolean("DEditedR", true);
+               editor.putBoolean(TimeIndex+"DLogin", true);
+               editor.putBoolean(TimeIndex+"DEditedR", true);
                editor.apply();
                Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

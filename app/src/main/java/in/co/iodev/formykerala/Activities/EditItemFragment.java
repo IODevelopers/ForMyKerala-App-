@@ -297,7 +297,7 @@ public class EditItemFragment extends Fragment {
                        if(jsonObject.getString("Message").equals("Success")) {
                            SharedPreferences.Editor editor = sharedPref.edit();
 
-                           editor.putBoolean("Edited", TRUE);
+                           editor.putBoolean(TimeIndex+"DEdited", TRUE);
                            editor.commit();
                        }
                         Toast.makeText(getContext(),jsonObject.getString("Message"),Toast.LENGTH_SHORT).show();

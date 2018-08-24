@@ -305,7 +305,7 @@ public class DonorSelectItems extends AppCompatActivity {
                 else
                 {Log.d("Responseitem",result);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putBoolean("DEditedR", TRUE);
+                    editor.putBoolean(TimeIndex+"DEditedR", TRUE);
                     editor.apply();
                     Intent intent = new Intent(DonorSelectItems.this, DonorHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

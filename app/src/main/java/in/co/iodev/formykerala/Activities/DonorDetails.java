@@ -208,7 +208,7 @@ public class DonorDetails extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
                 if(responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putBoolean("DEdited", TRUE);
+                    editor.putBoolean(TimeIndex+"DEdited", TRUE);
                     editor.apply();
                     Intent intent = new Intent(DonorDetails.this, DonorSelectItems.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

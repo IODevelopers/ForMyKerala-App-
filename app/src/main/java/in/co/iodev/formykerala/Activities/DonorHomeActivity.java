@@ -108,7 +108,6 @@ public class DonorHomeActivity extends FragmentActivity {
         if (doubleBackToExitPressedOnce) {
             SharedPreferences sharedPref=getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("DLogin",FALSE);
             editor.commit();
             sharedPref.edit().apply();
 

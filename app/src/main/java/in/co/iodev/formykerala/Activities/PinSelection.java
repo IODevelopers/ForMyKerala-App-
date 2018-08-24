@@ -130,7 +130,8 @@ ProgressBarHider hider;
                 if (responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("Login", TRUE);
+                    String TimeIndex=responseObject.getString("TimeIndex");
+                    editor.putBoolean(TimeIndex+"Login", TRUE);
                     editor.apply();
                     Intent intent = new Intent(PinSelection.this, ReceiverDetails.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

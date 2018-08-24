@@ -134,7 +134,6 @@ public class DPinReset extends AppCompatActivity {
                 if (responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
-                    editor.putBoolean("Login", TRUE);
                     editor.apply();
                     Intent intent = new Intent(DPinReset.this, DonorLogin.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

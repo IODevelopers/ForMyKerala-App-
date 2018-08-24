@@ -41,6 +41,7 @@ public class DForgotPin extends AppCompatActivity {
 
 
 
+
     String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
     @Override
