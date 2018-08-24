@@ -51,6 +51,7 @@ public class EditItemFragment extends Fragment {
         JSONObject items;
         Context context;
         ProgressBarHider hider;
+        int count=0;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,7 +96,7 @@ public class EditItemFragment extends Fragment {
                     }
                     StringData=timeindex.toString();
                     submit=true;
-                    Log.d("sj",StringData.toString());
+                    Log.d("sjt",StringData.toString());
 
                     hider.show();
                     new HTTPAsyncTask1().execute(url2);
@@ -173,9 +174,13 @@ public class EditItemFragment extends Fragment {
                     final ViewHolder1 finalHolder = holder;
                     final JSONObject object=new JSONObject(String.valueOf(products.getJSONObject(position)));
                     Log.d("seby",object.toString());
+
                     finalHolder.ProductName.setText(String.valueOf(object.getString("name")));
-                    items.put(object.getString("name"),object.get("number"));
-                    finalHolder.Quantity.setText(String.valueOf(object.getString("number")));
+                    if(items.has(object.getString("name")))
+                    { //finalHolder.Quantity.setText(items.getString(object.getString("name")));
+                    }
+                    else
+                        finalHolder.Quantity.setText(object.getString("number"));
                    /* if(items.has(holder.ProductName.getText().toString())) {
                         Log.d("Items",items.getString(holder.ProductName.getText().toString()));
                         holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
@@ -199,7 +204,10 @@ public class EditItemFragment extends Fragment {
                         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                             try {
                                 items.remove(finalHolder.ProductName.getText().toString());
+                                Log.d("sjt",items.toString());
                                 items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
+                                Log.d("sjt2",items.toString());
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -210,7 +218,11 @@ public class EditItemFragment extends Fragment {
                         public void afterTextChanged(Editable editable) {
                             try {
                                 items.remove(finalHolder.ProductName.getText().toString());
+                                Log.d("sjt3",items.toString());
+
                                 items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
+                                Log.d("sjt4",items.toString());
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -245,7 +257,7 @@ public class EditItemFragment extends Fragment {
         }
 
         private class HTTPAsyncTask1 extends AsyncTask<String, Void, String> {
-            String response=null;
+            String response="Network Error";
             @Override
             protected String doInBackground(String... urls) {
 

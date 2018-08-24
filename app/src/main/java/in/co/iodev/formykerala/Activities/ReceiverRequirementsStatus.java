@@ -49,8 +49,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     Context context;
     ImageView back;
     ProgressDialog progress;
-
-
+    JSONObject object1;
+    String status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +150,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                 Log.d("seby",object.toString());
                 finalHolder.ProductName.setText(String.valueOf(object.getString("name")));
                 finalHolder.Quantity.setText(String.valueOf(object.getString("number")));
+                holder.Status.setText(status);
                    /* if(items.has(holder.ProductName.getText().toString())) {
                         Log.d("Items",items.getString(holder.ProductName.getText().toString()));
                         holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
@@ -174,10 +175,12 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     private class ViewHolder1 {
         TextView ProductName;
         TextView Quantity;
+        TextView Status;
 
         public ViewHolder1(View v) {
         ProductName = (TextView) v.findViewById(R.id.product_name);
         Quantity=v.findViewById(R.id.requested_quantity);
+        Status=v.findViewById(R.id.status_item);
 
 
 
@@ -194,7 +197,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response=null;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -234,7 +237,9 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             try {
                 if (!submit)
                 {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
-
+                    Log.d("sjt",result.toString());
+                    object1=new JSONObject(result);
+                    status=object1.getString("Status_Now");
                     products = new JSONArray();
                     Mainproducts=new JSONArray();
                     products=parentObject;

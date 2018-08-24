@@ -95,9 +95,9 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:maxLength="1"
+                android:inputType="number|numberPassword"
 
-                android:inputType="number" />
+                android:maxLength="1" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -110,11 +110,12 @@
             <EditText
                 android:id="@+id/otp2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"  android:maxLength="1"
-
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
+
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number|numberPassword"
+                android:maxLength="1" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -128,11 +129,12 @@
                 android:id="@+id/otp3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"  android:maxLength="1"
-
-
+                android:background="@android:color/white"
                 android:gravity="center"
-                android:inputType="number" />
+
+
+                android:inputType="number|numberPassword"
+                android:maxLength="1" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -145,12 +147,13 @@
             <EditText
                 android:id="@+id/otp4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:maxLength="1"
-
-
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
+
+
                 android:gravity="center"
-                android:inputType="number" />
+                android:inputType="number|numberPassword"
+                android:maxLength="1" />
         </android.support.v7.widget.CardView>
 
     </LinearLayout>

@@ -108,10 +108,11 @@ public class DonorHomeActivity extends FragmentActivity {
         if (doubleBackToExitPressedOnce) {
             SharedPreferences sharedPref=getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPref.edit();
+             editor.remove("TimeIndex");
             editor.commit();
             sharedPref.edit().apply();
 
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
         }
 

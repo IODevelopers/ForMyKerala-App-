@@ -85,7 +85,7 @@ public class ForgotPin extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-        String response;
+        String response="Network error";
 
         @Override
         protected String doInBackground(String... urls) {
@@ -99,9 +99,13 @@ public class ForgotPin extends AppCompatActivity {
                     e.printStackTrace();
                     return "Error!";
                 }
+                finally {
+                    hider.hide();
+                }
             } catch (Exception e) {
                 return "Unable to retrieve web page. URL may be invalid.";
             }
+
         }
         @Override
         protected void onPreExecute() {
@@ -125,7 +129,7 @@ public class ForgotPin extends AppCompatActivity {
 
 
     }private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
-        String response;
+        String response="Network Error";
 
         @Override
         protected String doInBackground(String... urls) {

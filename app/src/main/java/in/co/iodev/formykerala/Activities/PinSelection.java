@@ -94,7 +94,7 @@ ProgressBarHider hider;
         }
     }
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-        String response;
+        String response="Network Error";
 
         @Override
         protected String doInBackground(String... urls) {

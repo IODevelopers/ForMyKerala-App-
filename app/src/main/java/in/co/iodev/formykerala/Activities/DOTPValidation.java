@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -42,7 +44,8 @@ public class DOTPValidation extends AppCompatActivity {
     ImageView back;
     Context context;
     ProgressBarHider hider;
-
+    int minutes=2,seconds=0;
+    long delay=120000;
     String StringData,request_post_url=Verify_OTP,TimeIndex;
 
 
@@ -70,9 +73,10 @@ public class DOTPValidation extends AppCompatActivity {
         otp_resend=findViewById(R.id.resend_otp);
         resend_otp=findViewById(R.id.otp_resend);
         back=findViewById(R.id.back_button);
+        TextView phone=findViewById(R.id.phone);
+        phone.setText("to "+sharedPref.getString("PhoneNumber",""));
         hider=new ProgressBarHider(verify.getRootView(),verify);
-
-        long delay=60000;
+        timer();
         new Timer().schedule(new resendotp(),delay);
         TimeIndex=sharedPref.getString("TimeIndex","");
         resend_otp.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +100,43 @@ public class DOTPValidation extends AppCompatActivity {
 
 
     }
+    public void timer()
+    {    final TextView textTimer=findViewById(R.id.timer);
+        new CountDownTimer(6000, 1000) {
 
-        private class resendotp extends TimerTask
+            public void onTick(long millisUntilFinished) {
+                textTimer.setText("Resend OTP in "+minutes+":"+checkDigit(seconds));
+
+                if(seconds==0)
+                {
+                    seconds=59;
+                    minutes--;
+                }
+                else {
+                    seconds--;
+                }
+
+
+
+            }
+
+            public void onFinish() {
+                minutes=2;
+                seconds=0;
+                textTimer.setText("try again");
+            }
+
+        }.start();
+
+
+
+
+    }
+    public String checkDigit(int number) {
+        return number <= 9 ? "0" + number : String.valueOf(number);}
+
+
+    private class resendotp extends TimerTask
     {
 
         @Override
@@ -139,7 +178,7 @@ public class DOTPValidation extends AppCompatActivity {
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
-        String response;
+        String response="Network Error";
 
         @Override
         protected String doInBackground(String... urls) {
@@ -193,7 +232,7 @@ public class DOTPValidation extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String response;
+            String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
             try {
                 try {
@@ -219,6 +258,9 @@ public class DOTPValidation extends AppCompatActivity {
             JSONObject responseObject= null;
             try {
                 responseObject = new JSONObject(result);
+                otp_resend.setVisibility(View.GONE);
+                timer();
+                new Timer().schedule(new resendotp(),delay);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();
 
 
