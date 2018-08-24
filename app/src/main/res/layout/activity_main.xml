@@ -31,15 +31,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="70dp"
+            app:cardBackgroundColor="#4885ED"
             android:layout_marginRight="70dp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="100px">
+            app:cardCornerRadius="25dp">
 
             <Button
                 android:id="@+id/role_receiver"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#4885ED"
+                android:background="@android:color/transparent"
                 android:text="Receiver"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -54,7 +55,7 @@
             android:layout_marginTop="20dp"
             android:elevation="5dp"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="100px">
+            app:cardCornerRadius="25dp">
 
             <Button
                 android:id="@+id/role_Donor"
