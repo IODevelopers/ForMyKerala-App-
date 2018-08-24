@@ -21,6 +21,14 @@ The app was developed in order to help rehabilitate the refugees into proper hou
   
 # Designs:
   Philson philip (https://github.com/philson-philip)
+  Abin Mathew (abinm8@gmail.com)
+
+
+# Web:
+  Pranoy Dev(https://github.com/devpranoy)
+  Chriss Martin(thechrissmartin@gmail.com)
+  Philson philip (https://github.com/philson-philip)
+
 
 # Organisation : https://iodev.co.in/
   
