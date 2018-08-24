@@ -28,6 +28,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Forgot_PIN_Generate;
 import static in.co.iodev.formykerala.Constants.Constants.Generate_OTP_Forget;
+import static in.co.iodev.formykerala.Constants.Constants.Resend_OTP;
 
 public class ForgotPin extends AppCompatActivity {
     EditText phone;
@@ -41,7 +42,7 @@ public class ForgotPin extends AppCompatActivity {
     ImageView back;
     Context context;
 
-    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
+    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Resend_OTP,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -31,7 +31,7 @@
             android:layout_marginRight="70dp"
             android:layout_marginLeft="70dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="100px"
+            app:cardCornerRadius="25dp"
             >
             <Button
                 android:id="@+id/receiver_register_request"
@@ -51,7 +51,7 @@
             android:layout_marginLeft="70dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="100px"
+            app:cardCornerRadius="25dp"
             >
             <Button
                 android:id="@+id/receiver_view_request"

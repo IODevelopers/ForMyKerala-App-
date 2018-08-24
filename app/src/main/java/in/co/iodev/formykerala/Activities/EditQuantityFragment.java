@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -54,6 +55,7 @@ public class EditQuantityFragment extends Fragment {
     EditText item_search;
     JSONObject items;
     Context context;
+    ProgressDialog progress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +83,7 @@ public class EditQuantityFragment extends Fragment {
 
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
         adapter=new Product_Request_Adapter();
-        new HTTPAsyncTask2().execute(url);
+        
         product_request_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -288,22 +290,38 @@ public class EditQuantityFragment extends Fragment {
         }
         @Override
         protected void onPreExecute() {
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Loading...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
+
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            progress.cancel();
             JSONObject responseObject= null;
             try {
                 if (!submit)
                 {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
-                 /*   JSONArray parentObject2 = new JSONObject(result).getJSONArray("0");
-                    Log.d("ResponseitemA",parentObject2.toString());*/
+                 /*   JSONArray parentObject2 = new JSONObject(result).getJSONArray("0");*/
+                    Log.d("ResponseitemA",parentObject.toString());
                     products = new JSONArray();
                     Mainproducts=new JSONArray();
                     Mainproducts=parentObject;
                     products=parentObject;
+                    if(products.length()==0)
+                    {
+                        product_request_list.setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        product_request_list.setVisibility(View.VISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                    }
                     Log.d("msg",products.toString());
                    product_request_list.setAdapter(adapter);
                 }
@@ -383,6 +401,14 @@ public class EditQuantityFragment extends Fragment {
         Boolean getStatus()
         {
             return status;
+        }
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            new HTTPAsyncTask2().execute(url);        }else{
+            // fragment is no longer visible
         }
     }
 }

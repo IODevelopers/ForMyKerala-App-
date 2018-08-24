@@ -102,7 +102,7 @@ public class DOTPValidation extends AppCompatActivity {
     }
     public void timer()
     {    final TextView textTimer=findViewById(R.id.timer);
-        new CountDownTimer(6000, 1000) {
+        new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 textTimer.setText("Resend OTP in "+minutes+":"+checkDigit(seconds));
@@ -260,7 +260,7 @@ public class DOTPValidation extends AppCompatActivity {
             JSONObject responseObject= null;
             try {
                 responseObject = new JSONObject(result);
-                otp_resend.setVisibility(View.GONE);
+                otp_resend.setVisibility(View.INVISIBLE);
                 timer();
                 new Timer().schedule(new resendotp(),delay);
                 Toast.makeText(getApplicationContext(),responseObject.getString("Message"),Toast.LENGTH_LONG).show();

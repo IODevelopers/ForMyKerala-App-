@@ -142,7 +142,7 @@
                 android:layout_marginTop="20dp"
                 android:elevation="5dp"
                 android:layout_marginBottom="10dp"
-                app:cardCornerRadius="100px">
+                app:cardCornerRadius="25dp">
                 <ProgressBar
                     android:visibility="invisible"
                     android:id="@+id/pgbar"

@@ -1,8 +1,11 @@
 package in.co.iodev.formykerala.Activities;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.tv.TvContract;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,11 +45,12 @@ public class AcceptedItemFragment extends Fragment {
     String StringData;
     Product_Request_Adapter adapter;
     Boolean submit=false;
-    Button submit_button;
+    Button Logout;
     ImageView search_button;
     EditText item_search;
     JSONObject items;
     Context context;
+    ProgressDialog progress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +78,17 @@ public class AcceptedItemFragment extends Fragment {
 
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
         adapter=new Product_Request_Adapter();
-        new HTTPAsyncTask3().execute(url);
+        view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPref=getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.remove("TimeIndex");
+                editor.commit();
+                sharedPref.edit().apply();
+                startActivity(new Intent(getContext(),MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            }
+        });
 
 
     }
@@ -230,10 +244,16 @@ public class AcceptedItemFragment extends Fragment {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Loading...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            progress.cancel();
             JSONObject responseObject= null;
             try {
                 if (!submit)
@@ -243,6 +263,15 @@ public class AcceptedItemFragment extends Fragment {
                     JSONArray parentObject = new JSONArray(result);
                     products = new JSONArray();
                     products=parentObject;
+                    if(products.length()==0)
+                    {
+                         product_request_list.setVisibility(View.INVISIBLE);
+                         getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        product_request_list.setVisibility(View.VISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                    }
                     Log.d("Responseitem",result.toString());
                     Log.d("Responseitem4",products.toString());
                     product_request_list.setAdapter(adapter);
@@ -267,5 +296,13 @@ public class AcceptedItemFragment extends Fragment {
             }    }
 
 
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            new HTTPAsyncTask3().execute(url);        }else{
+            // fragment is no longer visible
+        }
     }
 }

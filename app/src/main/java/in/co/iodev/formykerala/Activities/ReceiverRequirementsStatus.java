@@ -95,6 +95,16 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         adapter=new Product_Request_Adapter();
 
         search_button=findViewById(R.id.search_button);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    search();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         check_status=findViewById(R.id.check_status);
         item_search=findViewById(R.id.item_search);
         context=this;
@@ -124,7 +134,27 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         });
 
     }
+    private void search() throws Exception {
+        if(!item_search.getText().toString().equals(""))
+        {products=new JSONArray();
+        int j=0;
+            for (int i=0;i<Mainproducts.length();i++)
+            {     final JSONObject object=new JSONObject(String.valueOf(Mainproducts.getJSONObject(i)));
+                if(object.getString("name").toLowerCase().contains(item_search.getText().toString()))
+                {
+                    products.put(j,object);
+                    j++;
 
+                }
+            }}
+        else {
+            products=new JSONArray();
+            products=Mainproducts;
+        }
+        product_status_list.setAdapter(adapter);
+        Log.d("Items",products.toString()+" "+Mainproducts.toString());
+
+    }
 
     public void request(View view) {
 

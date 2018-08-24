@@ -6,11 +6,17 @@
     android:background="#F5F7F8"
     android:fillViewport="true"
     tools:context="in.co.iodev.formykerala.Activities.EditItemFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp"
         android:elevation="5dp"
         app:cardCornerRadius="5dp">
 
@@ -25,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Accepted Items"
+                android:text="Accepted Requests"
                 android:textSize="22sp" />
 
             <LinearLayout
@@ -38,8 +44,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="45dp"
                     android:orientation="horizontal">
 
@@ -87,35 +93,64 @@
                     android:id="@+id/separator"
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/black" />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
                 <ListView
                     android:id="@+id/donor_items_edit_listview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_marginTop="10dp"
                     android:divider="@android:color/transparent"
                     android:dividerHeight="0dp"></ListView>
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginRight="70dp"
-                    android:layout_marginTop="20dp"
-                    android:elevation="5dp"
-                    app:cardCornerRadius="100px">
+    <TextView
+        android:id="@+id/no_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Accepted Items"
+        android:visibility="invisible" />
+</RelativeLayout>
 
-                </android.support.v7.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="25dp">
 
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4885ED"
+                android:text="Log Out"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:visibility="invisible"
+                android:id="@+id/pgbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:textColor="@color/colorPrimaryBlue"/>
+
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
 </ScrollView>

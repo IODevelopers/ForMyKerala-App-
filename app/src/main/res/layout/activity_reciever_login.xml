@@ -166,7 +166,7 @@
         android:layout_marginLeft="70dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="100px"
+        app:cardCornerRadius="25dp"
         >
         <Button
             android:id="@+id/request_otp_button"

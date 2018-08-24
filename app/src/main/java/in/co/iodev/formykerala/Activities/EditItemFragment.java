@@ -1,6 +1,7 @@
 package in.co.iodev.formykerala.Activities;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -35,7 +36,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.Boolean.TRUE;
 
 public class EditItemFragment extends Fragment {
-
+         ProgressDialog progress;
         SharedPreferences sharedPref;
         String url= Constants.Get_Donation_items;
         String url2=Constants.Send_Donation_items;
@@ -276,6 +277,7 @@ public class EditItemFragment extends Fragment {
                     }
                     finally {
                         hider.hide();
+                        progress.cancel();
                     }
                 } catch (Exception e) {
                     return "Unable to retrieve web page. URL may be invalid.";
@@ -285,11 +287,18 @@ public class EditItemFragment extends Fragment {
             protected void onPreExecute() {
                 CheckInternet CI=new CheckInternet();
                 CI.isOnline(context);
+                progress=new ProgressDialog(getContext());
+                progress.setMessage("Loading...");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.setIndeterminate(true);
+                progress.show();
+
             }
             // onPostExecute displays the results of the AsyncTask.
             @Override
             protected void onPostExecute(String result) {
                 JSONObject responseObject= null;
+                progress.cancel();
                 try {
                     hider.hide();
                     if (!submit)
@@ -325,4 +334,5 @@ public class EditItemFragment extends Fragment {
 
 
         }
+
     }

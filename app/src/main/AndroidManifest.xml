@@ -34,7 +34,9 @@
             android:windowSoftInputMode="stateHidden"
             >
         </activity>
-        <activity android:name=".Activities.ReceiverSelectRequirement"></activity>
+        <activity android:name=".Activities.ReceiverSelectRequirement">
+
+        </activity>
         <activity android:name=".Activities.ReceiverRequirementsStatus"
             android:windowSoftInputMode="stateHidden"
 

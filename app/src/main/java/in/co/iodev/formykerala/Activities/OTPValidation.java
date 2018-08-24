@@ -255,7 +255,7 @@ ImageView back;
             JSONObject responseObject= null;
             try {
 
-                otp_resend.setVisibility(View.GONE);
+                otp_resend.setVisibility(View.INVISIBLE);
                 timer();
                 new Timer().schedule(new resendotp(),delay);
                 responseObject = new JSONObject(response);

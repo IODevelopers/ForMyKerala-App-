@@ -73,6 +73,7 @@ public class AcceptorsView extends AppCompatActivity {
             e.printStackTrace();
         }
         StringData=timeindex.toString();
+        Log.d("Tm",StringData.toString());
         new HTTPAsyncTask2().execute(url);
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -220,6 +221,8 @@ public class AcceptorsView extends AppCompatActivity {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
+            Log.d("Tm",StringData.toString());
+
             progress=new ProgressDialog(AcceptorsView.this);
             progress.setMessage("Loading...");
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -233,15 +236,26 @@ public class AcceptorsView extends AppCompatActivity {
             progress.cancel();
             try {
                 if (!submit)
-                {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
+                {Log.d("Responseitem",result);
 
-                    products = new JSONArray();
-                    Mainproducts=new JSONArray();
-                    products=parentObject;
-                    Mainproducts=parentObject;
+                    if(result.equals("{\"Items\": \"\"}"))
+                    {
+                        product_status_list.setVisibility(View.INVISIBLE);
+                       findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
 
-                    Log.d("Responseitem",products.toString());
-                    product_status_list.setAdapter(adapter);
+                        products = new JSONArray();
+                        Mainproducts=new JSONArray();
+                        products=parentObject;
+                        Mainproducts=parentObject;
+                        product_status_list.setVisibility(View.VISIBLE);
+                        findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                        Log.d("Responseitem2",products.toString());
+                        product_status_list.setAdapter(adapter);
+                    }
+
                 }
                 else
                 {Log.d("Responseitem",result);

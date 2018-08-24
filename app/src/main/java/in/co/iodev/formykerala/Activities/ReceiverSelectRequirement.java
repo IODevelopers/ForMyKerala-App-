@@ -77,7 +77,8 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject timeindex=new JSONObject();
+                if(items.length()!=0)
+                {JSONObject timeindex=new JSONObject();
                 try {
                     timeindex.put("TimeIndex",TimeIndex);
                     timeindex.put("Items",items);
@@ -87,7 +88,13 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 StringData=timeindex.toString();
                 submit=true;
                 hider.show();
-                new HTTPAsyncTask2().execute(url);
+                new HTTPAsyncTask2().execute(url);}
+                else
+                {
+                    hider.hide();
+                    Toast.makeText(getApplicationContext(),"Please a Choose a Requirement",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +189,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                         try
                         {if(isChecked)
-                        {
+                        {   if(!finalHolder.Quantity.getText().toString().equals(""))
                             items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
 
                         }

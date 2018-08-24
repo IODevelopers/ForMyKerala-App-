@@ -245,7 +245,7 @@ public void timer()
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            otp_resend.setVisibility(View.GONE);
+            otp_resend.setVisibility(View.INVISIBLE);
             timer();
 
             new Timer().schedule(new resendotp(),delay);

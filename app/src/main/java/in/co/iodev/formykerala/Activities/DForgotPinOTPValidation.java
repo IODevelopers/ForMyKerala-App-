@@ -250,7 +250,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
-            otp_resend.setVisibility(View.GONE);
+            otp_resend.setVisibility(View.INVISIBLE);
             timer();
 
             new Timer().schedule(new resendotp(),delay);

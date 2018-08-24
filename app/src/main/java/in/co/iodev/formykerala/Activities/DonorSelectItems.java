@@ -78,7 +78,8 @@ public class DonorSelectItems extends AppCompatActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject timeindex=new JSONObject();
+                if(items.length()!=0)
+                { JSONObject timeindex=new JSONObject();
                 try {
                     timeindex.put("TimeIndex",TimeIndex);
                     timeindex.put("DonationItems",items);
@@ -89,7 +90,12 @@ public class DonorSelectItems extends AppCompatActivity {
                 Log.d("seby",StringData.toString());
                 submit=true;
                 hider.show();
-                new HTTPAsyncTask2().execute(url);
+                new HTTPAsyncTask2().execute(url);}
+                else
+
+            {
+                hider.hide();
+                Toast.makeText(getApplicationContext(),"Please a Choose a Requirement",Toast.LENGTH_SHORT).show();            }
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -185,8 +191,8 @@ public class DonorSelectItems extends AppCompatActivity {
                         try
                         {if(isChecked)
                         {
-                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
-
+                            if(!finalHolder.Quantity.getText().toString().equals(""))
+                                items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
                         }
                         else
                         {
