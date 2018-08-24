@@ -20,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +54,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     ProgressDialog progress;
     JSONObject object1;
     String status;
+    String FireBaseRegistrationURL= Constants.FireBAseRegistrationURL,FireBaseRegData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +67,30 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"LOGGED IN ALREADY--REDIRECT",Toast.LENGTH_LONG).show();
         }*/
         TimeIndex=sharedPref.getString("TimeIndex","");
+        try{
+            TimeIndex=sharedPref.getString("TimeIndex","");
+            Log.d("TimeIndexDonor",TimeIndex);
+            Log.d("FireBase Instance",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+            JSONObject FireBaseINFO = new JSONObject();
+            try {
+                FireBaseINFO.put("TimeIndex", TimeIndex);
+                FireBaseINFO.put("UserGroup", "Reciever");
+                FireBaseINFO.put("PUSH_Token", FirebaseInstanceId.getInstance().getToken());
+                FireBaseRegData=FireBaseINFO.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            new FireBaseRegistration().execute(FireBaseRegistrationURL);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         back=findViewById(R.id.back_button);
 
+        try{
+            Log.d("FireBase Instance",String.valueOf(FirebaseInstanceId.getInstance().getToken()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
 
@@ -284,6 +310,46 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+    private class FireBaseRegistration extends AsyncTask<String, Void, String> {
+        String response="Network Error";
+
+        @Override
+        protected String doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                try {
+                    Log.d("Sending data",FireBaseRegData);
+                    response= HTTPPostGet.getJsonResponse(urls[0],FireBaseRegData);
+                    Log.i("FireBase response",response.toString());
+                    return response;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "Error!";
+                }
+            } catch (Exception e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPreExecute() {
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(context);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            JSONObject responseObject= null;
+            try {
+                responseObject = new JSONObject(response);
+                Log.d("FireBaseRegistration",responseObject.getString("Message"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 }

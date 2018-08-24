@@ -201,12 +201,6 @@ public class AcceptedItemFragment extends Fragment {
             Quantity=v.findViewById(R.id.requested_quantity);
             Product=v.findViewById(R.id.products);
             Phone=v.findViewById(R.id.phone_no);
-
-
-
-
-
-
         }
     }
 
@@ -250,7 +244,7 @@ public class AcceptedItemFragment extends Fragment {
                     products = new JSONArray();
                     products=parentObject;
                     Log.d("Responseitem",result.toString());
-                    Log.d("Responseitem",products.toString());
+                    Log.d("Responseitem4",products.toString());
                     product_request_list.setAdapter(adapter);
 
                 }

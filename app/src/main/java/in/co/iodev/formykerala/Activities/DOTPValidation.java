@@ -225,10 +225,12 @@ public class DOTPValidation extends AppCompatActivity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }    }
+            }
+        }
 
 
-    } private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
+    }
+    private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
