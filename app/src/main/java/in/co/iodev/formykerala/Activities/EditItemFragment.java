@@ -74,19 +74,19 @@ public class EditItemFragment extends Fragment {
             /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
                 final AlertDialog.Builder builder;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_Light);
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
                 } else {
                     builder = new AlertDialog.Builder(getContext());
                 }
-                builder.setTitle("Disclaimer")
+                builder
                         .setMessage("Our Volunteer will contact you within 24 hours for verification purposes")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }
                         })
 
-                        .show()
-                        .getWindow().setLayout((6 * 1000)/7, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        .show();
+
                 sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
             }
             items=new JSONObject();
