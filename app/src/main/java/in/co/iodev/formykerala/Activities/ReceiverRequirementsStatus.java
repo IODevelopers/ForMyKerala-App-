@@ -1,13 +1,18 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +71,29 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"LOGGED IN ALREADY--REDIRECT",Toast.LENGTH_LONG).show();
         }*/
+
         TimeIndex=sharedPref.getString("TimeIndex","");
+        if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+        {
+            /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
+            final AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light);
+            } else {
+                builder = new AlertDialog.Builder(this);
+            }
+            builder.setTitle("Disclaimer")
+                    .setMessage("Our Volunteer will contact you within 24 hours for verification purposes")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+
+            .show()
+            .getWindow().setLayout((6 * 1000)/7, ViewGroup.LayoutParams.WRAP_CONTENT);
+            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+        }
+
         try{
             TimeIndex=sharedPref.getString("TimeIndex","");
             Log.d("TimeIndexDonor",TimeIndex);
@@ -105,8 +132,29 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                 }
             }
         });
-        check_status=findViewById(R.id.check_status);
         item_search=findViewById(R.id.item_search);
+        item_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    search();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        check_status=findViewById(R.id.check_status);
+
         context=this;
         JSONObject timeindex=new JSONObject();
         try {

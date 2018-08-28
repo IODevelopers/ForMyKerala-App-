@@ -1,10 +1,13 @@
 package in.co.iodev.formykerala.Activities;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -66,7 +69,26 @@ public class EditItemFragment extends Fragment {
             sharedPref=getDefaultSharedPreferences(getContext());
             context=this.getContext();
             TimeIndex=sharedPref.getString("TimeIndex","");
+            if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+            {
+            /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
+                final AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_Light);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Disclaimer")
+                        .setMessage("Our Volunteer will contact you within 24 hours for verification purposes")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
 
+                        .show()
+                        .getWindow().setLayout((6 * 1000)/7, ViewGroup.LayoutParams.WRAP_CONTENT);
+                sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+            }
             items=new JSONObject();
             JSONObject timeindex=new JSONObject();
             try {
@@ -316,10 +338,7 @@ public class EditItemFragment extends Fragment {
                     {Log.d("Responseitem",result);
                        JSONObject jsonObject=new JSONObject(response);
                        if(jsonObject.getString("Message").equals("Success")) {
-                           SharedPreferences.Editor editor = sharedPref.edit();
 
-                           editor.putBoolean(TimeIndex+"DEdited", TRUE);
-                           editor.commit();
                        }
                         Toast.makeText(getContext(),jsonObject.getString("Message"),Toast.LENGTH_SHORT).show();
                         submit=false;

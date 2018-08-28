@@ -42,7 +42,7 @@ public class ForgotPin extends AppCompatActivity {
     ImageView back;
     Context context;
 
-    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Resend_OTP,TimeIndex;
+    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

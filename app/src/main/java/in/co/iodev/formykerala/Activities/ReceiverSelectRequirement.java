@@ -103,6 +103,22 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                 search();
             }
         });
+       item_search.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                  search();
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
+
+           }
+       });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

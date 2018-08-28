@@ -125,11 +125,12 @@ public class DonorDetails extends AppCompatActivity {
                     StringData=gson.toJson(d);
                     Log.i("jisjoe",""+StringData);
                     submit=true;
+                    hider.show();
                     new HTTPAsyncTask2().execute(request_post_url);
 
 
                 }
-                hider.show();
+
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

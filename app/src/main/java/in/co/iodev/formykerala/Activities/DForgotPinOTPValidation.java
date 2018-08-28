@@ -243,6 +243,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         }
         @Override
         protected void onPreExecute() {
+            otp_resend.setVisibility(View.INVISIBLE);
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
         }
@@ -251,6 +252,9 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         protected void onPostExecute(String result) {
             JSONObject responseObject= null;
             otp_resend.setVisibility(View.INVISIBLE);
+            minutes=2;
+            seconds=0;
+
             timer();
 
             new Timer().schedule(new resendotp(),delay);

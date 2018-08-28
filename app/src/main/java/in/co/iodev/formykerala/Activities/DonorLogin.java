@@ -168,8 +168,12 @@ public class DonorLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
+               editor.apply();
+
+               TimeIndex=sharedPref.getString("TimeIndex","");
                editor.putBoolean(TimeIndex+"DLogin", true);
                editor.putBoolean(TimeIndex+"DEditedR", true);
+               editor.putBoolean(TimeIndex+"DEdited", true);
                editor.apply();
                Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

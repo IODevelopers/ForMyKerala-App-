@@ -58,17 +58,17 @@
         android:padding="5dp">
 
         <android.support.design.widget.TextInputEditText
-            android:layout_gravity="center"
             android:id="@+id/phone"
-            android:layout_marginTop="20dp"
-            android:hint="Your Phone Number"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
             android:ems="15"
-            android:inputType="phone"/>
+            android:hint="Your 10 Digit Phone Number"
+            android:inputType="phone" />
 
     </android.support.design.widget.TextInputLayout>
 

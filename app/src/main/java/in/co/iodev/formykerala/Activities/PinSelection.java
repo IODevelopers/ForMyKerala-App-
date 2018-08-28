@@ -133,8 +133,7 @@ ProgressBarHider hider;
                     String TimeIndex=responseObject.getString("TimeIndex");
                     editor.putBoolean(TimeIndex+"Login", TRUE);
                     editor.apply();
-                    Intent intent = new Intent(PinSelection.this, ReceiverDetails.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent intent = new Intent(PinSelection.this, ReceiverDetails.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
                     startActivity(intent);
                     finish();

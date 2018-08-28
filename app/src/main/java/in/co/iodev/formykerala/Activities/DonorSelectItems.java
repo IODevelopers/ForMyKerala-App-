@@ -104,6 +104,22 @@ public class DonorSelectItems extends AppCompatActivity {
                 search();
             }
         });
+        item_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                search();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +133,7 @@ public class DonorSelectItems extends AppCompatActivity {
         {products.clear();
             for (int i=0;i<Mainproducts.size();i++)
             {
-                if(Mainproducts.get(i).equals(item_search.getText().toString()))
+                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString()))
                 {
                     products.add(Mainproducts.get(i));
 
