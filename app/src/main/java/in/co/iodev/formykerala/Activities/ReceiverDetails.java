@@ -212,7 +212,7 @@ public class ReceiverDetails extends AppCompatActivity {
                   editor.putBoolean(TimeIndex+"Edited", TRUE);
                    editor.apply();
                   Intent intent = new Intent(ReceiverDetails.this, ReceiverSelectRequirement.class);
-                  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                   startActivity(intent);
                   finish();
