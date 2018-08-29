@@ -79,7 +79,7 @@ public class EditItemFragment extends Fragment {
                     builder = new AlertDialog.Builder(getContext());
                 }
                 builder
-                        .setMessage("Our Volunteer will contact you within 24 hours for verification purposes")
+                        .setMessage("Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }

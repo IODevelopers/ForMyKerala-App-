@@ -1,11 +1,14 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -159,11 +162,35 @@ Boolean noupdate=true,internet=true;
                 else
                     update_version=new JSONObject(response).getString("version");
                 if(internet&&Double.parseDouble(appversion)<Double.parseDouble(update_version))
-                {
-                    Toast.makeText(getApplicationContext(),"Update App",Toast.LENGTH_SHORT).show();
-                    noupdate=false;
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +"in.co.iodev.formykerala")));
-                    System.exit(0);
+                {  role.setVisibility(View.INVISIBLE);
+                    updater.setVisibility(View.INVISIBLE);
+                    network.setVisibility(View.INVISIBLE);
+                    final AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Light_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(MainActivity.this);
+                    }
+                    builder
+                            .setMessage("Please update app to continue")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    noupdate=false;
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +"in.co.iodev.formykerala")));
+                                    System.exit(0);
+
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    System.exit(0);
+
+                                }
+                            })
+                            .setCancelable(false)
+                            .show();
+
                 }
                 else
                 {if (internet) {
