@@ -16,26 +16,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPGet;
-import in.co.iodev.formykerala.Controllers.HTTPPostGet;
-import java.sql.Time;
 
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Get_App_Version;
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 public class MainActivity extends AppCompatActivity {
-Button receiver,donor;
+Button receiver,donor,help;
 String url=Get_App_Version;
 String appversion;
     String TimeIndex;
@@ -56,6 +50,7 @@ Boolean noupdate=true,internet=true;
 
         receiver = findViewById(R.id.role_receiver);
         donor = findViewById(R.id.role_Donor);
+        help=findViewById(R.id.help);
       }
 
     public void receiver() {
@@ -66,6 +61,10 @@ Boolean noupdate=true,internet=true;
         startActivity(new Intent(MainActivity.this,DonorLogin.class));
         MainActivity.this.finish();
     }
+    private void help_view() {
+        startActivity(new Intent(MainActivity.this,Help_view.class));
+    }
+
     public void redirect()
     {
         if(noupdate)
@@ -220,6 +219,20 @@ Boolean noupdate=true,internet=true;
                                 updater.setVisibility(View.INVISIBLE);
                                 network.setVisibility(View.VISIBLE);
                             }
+
+                        }
+                    });
+                    help.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(internet)
+                                help_view();
+                            else
+                            {
+                                role.setVisibility(View.INVISIBLE);
+                                updater.setVisibility(View.INVISIBLE);
+                                network.setVisibility(View.VISIBLE);
+                            }
                         }
                     });
                 }}
@@ -230,6 +243,7 @@ Boolean noupdate=true,internet=true;
 
 
     }
+
 
     @Override
     public void onBackPressed() {

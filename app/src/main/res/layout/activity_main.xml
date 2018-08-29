@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:src="@mipmap/logomerged" />
 
         <RelativeLayout
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="40dp"
                     android:text="Select Your Role"
                     android:textSize="22sp" />
 
@@ -73,6 +73,27 @@
                         android:layout_height="match_parent"
                         android:background="#4885ED"
                         android:text="Donor"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_marginTop="30dp"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="25dp">
+
+                    <Button
+                        android:id="@+id/help"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#239112"
+                        android:text="Help"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>

@@ -28,6 +28,7 @@ import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.DForgot_Reset_PIN;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class DPinReset extends AppCompatActivity {
@@ -134,6 +135,9 @@ public class DPinReset extends AppCompatActivity {
                 if (responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
+                    editor.apply();
+                    TimeIndex=sharedPref.getString("TimeIndex","");
+                    editor.putBoolean(TimeIndex+"DLogin",FALSE);
                     editor.apply();
                     Intent intent = new Intent(DPinReset.this, DonorLogin.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
