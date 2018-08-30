@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -49,7 +51,7 @@ public class EditItemFragment extends Fragment {
         String StringData;
         Product_Request_Adapter adapter;
         Boolean submit=false;
-        Button submit_button;
+        Button submit_button,Edit_Button;
         ImageView search_button;
         EditText item_search;
         JSONObject items;
@@ -105,6 +107,21 @@ public class EditItemFragment extends Fragment {
             new HTTPAsyncTask1().execute(url);
             submit_button=view.findViewById(R.id.donor_items_submit);
             hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
+            Edit_Button=view.findViewById(R.id.donor_items_edit);
+            Edit_Button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("products",products.toString());
+                    Fragment frag =new DonorEdit();
+                    frag.setArguments(bundle);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.Main_Container,frag);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
             submit_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

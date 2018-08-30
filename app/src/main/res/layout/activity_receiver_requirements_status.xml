@@ -16,7 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="30dp">
+                android:paddingBottom="80dp">
 
                 <ImageView
                     android:id="@+id/back_button"
@@ -101,7 +101,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_weight="6"
+                                android:layout_weight="3"
                                 android:gravity="center"
                                 android:text="Name"
                                 android:textSize="20sp" />
@@ -109,8 +109,8 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="6"
+                                android:layout_gravity="left"
+                                android:layout_weight="8"
                                 android:gravity="center"
                                 android:text="No. of Items Requested"
                                 android:textSize="20sp" />
@@ -119,7 +119,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_weight="6"
+                                android:layout_weight="3"
                                 android:gravity="center"
                                 android:text="Status"
                                 android:textSize="20sp" />
@@ -157,7 +157,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:elevation="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="55dp"
         app:cardCornerRadius="20dp">
 
         <Button
@@ -169,16 +169,27 @@
             android:text="Check Status"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
+           </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:elevation="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="20dp">
+
         <Button
+
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:layout_gravity="center_vertical|center_horizontal"
             android:background="@android:color/white"
-            android:gravity="center_vertical|center_horizontal|center"
             android:text="Log Out"
-            android:textColor="@color/colorPrimaryBlue"/>
-           </android.support.v7.widget.CardView>
+            android:textColor="@color/colorPrimaryBlue"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
