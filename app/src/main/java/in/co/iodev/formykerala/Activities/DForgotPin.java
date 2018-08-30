@@ -75,7 +75,7 @@ public class DForgotPin extends AppCompatActivity {
 
         StringData=phone.getText().toString();
         if(StringData.equals(""))
-        {
+        {   hider.hide();
             Toast.makeText(DForgotPin.this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
         }
         else {

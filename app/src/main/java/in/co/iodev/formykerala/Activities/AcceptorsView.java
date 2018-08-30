@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
+
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
@@ -80,7 +82,7 @@ public class AcceptorsView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean("Login",FALSE);
+                editor.putBoolean(TimeIndex+"Login",FALSE);
                 editor.remove("TimeIndex");
               /*  editor.putBoolean("Edited",FALSE);
                 editor.putBoolean("EditedR",FALSE);

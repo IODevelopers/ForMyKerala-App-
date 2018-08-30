@@ -275,7 +275,8 @@ public class EditQuantityFragment extends Fragment {
             try {
                 try {
                     if(!submit)
-                        response= HTTPPostGet.getJsonResponse(url,StringData);
+                    {    Log.d("sj69",StringData.toString());
+                    response= HTTPPostGet.getJsonResponse(url,StringData);}
                     else
                         response= HTTPPostGet.getJsonResponse(url2,StringData);
                     Log.d("sj",StringData.toString());
@@ -306,24 +307,40 @@ public class EditQuantityFragment extends Fragment {
             JSONObject responseObject= null;
             try {
                 if (!submit)
-                {JSONArray parentObject = new JSONObject(result).getJSONArray("Items");
+                {   JSONObject jsonObject=new JSONObject(result);
+                    JSONArray parentObject=null;
+                    if(!jsonObject.has("Message"))
+                    parentObject = new JSONObject(result).getJSONArray("Items");
+
+
                  /*   JSONArray parentObject2 = new JSONObject(result).getJSONArray("0");*/
-                    Log.d("ResponseitemA",parentObject.toString());
+                    Log.d("ResponseitemA",jsonObject.toString());
                     products = new JSONArray();
                     Mainproducts=new JSONArray();
                     Mainproducts=parentObject;
                     products=parentObject;
-                    if(products.length()==0)
+                   if(jsonObject.has("Message"))
+                    { product_request_list.setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.not_verified).setVisibility(View.VISIBLE);
+                    }
+                    else if(products.length()==0)
                     {
+                        getView().findViewById(R.id.not_verified).setVisibility(View.INVISIBLE);
                         product_request_list.setVisibility(View.INVISIBLE);
                         getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
+                        Log.d("msg",products.toString());
+                        product_request_list.setAdapter(adapter);
                     }
                     else {
                         product_request_list.setVisibility(View.VISIBLE);
                         getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.not_verified).setVisibility(View.INVISIBLE);
+                       Log.d("msg",products.toString());
+                       product_request_list.setAdapter(adapter);
                     }
-                    Log.d("msg",products.toString());
-                   product_request_list.setAdapter(adapter);
+
+
                 }
                 else
                 {  JSONObject jsonObject=new JSONObject(result);
@@ -375,7 +392,7 @@ public class EditQuantityFragment extends Fragment {
                     JSONObject data=new JSONObject();
 
                     try { JSONObject object=products.getJSONObject(position);
-                        Log.d("sj",object.getString("ReceiverTimeIndex"));
+                        //Log.d("sj",object.getString("TimeIndex"));
                         data.put("Donor_TimeIndex",TimeIndex);
                         data.put("Request_TimeIndex",object.get("TimeIndex"));
 

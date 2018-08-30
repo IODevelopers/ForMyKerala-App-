@@ -136,8 +136,7 @@ public class DPinSelection extends AppCompatActivity {
                     String TimeIndex=responseObject.getString("TimeIndex");
                     editor.putBoolean(TimeIndex+"DLogin",TRUE);
                     editor.apply();
-                    Intent intent = new Intent(DPinSelection.this, DonorDetails.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent intent = new Intent(DPinSelection.this, DonorDetails.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
                     startActivity(intent);
 finish();
@@ -159,7 +158,7 @@ finish();
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            return;
+
         }
 
         this.doubleBackToExitPressedOnce = true;

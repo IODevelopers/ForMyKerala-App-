@@ -42,7 +42,7 @@ public class ForgotPin extends AppCompatActivity {
     ImageView back;
     Context context;
 
-    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Resend_OTP,TimeIndex;
+    String StringData,request_post_url=Forgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +72,19 @@ public class ForgotPin extends AppCompatActivity {
 
     public void verify() {
         hider.show();
-
+        StringData=phone.getText().toString();
+        if(StringData.equals(""))
+        {   hider.hide();
+            Toast.makeText(this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+        }
+        else{
         StringData=phone.getText().toString();
         d=new DataModel();
         d.setPhoneNumber(StringData);
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+        new HTTPAsyncTask2().execute(request_post_url);}
 
 
 
@@ -167,7 +172,7 @@ public class ForgotPin extends AppCompatActivity {
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
-                startActivity(new Intent(getApplicationContext(),ForgotPinOTPValidation.class));
+                startActivity(new Intent(ForgotPin.this,ForgotPinOTPValidation.class));
 
 
             } catch (JSONException e) {

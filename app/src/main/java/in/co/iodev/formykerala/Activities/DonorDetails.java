@@ -36,6 +36,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Get_District;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Donors;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class DonorDetails extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class DonorDetails extends AppCompatActivity {
     JSONObject object;
     String Name,District,Taluk;
     Gson gson = new Gson();
-    Button next;
+    Button next,logout;
     String StringData;
     ImageView back;
     SharedPreferences sharedPref;
@@ -68,6 +69,7 @@ public class DonorDetails extends AppCompatActivity {
         district=findViewById(R.id.district);
         taluk=findViewById(R.id.taluk);
         next=findViewById(R.id.button6);
+        logout=findViewById(R.id.logout);
         back=findViewById(R.id.back_button);
         hider=new ProgressBarHider(next.getRootView(),next);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
@@ -102,6 +104,24 @@ public class DonorDetails extends AppCompatActivity {
 
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(TimeIndex+"DLogin",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+*/
+                editor.commit();
+                sharedPref.edit().apply();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+
+            }
+
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,11 +145,12 @@ public class DonorDetails extends AppCompatActivity {
                     StringData=gson.toJson(d);
                     Log.i("jisjoe",""+StringData);
                     submit=true;
+                    hider.show();
                     new HTTPAsyncTask2().execute(request_post_url);
 
 
                 }
-                hider.show();
+
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +232,7 @@ public class DonorDetails extends AppCompatActivity {
                     editor.putBoolean(TimeIndex+"DEdited", TRUE);
                     editor.apply();
                     Intent intent = new Intent(DonorDetails.this, DonorSelectItems.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(intent);
                     finish();

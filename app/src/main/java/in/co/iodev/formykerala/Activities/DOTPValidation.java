@@ -251,6 +251,7 @@ public class DOTPValidation extends AppCompatActivity {
         }
         @Override
         protected void onPreExecute() {
+            otp_resend.setVisibility(View.INVISIBLE);
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
         }
@@ -260,6 +261,8 @@ public class DOTPValidation extends AppCompatActivity {
             JSONObject responseObject= null;
             try {
                 responseObject = new JSONObject(result);
+                minutes=2;
+                seconds=0;
                 otp_resend.setVisibility(View.INVISIBLE);
                 timer();
                 new Timer().schedule(new resendotp(),delay);

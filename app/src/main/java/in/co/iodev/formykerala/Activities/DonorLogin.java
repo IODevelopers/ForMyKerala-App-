@@ -99,6 +99,10 @@ public class DonorLogin extends AppCompatActivity {
     }
 
     public void verify() {
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
+            Toast.makeText(this,"Please Enter Valid Phone and PIN",Toast.LENGTH_LONG).show();
+        }
+        else {
          hider.show();
         StringData=phone.getText().toString();
         StringData1=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
@@ -109,7 +113,7 @@ public class DonorLogin extends AppCompatActivity {
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+        new HTTPAsyncTask2().execute(request_post_url);}
 
 
 
@@ -168,14 +172,37 @@ public class DonorLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
-               editor.putBoolean(TimeIndex+"DLogin", true);
-               editor.putBoolean(TimeIndex+"DEditedR", true);
                editor.apply();
-               Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
-               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                DonorLogin.this.finish();
-           }
+
+               TimeIndex=sharedPref.getString("TimeIndex","");
+               editor.putBoolean(TimeIndex+"DLogin", true);
+             //  editor.putBoolean(TimeIndex+"DEditedR", true);
+               //editor.putBoolean(TimeIndex+"DEdited", true);
+               editor.apply();
+               if(sharedPref.getBoolean(TimeIndex+"DEditedR",FALSE)) {
+                   Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+               }
+               else
+               if(sharedPref.getBoolean(TimeIndex+"DEdited",FALSE)){
+                   Intent intent = new Intent(DonorLogin.this, DonorSelectItems.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+                   }
+               else{
+                   Intent intent = new Intent(DonorLogin.this, DonorDetails.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+
+               }
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

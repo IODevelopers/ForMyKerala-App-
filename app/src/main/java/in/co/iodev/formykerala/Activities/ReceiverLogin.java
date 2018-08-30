@@ -172,13 +172,27 @@ public class ReceiverLogin extends AppCompatActivity {
                String TimeIndex=responseObject.getString("TimeIndex");
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
-               editor.putBoolean(TimeIndex+"EditedR", TRUE);
                editor.putBoolean(TimeIndex+"Login", TRUE);
 
-
                editor.apply();
-               startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); //TO VIEW ADDED REQUESTS
-               ReceiverLogin.this.finish();
+
+
+               if(sharedPref.getBoolean(TimeIndex+"EditedR",FALSE)) {
+                    startActivity(new Intent(getApplicationContext(), ReceiverRequirementsStatus.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); //TO VIEW ADDED REQUESTS
+                   ReceiverLogin.this.finish();
+               }
+               else
+               if(sharedPref.getBoolean(TimeIndex+"Edited",FALSE)){
+                   startActivity(new Intent(getApplicationContext(), ReceiverSelectRequirement.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); //TO VIEW ADDED REQUESTS
+                   ReceiverLogin.this.finish();
+                     }
+               else {
+                   startActivity(new Intent(getApplicationContext(), ReceiverDetails.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)); //TO VIEW ADDED REQUESTS
+                   ReceiverLogin.this.finish();
+
+
+               }
+
            }
 
         } catch (JSONException e) {

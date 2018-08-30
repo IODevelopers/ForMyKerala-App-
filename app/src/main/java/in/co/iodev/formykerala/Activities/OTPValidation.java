@@ -246,6 +246,7 @@ ImageView back;
         }
         @Override
         protected void onPreExecute() {
+            otp_resend.setVisibility(View.INVISIBLE);
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
         }

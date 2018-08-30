@@ -49,7 +49,7 @@ public class DonorSelectItems extends AppCompatActivity {
     String StringData;
     Product_Request_Adapter adapter;
     Boolean submit=false;
-    Button submit_button;
+    Button submit_button,logout;
     ImageView search_button;
     ImageView back;
     EditText item_search;
@@ -74,6 +74,7 @@ public class DonorSelectItems extends AppCompatActivity {
         search_button=findViewById(R.id.search_button);
         item_search=findViewById(R.id.item_search);
         back=findViewById(R.id.back_button);
+        logout=findViewById(R.id.logout);
         hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,11 +105,45 @@ public class DonorSelectItems extends AppCompatActivity {
                 search();
             }
         });
+        item_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                search();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(TimeIndex+"DLogin",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+*/
+                editor.commit();
+                sharedPref.edit().apply();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+
+            }
+
         });
     }
 
@@ -117,7 +152,7 @@ public class DonorSelectItems extends AppCompatActivity {
         {products.clear();
             for (int i=0;i<Mainproducts.size();i++)
             {
-                if(Mainproducts.get(i).equals(item_search.getText().toString()))
+                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString()))
                 {
                     products.add(Mainproducts.get(i));
 
@@ -314,7 +349,7 @@ public class DonorSelectItems extends AppCompatActivity {
                     editor.putBoolean(TimeIndex+"DEditedR", TRUE);
                     editor.apply();
                     Intent intent = new Intent(DonorSelectItems.this, DonorHomeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(intent);
 

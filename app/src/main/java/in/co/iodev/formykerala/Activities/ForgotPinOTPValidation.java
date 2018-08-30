@@ -240,11 +240,14 @@ public void timer()
         @Override
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
+            otp_resend.setVisibility(View.INVISIBLE);
             CI.isOnline(context);
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            minutes=2;
+            seconds=0;
             otp_resend.setVisibility(View.INVISIBLE);
             timer();
 

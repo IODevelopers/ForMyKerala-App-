@@ -52,6 +52,12 @@ public class DonorHomeActivity extends FragmentActivity {
         mViewPager = (ViewPager)findViewById(R.id.container);
         context=this;
         mViewPager.setOffscreenPageLimit(3);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(TimeIndex+"DLogin", true);
+        editor.putBoolean(TimeIndex+"DEditedR", true);
+        editor.putBoolean(TimeIndex+"DEdited", true);
+        editor.apply();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
         try{
@@ -92,15 +98,20 @@ public class DonorHomeActivity extends FragmentActivity {
                 case 0:
 
                     EditItemFragment tab1=new EditItemFragment();
-
+                    Log.d("logout",sharedPref.getString("TimeIndex",""));
+                    Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab1;
                 case 1:
 
                   EditQuantityFragment tab2=new EditQuantityFragment();
+                    Log.d("logout",sharedPref.getString("TimeIndex",""));
+                    Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab2;
                 case 2:
 
                    AcceptedItemFragment tab3=new AcceptedItemFragment();
+                    Log.d("logout",sharedPref.getString("TimeIndex",""));
+                    Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab3;
 
                 default: return null;

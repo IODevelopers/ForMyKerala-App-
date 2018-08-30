@@ -11,72 +11,56 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
+
+        </activity>
+        <activity android:name=".Activities.OTPVerification" />
+        <activity android:name=".Activities.OTPValidation" />
+        <activity android:name=".Activities.ReceiverRoleSelectActivity" />
+        <activity android:name=".Activities.PinSelection" />
+        <activity
+            android:name=".Activities.ReceiverLogin"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".Activities.DonorLogin"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".Activities.ReceiverSelectRequirement">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.OTPVerification"></activity>
+        <activity
+            android:name=".Activities.ReceiverRequirementsStatus"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".Activities.ReceiverDetails"></activity>
+        <activity android:name=".Activities.AcceptorsView"></activity>
+        <activity android:name=".Activities.PinReset"></activity>
+        <activity android:name=".Activities.ForgotPinOTPValidation" />
+        <activity android:name=".Activities.ForgotPin" />
+        <activity android:name=".Activities.DonorDetails" />
+        <activity android:name=".Activities.DForgotPin" />
+        <activity android:name=".Activities.DOTPValidation" />
+        <activity android:name=".Activities.DPinSelection" />
+        <activity android:name=".Activities.DOTPVerification" />
+        <activity android:name=".Activities.DForgotPinOTPValidation" />
+        <activity android:name=".Activities.DPinReset" />
+        <activity android:name=".Activities.DonorSelectItems"></activity>
+        <activity android:name=".Activities.DonorHomeActivity"></activity>
 
-        <activity android:name=".Activities.OTPValidation"></activity>
-        <activity android:name=".Activities.ReceiverRoleSelectActivity"></activity>
-        <activity android:name=".Activities.PinSelection"></activity>
-        <activity android:name=".Activities.ReceiverLogin"
-            android:windowSoftInputMode="stateHidden"
-
-            >
-        </activity>
-        <activity android:name=".Activities.DonorLogin"
-            android:windowSoftInputMode="stateHidden"
-            >
-        </activity>
-        <activity android:name=".Activities.ReceiverSelectRequirement">
-
-        </activity>
-        <activity android:name=".Activities.ReceiverRequirementsStatus"
-            android:windowSoftInputMode="stateHidden"
-
-            >
-
-        </activity>
-        <activity android:name=".Activities.ReceiverDetails">
-
-
-        </activity>
-        <activity android:name=".Activities.AcceptorsView">
-
-        </activity>
-        <activity android:name=".Activities.PinReset">
-        </activity>
-        <activity android:name=".Activities.ForgotPinOTPValidation"></activity>
-        <activity android:name=".Activities.ForgotPin"></activity>
-        <activity android:name=".Activities.DonorDetails"></activity>
-        <activity android:name=".Activities.DForgotPin"></activity>
-        <activity android:name=".Activities.DOTPValidation"></activity>
-        <activity android:name=".Activities.DPinSelection"></activity>
-        <activity android:name=".Activities.DOTPVerification"></activity>
-        <activity android:name=".Activities.DForgotPinOTPValidation"></activity>
-        <activity android:name=".Activities.DPinReset"></activity>
-        <activity android:name=".Activities.DonorSelectItems">
-
-        </activity>
-        <activity android:name=".Activities.DonorHomeActivity">
-        </activity>
-
-        <service
-            android:name=".Controllers.ForMyKeralaMessagingService">
+        <service android:name=".Controllers.ForMyKeralaMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <activity android:name=".Activities.Help_view"></activity>
     </application>
 
 </manifest>
