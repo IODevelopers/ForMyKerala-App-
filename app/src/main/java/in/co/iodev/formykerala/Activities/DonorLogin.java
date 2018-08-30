@@ -176,14 +176,33 @@ public class DonorLogin extends AppCompatActivity {
 
                TimeIndex=sharedPref.getString("TimeIndex","");
                editor.putBoolean(TimeIndex+"DLogin", true);
-               editor.putBoolean(TimeIndex+"DEditedR", true);
-               editor.putBoolean(TimeIndex+"DEdited", true);
+             //  editor.putBoolean(TimeIndex+"DEditedR", true);
+               //editor.putBoolean(TimeIndex+"DEdited", true);
                editor.apply();
-               Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
-               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                DonorLogin.this.finish();
-           }
+               if(sharedPref.getBoolean(TimeIndex+"DEditedR",FALSE)) {
+                   Intent intent = new Intent(DonorLogin.this, DonorHomeActivity.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+               }
+               else
+               if(sharedPref.getBoolean(TimeIndex+"DEdited",FALSE)){
+                   Intent intent = new Intent(DonorLogin.this, DonorSelectItems.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+                   }
+               else{
+                   Intent intent = new Intent(DonorLogin.this, DonorDetails.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   DonorLogin.this.finish();
+
+
+               }
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

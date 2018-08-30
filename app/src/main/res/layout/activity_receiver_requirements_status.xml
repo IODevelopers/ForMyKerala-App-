@@ -169,7 +169,16 @@
             android:text="Check Status"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-    </android.support.v7.widget.CardView>
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@android:color/white"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="Log Out"
+            android:textColor="@color/colorPrimaryBlue"/>
+           </android.support.v7.widget.CardView>
 
 </RelativeLayout>

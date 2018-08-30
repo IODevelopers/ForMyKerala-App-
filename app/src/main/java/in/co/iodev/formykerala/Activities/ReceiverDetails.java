@@ -37,6 +37,7 @@ import in.co.iodev.formykerala.R;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Get_District;
 import static in.co.iodev.formykerala.Constants.Constants.Register_Receivers;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class ReceiverDetails extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class ReceiverDetails extends AppCompatActivity {
     JSONObject object;
     String Name,Address,District,Taluk;
     Gson gson = new Gson();
-    Button next;
+    Button next,logout;
     String StringData;
     SharedPreferences sharedPref;
     String request_post_url=Register_Receivers,url2=Get_District,TimeIndex;
@@ -69,6 +70,7 @@ public class ReceiverDetails extends AppCompatActivity {
         taluk=findViewById(R.id.taluk);
         next=findViewById(R.id.button6);
         back=findViewById(R.id.back_button);
+        logout=findViewById(R.id.logout);
         hider=new ProgressBarHider(next.getRootView(),next);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
@@ -102,6 +104,24 @@ public class ReceiverDetails extends AppCompatActivity {
 
            }
        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(TimeIndex+"Login",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+*/
+                editor.commit();
+                sharedPref.edit().apply();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+
+            }
+
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

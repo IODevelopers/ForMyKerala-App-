@@ -39,6 +39,7 @@ import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class ReceiverRequirementsStatus extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     String StringData;
     Product_Request_Adapter adapter;
     ImageView search_button;
-    Button check_status;
+    Button check_status,logout;
     Boolean submit=false;
     EditText item_search;
     Context context;
@@ -65,6 +66,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver_requirements_status);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
+        logout=findViewById(R.id.logout);
 
 /*
         if(sharedPref.getBoolean("Login",FALSE))
@@ -130,6 +132,24 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(TimeIndex+"Login",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+*/
+                editor.commit();
+                sharedPref.edit().apply();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+
+            }
+
         });
         item_search=findViewById(R.id.item_search);
         item_search.addTextChangedListener(new TextWatcher() {

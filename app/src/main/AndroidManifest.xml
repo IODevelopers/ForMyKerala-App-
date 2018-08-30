@@ -13,11 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.OTPVerification" />
         <activity android:name=".Activities.OTPValidation" />
@@ -29,7 +25,13 @@
         <activity
             android:name=".Activities.DonorLogin"
             android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Activities.ReceiverSelectRequirement"></activity>
+        <activity android:name=".Activities.ReceiverSelectRequirement">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.ReceiverRequirementsStatus"
             android:windowSoftInputMode="stateHidden"></activity>

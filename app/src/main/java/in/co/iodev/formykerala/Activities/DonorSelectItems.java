@@ -49,7 +49,7 @@ public class DonorSelectItems extends AppCompatActivity {
     String StringData;
     Product_Request_Adapter adapter;
     Boolean submit=false;
-    Button submit_button;
+    Button submit_button,logout;
     ImageView search_button;
     ImageView back;
     EditText item_search;
@@ -74,6 +74,7 @@ public class DonorSelectItems extends AppCompatActivity {
         search_button=findViewById(R.id.search_button);
         item_search=findViewById(R.id.item_search);
         back=findViewById(R.id.back_button);
+        logout=findViewById(R.id.logout);
         hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +126,24 @@ public class DonorSelectItems extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
             }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(TimeIndex+"DLogin",FALSE);
+                editor.remove("TimeIndex");
+              /*  editor.putBoolean("Edited",FALSE);
+                editor.putBoolean("EditedR",FALSE);
+*/
+                editor.commit();
+                sharedPref.edit().apply();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+
+            }
+
         });
     }
 

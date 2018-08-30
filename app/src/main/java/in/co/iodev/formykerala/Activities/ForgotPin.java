@@ -172,7 +172,7 @@ public class ForgotPin extends AppCompatActivity {
                 editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
-                startActivity(new Intent(getApplicationContext(),ForgotPinOTPValidation.class));
+                startActivity(new Intent(ForgotPin.this,ForgotPinOTPValidation.class));
 
 
             } catch (JSONException e) {

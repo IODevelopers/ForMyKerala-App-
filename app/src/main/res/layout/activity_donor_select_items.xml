@@ -156,7 +156,15 @@
             android:text="Submit"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
-
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@android:color/white"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="Log Out"
+            android:textColor="@color/colorPrimaryBlue"/>
         <ProgressBar
             android:visibility="invisible"
             android:id="@+id/pgbar"
