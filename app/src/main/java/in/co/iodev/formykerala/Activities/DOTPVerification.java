@@ -77,7 +77,8 @@ public class DOTPVerification extends AppCompatActivity {
 
         StringData=phone.getText().toString();
         if(StringData.equals("")){
-            Toast.makeText(DOTPVerification.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            hider.hide();
+            Toast.makeText(DOTPVerification.this,"Please Enter Valid Phone Number",Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();

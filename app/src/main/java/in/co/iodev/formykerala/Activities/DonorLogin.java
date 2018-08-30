@@ -99,6 +99,10 @@ public class DonorLogin extends AppCompatActivity {
     }
 
     public void verify() {
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
+            Toast.makeText(this,"Please Enter Valid Phone and PIN",Toast.LENGTH_LONG).show();
+        }
+        else {
          hider.show();
         StringData=phone.getText().toString();
         StringData1=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
@@ -109,7 +113,7 @@ public class DonorLogin extends AppCompatActivity {
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+        new HTTPAsyncTask2().execute(request_post_url);}
 
 
 

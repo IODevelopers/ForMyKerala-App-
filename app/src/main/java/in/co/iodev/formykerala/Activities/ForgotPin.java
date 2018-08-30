@@ -72,14 +72,19 @@ public class ForgotPin extends AppCompatActivity {
 
     public void verify() {
         hider.show();
-
+        StringData=phone.getText().toString();
+        if(StringData.equals(""))
+        {   hider.hide();
+            Toast.makeText(this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+        }
+        else{
         StringData=phone.getText().toString();
         d=new DataModel();
         d.setPhoneNumber(StringData);
         StringData=gson.toJson(d);
         Log.i("jisjoe",StringData);
 
-        new HTTPAsyncTask2().execute(request_post_url);
+        new HTTPAsyncTask2().execute(request_post_url);}
 
 
 

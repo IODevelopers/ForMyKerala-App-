@@ -76,7 +76,7 @@ public class OTPVerification extends AppCompatActivity {
 
         StringData=phone.getText().toString();
         if(StringData.equals("")){
-            Toast.makeText(OTPVerification.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            Toast.makeText(OTPVerification.this,"Please Enter Valid Phone Number",Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();
