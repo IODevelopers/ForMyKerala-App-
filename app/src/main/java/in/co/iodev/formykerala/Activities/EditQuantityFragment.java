@@ -424,7 +424,8 @@ public class EditQuantityFragment extends Fragment {
 
                     try { JSONObject object=products.getJSONObject(position);
                         //Log.d("sj",object.getString("TimeIndex"));
-                        data.put("TimeIndex",object.get("TimeIndex"));
+                        data.put("Donor_TimeIndex",TimeIndex);
+                        data.put("Request_TimeIndex",object.get("TimeIndex"));
                         data.put("Items",items2);
 
                     } catch (JSONException e) {
