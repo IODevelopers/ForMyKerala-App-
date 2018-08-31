@@ -532,11 +532,13 @@ public class EditQuantityFragment extends Fragment {
 
                         @Override
                         public void afterTextChanged(Editable editable) {
-                            if(!finalHolder.Product.getText().toString().equals("")&&Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
+                            if(!finalHolder.Product.getText().toString().equals(""))
                             {
-                                Toast.makeText(getContext(),"Your Value shoulde be less than or equal to the required quantity ",Toast.LENGTH_SHORT).show();
+                            if(Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
+                            {
+                                Toast.makeText(getContext(),"Your Value should be less than or equal to the required quantity ",Toast.LENGTH_SHORT).show();
                                 finalHolder.Product.setText("");
-                            }
+                            }}
 
                             else
                             { try {

@@ -353,9 +353,13 @@ public class EditQuantityFragment_New extends Fragment {
                     JSONArray parentObject=null;
                     if(!jsonObject.has("Message"))
                     parentObject = new JSONObject(result).getJSONArray("Items");
+                   try {
+                       LastIndex = jsonObject.getJSONObject("LastEvaluatedKey");
+                   }
+                   catch (Exception e)
+                   {
 
-                    LastIndex = jsonObject.getJSONObject("LastEvaluatedKey");
-
+                   }
                  /*   JSONArray parentObject2 = new JSONObject(result).getJSONArray("0");*/
                     Log.d("ResponseitemA",jsonObject.toString());
                     products = new JSONArray();
@@ -563,7 +567,8 @@ public class EditQuantityFragment_New extends Fragment {
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    JSONObject data=new JSONObject();
+                    if(items2.length()!=0)
+                    { JSONObject data=new JSONObject();
 
                     try { JSONObject object=products.getJSONObject(position);
                         //Log.d("sj",object.getString("TimeIndex"));
@@ -577,7 +582,10 @@ public class EditQuantityFragment_New extends Fragment {
                     StringData=data.toString();
                     submit=true;
                     new HTTPAsyncTask2().execute(url);
-                    DialogBox.super.dismiss();
+                    DialogBox.super.dismiss();}
+                    else {
+                        Toast.makeText(getContext(),"Please enter a value ",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             decline.setOnClickListener(new View.OnClickListener() {

@@ -95,8 +95,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="30dp"
                         android:layout_marginTop="10dp"
+
                         android:divider="@android:color/transparent"
-                        android:dividerHeight="0dp"></ListView>
+                        android:dividerHeight="25dp"></ListView>
 
                     <TextView
                         android:id="@+id/no_entry"
