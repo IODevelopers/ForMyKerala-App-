@@ -62,6 +62,7 @@ public class AcceptedItemFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPref=getDefaultSharedPreferences(getContext());
+        context=getContext();
 
         TimeIndex=sharedPref.getString("TimeIndex","");
 
@@ -244,7 +245,7 @@ public class AcceptedItemFragment extends Fragment {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
-            progress=new ProgressDialog(getContext());
+            progress=new ProgressDialog(context);
             progress.setMessage("Loading...");
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);

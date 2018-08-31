@@ -47,7 +47,6 @@
         <activity android:name=".Activities.DOTPVerification" />
         <activity android:name=".Activities.DForgotPinOTPValidation" />
         <activity android:name=".Activities.DPinReset" />
-        <activity android:name=".Activities.DonorSelectItems"></activity>
         <activity android:name=".Activities.DonorHomeActivity"></activity>
 
         <service android:name=".Controllers.ForMyKeralaMessagingService">

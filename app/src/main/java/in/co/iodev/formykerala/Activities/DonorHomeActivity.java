@@ -31,7 +31,7 @@ import static java.lang.Boolean.FALSE;
 public class DonorHomeActivity extends FragmentActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static int NUM_PAGES = 3;
+    private static int NUM_PAGES = 2;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -96,19 +96,13 @@ public class DonorHomeActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position)
             {
-                case 0:
+                 case 0:
 
-                    EditItemFragment tab1=new EditItemFragment();
-                    Log.d("logout",sharedPref.getString("TimeIndex",""));
-                    Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
-                    return tab1;
-                case 1:
-
-                  EditQuantityFragment_New tab2=new EditQuantityFragment_New();
+                  EditQuantityFragment_New tab2=new EditQuantityFragment_New(DonorHomeActivity.this);
                     Log.d("logout",sharedPref.getString("TimeIndex",""));
                     Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab2;
-                case 2:
+                case 1:
 
                    AcceptedItemFragment tab3=new AcceptedItemFragment();
                     Log.d("logout",sharedPref.getString("TimeIndex",""));

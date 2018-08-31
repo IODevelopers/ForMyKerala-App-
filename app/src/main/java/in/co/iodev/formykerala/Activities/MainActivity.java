@@ -171,11 +171,6 @@ Boolean noupdate=true,internet=true;
                     startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
                     MainActivity.this.finish();
                 }
-                else
-                if(sharedPref.getBoolean(TimeIndex+"DEdited",FALSE)){
-                    startActivity(new Intent(getApplicationContext(),DonorSelectItems.class)); //TO SELECT ITEMS
-                    MainActivity.this.finish();
-                }
                 else{
                     startActivity(new Intent(getApplicationContext(),DonorDetails.class)); //TO ADD NEW REQUEST
                     MainActivity.this.finish();

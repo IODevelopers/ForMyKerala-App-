@@ -1,6 +1,7 @@
 package in.co.iodev.formykerala.Activities;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -64,6 +65,12 @@ public class EditQuantityFragment_New extends Fragment {
     Context context;
 
     ProgressDialog progress;
+
+    @SuppressLint("ValidFragment")
+    public EditQuantityFragment_New(Context context) {
+        this.context=context;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,7 +83,6 @@ public class EditQuantityFragment_New extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPref=getDefaultSharedPreferences(getContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
-        context=this.getContext();
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
 
@@ -333,7 +339,7 @@ public class EditQuantityFragment_New extends Fragment {
         }
         @Override
         protected void onPreExecute() {
-            progress=new ProgressDialog(getContext());
+            progress=new ProgressDialog(context);
             progress.setMessage("Loading...");
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
@@ -535,6 +541,7 @@ public class EditQuantityFragment_New extends Fragment {
             ListView product_request_list=findViewById(R.id.donor_items_edit_listview);
             Product_Request_Adapter2 adapter=new Product_Request_Adapter2();
             product_request_list.setAdapter(adapter);
+            context=getContext();
             Name=findViewById(R.id.receiver_namw);
             JSONObject object=null;
             JSONObject object1=null;
@@ -731,10 +738,9 @@ public class EditQuantityFragment_New extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            sharedPref=getDefaultSharedPreferences(getContext());
+            sharedPref=getDefaultSharedPreferences(context);
 
             TimeIndex=sharedPref.getString("TimeIndex","");
-            context=this.getContext();
             items=new JSONObject();
             JSONObject timeindex=new JSONObject();
             try {

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F7F8"
     android:fillViewport="true"
-    tools:context="in.co.iodev.formykerala.Activities.EditItemFragment">
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

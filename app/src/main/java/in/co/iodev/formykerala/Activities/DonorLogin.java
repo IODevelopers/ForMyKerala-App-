@@ -185,14 +185,7 @@ public class DonorLogin extends AppCompatActivity {
                    DonorLogin.this.finish();
 
                }
-               else
-               if(sharedPref.getBoolean(TimeIndex+"DEdited",FALSE)){
-                   Intent intent = new Intent(DonorLogin.this, DonorSelectItems.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                   startActivity(intent);
-                   DonorLogin.this.finish();
 
-                   }
                else{
                    Intent intent = new Intent(DonorLogin.this, DonorDetails.class);
                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
