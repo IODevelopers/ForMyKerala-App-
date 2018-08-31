@@ -23,6 +23,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:enabled="false"
             android:id="@+id/requested_quantity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
