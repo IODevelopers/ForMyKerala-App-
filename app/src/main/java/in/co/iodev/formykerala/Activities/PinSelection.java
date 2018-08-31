@@ -45,6 +45,7 @@ ProgressBarHider hider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_pinselection);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         otp1=findViewById(R.id.otp1);
@@ -78,7 +79,8 @@ ProgressBarHider hider;
 
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
-            Toast.makeText(PinSelection.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_otp);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();
@@ -157,7 +159,8 @@ ProgressBarHider hider;
             }
 
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+            String toastText = getString(R.string.please_click_back_again_to_exit);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
             new Handler().postDelayed(new Runnable() {
 

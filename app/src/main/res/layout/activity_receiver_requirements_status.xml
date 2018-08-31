@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="-20dp"
-                    android:text="Registered Requirements"
+                    android:text="@string/register_request"
                     android:textColor="@android:color/white"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -103,7 +103,7 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
                                 android:gravity="center"
-                                android:text="Name"
+                                android:text="@string/name"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -112,7 +112,7 @@
                                 android:layout_gravity="left"
                                 android:layout_weight="8"
                                 android:gravity="center"
-                                android:text="No. of Items Requested"
+                                android:text="@string/no_of_items_requested"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -121,7 +121,7 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
                                 android:gravity="center"
-                                android:text="Status"
+                                android:text="@string/status"
                                 android:textSize="20sp" />
 
                         </LinearLayout>
@@ -143,7 +143,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
                             android:divider="@android:color/transparent"
-                            android:dividerHeight="0dp"></ListView>
+                            android:dividerHeight="0dp"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:text="Check Status"
+            android:text="@string/check_status"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
            </android.support.v7.widget.CardView>
@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:text="Log Out"
+            android:text="@string/log_out"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
     </android.support.v7.widget.CardView>

@@ -47,6 +47,7 @@ public class DForgotPin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         back=findViewById(R.id.back_button);
@@ -76,7 +77,8 @@ public class DForgotPin extends AppCompatActivity {
         StringData=phone.getText().toString();
         if(StringData.equals(""))
         {   hider.hide();
-            Toast.makeText(DForgotPin.this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_ph_no);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else {
             d = new DataModel();

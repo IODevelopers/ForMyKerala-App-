@@ -64,6 +64,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_receiver_requirements_status);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         logout=findViewById(R.id.logout);
@@ -84,8 +85,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder
-                    .setMessage("Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.")
+            String infoAlert = getString(R.string.info_alert);
+            builder.setMessage(infoAlert)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -398,7 +399,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 

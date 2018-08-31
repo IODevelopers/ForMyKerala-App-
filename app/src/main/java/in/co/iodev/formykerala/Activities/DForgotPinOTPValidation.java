@@ -53,6 +53,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
             setContentView(R.layout.activity_otpvalidation);
             sharedPref=getDefaultSharedPreferences(getApplicationContext());
             otp1=findViewById(R.id.otp1);
@@ -144,7 +145,8 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
         }
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_otp);
+            Toast.makeText(getApplicationContext(),toastText,Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();
@@ -213,7 +215,8 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
                            startActivity(new Intent(DForgotPinOTPValidation.this,DPinReset.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
+                    String toastText = getString(R.string.wrong_otp);
+                    Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {

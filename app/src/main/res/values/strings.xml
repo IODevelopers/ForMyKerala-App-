@@ -3,17 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="help_malayalam">ഫോർ മൈ കേരള  ഉപയോഗിക്കുന്ന ഹെൽപ്പ്ലൈൻ ഇതാ.
-
-നിങ്ങൾ റിസീവർ അല്ലെങ്കിൽ ഡോണർ എന്നത് ആദ്യം തിരഞ്ഞെടുക്കുക.
-സഹായം നൽകുന്നതിന് തയ്യാറാകുന്ന ഒരു വ്യക്തിയാണ്. ഡോണർ സഹായം ആവശ്യമുള്ള വ്യക്തിയാണ് റിസീവർ. തിരഞ്ഞെടുപ്പിന് ശേഷം, നിങ്ങളുടെ മൊബൈൽ ഫോൺ നമ്പർ ഉപയോഗിച്ച് നിങ്ങളുടെ അക്കൗണ്ട് രജിസ്റ്റർ ചെയ്യേണ്ടതാണ്. ഒരു OTP ഉപയോഗിച്ച് മൊബൈൽ ഫോൺ പരിശോധിച്ചുറപ്പിക്കും. അതിനുശേഷം നിങ്ങൾക്കു 4 അക്ക PIN ഉപയോഗിക്കാൻ കഴിയും, ഇത് നിങ്ങളുടെ ലോഗിൻ പാസ്വേർഡായി ഉപയോഗിക്കും.
-അടുത്തതായി, നിങ്ങളുടെ മേൽവിലാസം ജില്ലയും താലൂക്കും പോലുള്ള വിവരങ്ങൾ നൽകാം. അതിനുശേഷം സ്ക്രീനിൽ ഡോണറാൽ ലഭ്യമായ ഇനങ്ങളുടെ പട്ടിക കാണാം.
- നിങ്ങൾ ഒരു ഡോണറാണെങ്കിൽ നിങ്ങൾക്ക് റിസീവറിന് നൽകാൻ പറ്റുന്ന സാധനങ്ങളുടെ ലിസ്റ്റ് കാണാം.
-റിസീവറിന്റെ ഭാഗത്തുനിന്ന് നിങ്ങൾ തിരഞ്ഞെടുക്കുന്നതിനു ശേഷം നിങ്ങൾ, ആവശ്യമുള്ള ഇനങ്ങളുടെ എണ്ണം നിങ്ങൾക്ക് സംഭാവന നൽകാൻ കഴിയുന്ന ഒരു സ്ക്രീനിൽ കാണിക്കും. ഇതിനിടയിൽ ഞങ്ങളുടെ വോളന്റിയർ നിങ്ങളെ വിളിക്കുകയും നിങ്ങളുടെ  അഭ്യർത്ഥന  പരിശോധിക്കുകയും ചെയ്യും. ഇതേ പരിശോധന ഡോണേർസിനിടയിലും നടക്കുന്നു.
-പരിശോധിച്ചുറപ്പിച്ചതിന് ശേഷം നിങ്ങൾക്ക് ഇനങ്ങൾ നൽകാൻ കഴിയുന്ന പേജിലേക്ക് റീഡയറക്ട് ചെയ്യുകയും എപ്പോൾ വേണമെങ്കിലും  എഡിറ്റുചെയ്യുകയും ചെയ്യാം.
-എണ്ണത്തെ എഡിറ്റുചെയ്തതിനുശേഷം ഞങ്ങളുടെ വോളന്റിയർ സ്വീകരിച്ചിട്ടുള്ള റിസീവർമാരുടെ പട്ടിക നിങ്ങൾക്ക് കാണാൻ കഴിയും. നിങ്ങൾക്കു അതു സ്വീകരിക്കുകയും ,
- സ്വീകരിക്കേണ്ട അഭ്യർത്ഥനയുടെ സ്റ്റാറ്റസ് ഒരു ടാബിൽ എല്ലായ്പ്പോഴും കാണാൻ കഴിയുകയും ചെയ്യാം. കൂടാതെ ഞങ്ങളുടെ വോളന്റിയർ നിങ്ങളുടെ കേസ് അവസാനിപ്പിക്കുന്നതിനുവേണ്ട നടപടികൾ കൈകാര്യം ചെയ്യുകയും ചെയ്യും</string>
-    <string name="help_english">Here is the helpline for using For My Kerala application.
+    <string name="app_usage_help">Here is the helpline for using For My Kerala application.
 
 First select whether you are a receiver or a Donor.
 Receiver is a person who needs help while Donor is a person who is ready to provide help. After selection,you will need to register your account using your mobile phone number. You will receive a One Time Password(OTP) as SMS to the number provided . Enter the OTP and continue. After that you can select a 4 digit PIN which will be used as your login password.
@@ -22,6 +12,84 @@ After selection you can wait for the donor to accept your request.Meanwhile  our
  If registered as donor,after verification you will be redirected to a page where you can provide the items and edit the count at anytime.As in the case of receiver , verification will be done by our volunteer.
 After editing the count you can view the list of receivers which are already verified by our volunteers.
  You can accept and can always view the status of the accepted request on a tab. Our volunteer will handle the closing of the case.</string>
+
+
+    <string name="accepted_donors">Accepted Donors</string>
+    <string name="donor_name">Donor Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="no_donors_accepted">No Donors Accepted</string>
+    <string name="donor_login">Donor Login</string>
+    <string name="what_can_you_donate">What can you donate?</string>
+    <string name="english">English</string>
+    <string name="help_title">How to use ForMyKerala App</string>
+    <string name="select_your_role">Select Your Role</string>
+    <string name="donor">Donor</string>
+    <string name="help">Help</string>
+    <string name="checking_for_updates">Checking for Updates</string>
+    <string name="no_network_ncheck_your_connection_and_restart_app">No network. Check your connection and restart app.</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="please_enter_the_verification_code_sent">Please enter the verification code sent</string>
+    <string name="to">to</string>
+    <string name="resend_otp_in">Resend OTP in :</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="pin_for_security">PIN for Security</string>
+    <string name="please_enter_a_4_digit_pin_for_your_login">Please enter a 4 digit PIN for your Login</string>
+    <string name="please_remember_the_same_for_later_login">(Please remember the same for Later Login)</string>
+    <string name="save">Save</string>
+    <string name="registered_requirements">Registered Requirements</string>
+    <string name="no_of_items_requested">No. of Items Requested</string>
+    <string name="check_status">Check Status</string>
+    <string name="register_request">Register Request</string>
+    <string name="view_registered_requests">View Registered Requests</string>
+    <string name="register">Register</string>
+    <string name="address">Address</string>
+    <string name="district">District</string>
+    <string name="taluk">Taluk</string>
+    <string name="receiver_login">Receiver Login</string>
+    <string name="your_10_digit_phone_number">Your 10 Digit Phone Number</string>
+    <string name="your_4_digit_pin">Your 4 Digit PIN</string>
+    <string name="forgot_pin">Forgot PIN?</string>
+    <string name="new_user_register_now">New User? Register Now!</string>
+    <string name="select_requirements">Select Requirements</string>
+    <string name="search_your_items">Search your items</string>
+    <string name="your_quantity">Your Quantity</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="verified">Verified</string>
+    <string name="accepted_requests">Accepted Requests</string>
+    <string name="phone">Phone</string>
+    <string name="no_accepted_items">No Accepted Items</string>
+    <string name="log_out">Log Out</string>
+    <string name="edit_quantity_of_the_items">Edit Quantity of the Items</string>
+    <string name="submit">Submit</string>
+    <string name="edit">Edit</string>
+    <string name="people_you_can_help">People You Can Help</string>
+    <string name="receiver">Receiver</string>
+    <string name="product">Product</string>
+    <string name="quantity">Quantity</string>
+    <string name="status">Status</string>
+    <string name="no_verified_requests">No Verified Requests</string>
+    <string name="your_account_is_yet_to_be_verified">Your account is yet to be verified</string>
+    <string name="name">Name</string>
+   <string name="receiver_name">Receiver Name</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="please_a_choose_a_requirement">Please a Choose a Requirement</string>
+    <string name="please_click_back_again_to_exit">Please click BACK again to exit</string>
+    <string name="verify">Verify</string>
+    <string name="toast_valid_ph_no">Please Enter Valid Phone Number</string>
+    <string name="toast_valid_otp">Please Enter Valid OTP</string>
+    <string name="wrong_otp">Wrong OTP</string>
+    <string name="toast_valid_pin">Please Enter Valid PIN</string>
+    <string name="toast_all_fields">Please provide all fields</string>
+    <string name="info_alert">Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.</string>
+
+    <string-array name="available_languages">
+        <item>Select Language</item>
+        <item>English</item>
+        <item>Malayalam</item>
+    </string-array>
+
     <string-array name="District">
 
         <item><string-array name="Kottayam">

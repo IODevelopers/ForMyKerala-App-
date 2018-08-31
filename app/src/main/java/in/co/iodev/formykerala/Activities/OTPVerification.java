@@ -43,6 +43,7 @@ public class OTPVerification extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
@@ -76,7 +77,8 @@ public class OTPVerification extends AppCompatActivity {
 
         StringData=phone.getText().toString();
         if(StringData.equals("")){
-            Toast.makeText(OTPVerification.this,"Please Enter Valid Phone Number",Toast.LENGTH_LONG).show();
+            String toastText =getString(R.string.toast_valid_ph_no);
+            Toast.makeText(OTPVerification.this, toastText,Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();

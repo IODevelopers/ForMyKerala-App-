@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 android:textSize="22sp"
                 android:textColor="@android:color/white"
-                android:text="Verification Code" />
+                android:text="@string/verification_code" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@android:color/white"
-                android:text="Please enter the verification code sent" />
+                android:text="@string/please_enter_the_verification_code_sent" />
 
             <TextView
                 android:id="@+id/phone"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:text="to"
+                android:text="@string/to"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -73,7 +73,6 @@
                         android:background="@android:color/white"
                         android:gravity="center"
                         android:maxLength="1"
-
                         android:inputType="number" />
                 </android.support.v7.widget.CardView>
 
@@ -88,7 +87,6 @@
                         android:id="@+id/otp2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"  android:maxLength="1"
-
                         android:background="@android:color/white"
                         android:gravity="center"
                         android:inputType="number" />
@@ -106,8 +104,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/white"  android:maxLength="1"
-
-
                         android:gravity="center"
                         android:inputType="number" />
                 </android.support.v7.widget.CardView>
@@ -123,8 +119,6 @@
                         android:id="@+id/otp4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:maxLength="1"
-
-
                         android:background="@android:color/white"
                         android:gravity="center"
                         android:inputType="number" />
@@ -155,12 +149,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:text="Verify"
+                    android:text="@string/verify"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
             </android.support.v7.widget.CardView>
-x
 
             <TextView
                 android:id="@+id/timer"
@@ -168,7 +161,7 @@ x
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Resend OTP in :"
+                android:text="@string/resend_otp_in"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -191,7 +184,7 @@ x
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:text="Resend OTP"
+                    android:text="@string/resend_otp"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:visibility="visible" />
