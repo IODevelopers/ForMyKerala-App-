@@ -3,11 +3,14 @@ package in.co.iodev.formykerala.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -43,6 +46,8 @@ import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.TRUE;
+
 
 public class EditQuantityFragment_New extends Fragment {
 
@@ -62,14 +67,8 @@ public class EditQuantityFragment_New extends Fragment {
     JSONObject items;
 
     private ProgressBar progressBar;
-    Context context;
 
     ProgressDialog progress;
-
-    @SuppressLint("ValidFragment")
-    public EditQuantityFragment_New(Context context) {
-        this.context=context;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +82,26 @@ public class EditQuantityFragment_New extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPref=getDefaultSharedPreferences(getContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
+        if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+        {
+            /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
+            final AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(getContext());
+            }
+            String infoAlert = getString(R.string.info_alert);
+            builder.setMessage(infoAlert)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+
+                    .show();
+            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+        }
+
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
 
@@ -98,7 +117,6 @@ public class EditQuantityFragment_New extends Fragment {
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
         setListViewFooter();
         setListOnScrollListener();
-
         adapter=new Product_Request_Adapter();
         
         product_request_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,11 +140,11 @@ public class EditQuantityFragment_New extends Fragment {
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-
+        new HTTPAsyncTask2().execute(url);
 
     }
     private void setListViewFooter(){
-        View view = LayoutInflater.from(context).inflate(R.layout.footer_listview_progressbar, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.footer_listview_progressbar, null);
         progressBar = view.findViewById(R.id.progressBar);
         product_request_list.addFooterView(progressBar);
     }
@@ -339,14 +357,14 @@ public class EditQuantityFragment_New extends Fragment {
         }
         @Override
         protected void onPreExecute() {
-            progress=new ProgressDialog(context);
+            progress=new ProgressDialog(getContext());
             progress.setMessage("Loading...");
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();
 
             CheckInternet CI=new CheckInternet();
-            CI.isOnline(context);
+            CI.isOnline(getContext());
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
@@ -440,7 +458,7 @@ public class EditQuantityFragment_New extends Fragment {
 
 
             CheckInternet CI=new CheckInternet();
-            CI.isOnline(context);
+            CI.isOnline(getContext());
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
@@ -541,7 +559,7 @@ public class EditQuantityFragment_New extends Fragment {
             ListView product_request_list=findViewById(R.id.donor_items_edit_listview);
             Product_Request_Adapter2 adapter=new Product_Request_Adapter2();
             product_request_list.setAdapter(adapter);
-            context=getContext();
+
             Name=findViewById(R.id.receiver_namw);
             JSONObject object=null;
             JSONObject object1=null;
@@ -558,10 +576,11 @@ public class EditQuantityFragment_New extends Fragment {
                 String key = iter.next();
                 JSONObject ob=new JSONObject();
                 try {
-                    ob.put("name",key);
+                    if(Integer.parseInt(object1.get(key).toString())!=0)
+                    { ob.put("name",key);
                     ob.put("number",object1.get(key));
                     products2.put(i,ob);
-                    i++;
+                    i++;}
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -737,21 +756,8 @@ public class EditQuantityFragment_New extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            sharedPref=getDefaultSharedPreferences(context);
+        if (isVisibleToUser&&sharedPref!=null) {
 
-            TimeIndex=sharedPref.getString("TimeIndex","");
-            items=new JSONObject();
-            JSONObject timeindex=new JSONObject();
-            try {
-                timeindex.put("TimeIndex",TimeIndex);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            StringData=timeindex.toString();
-            submit=false;
-            new HTTPAsyncTask2().execute(url);        }else{
-            // fragment is no longer visible
-        }
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit(); } else{
     }
-}
+}}

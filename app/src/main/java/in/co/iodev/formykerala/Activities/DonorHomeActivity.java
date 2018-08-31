@@ -52,7 +52,7 @@ public class DonorHomeActivity extends FragmentActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager)findViewById(R.id.container);
         context=this;
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(0);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(TimeIndex+"DLogin", true);
@@ -98,7 +98,7 @@ public class DonorHomeActivity extends FragmentActivity {
             {
                  case 0:
 
-                  EditQuantityFragment_New tab2=new EditQuantityFragment_New(DonorHomeActivity.this);
+                  EditQuantityFragment_New tab2=new EditQuantityFragment_New();
                     Log.d("logout",sharedPref.getString("TimeIndex",""));
                     Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab2;

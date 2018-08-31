@@ -47,7 +47,8 @@
         <activity android:name=".Activities.DOTPVerification" />
         <activity android:name=".Activities.DForgotPinOTPValidation" />
         <activity android:name=".Activities.DPinReset" />
-        <activity android:name=".Activities.DonorHomeActivity"></activity>
+        <activity android:name=".Activities.DonorHomeActivity"
+            android:screenOrientation="portrait"></activity>
 
         <service android:name=".Controllers.ForMyKeralaMessagingService">
             <intent-filter>

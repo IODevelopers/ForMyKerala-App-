@@ -82,7 +82,7 @@ After editing the count you can view the list of receivers which are already ver
     <string name="wrong_otp">Wrong OTP</string>
     <string name="toast_valid_pin">Please Enter Valid PIN</string>
     <string name="toast_all_fields">Please provide all fields</string>
-    <string name="info_alert">Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.</string>
+    <string name="info_alert">Your account is yet to be verified. You will receive a call from our volunteer within 24 hours after registration.If you are in need of a quick verification, send a WhatsApp message or SMS \'QV\' to  7902661414.</string>
 
     <string-array name="available_languages">
         <item>Select Language</item>
