@@ -52,6 +52,7 @@ public class DOTPValidation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpvalidation);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         otp1=findViewById(R.id.otp1);
@@ -105,7 +106,8 @@ public class DOTPValidation extends AppCompatActivity {
         new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                textTimer.setText("Resend OTP in "+minutes+":"+checkDigit(seconds));
+                String reSentOTP = getString(R.string.resend_otp_in)+minutes+":"+checkDigit(seconds);
+                textTimer.setText(reSentOTP);
 
                 if(seconds==0)
                 {
@@ -153,7 +155,8 @@ public class DOTPValidation extends AppCompatActivity {
 
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
-            Toast.makeText(DOTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_otp);
+            Toast.makeText(DOTPValidation.this,toastText,Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();
@@ -220,7 +223,8 @@ public class DOTPValidation extends AppCompatActivity {
                 finish();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
+                    String toastText = getString(R.string.wrong_otp);
+                    Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {

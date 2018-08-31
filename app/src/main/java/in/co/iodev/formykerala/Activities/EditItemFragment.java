@@ -80,8 +80,8 @@ public class EditItemFragment extends Fragment {
                 } else {
                     builder = new AlertDialog.Builder(getContext());
                 }
-                builder
-                        .setMessage("Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.")
+                String infoAlert = getString(R.string.info_alert);
+                builder.setMessage(infoAlert)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }

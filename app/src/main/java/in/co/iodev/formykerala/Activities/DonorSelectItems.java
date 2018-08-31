@@ -60,6 +60,7 @@ public class DonorSelectItems extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_donor_select_items);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
@@ -96,7 +97,8 @@ public class DonorSelectItems extends AppCompatActivity {
 
             {
                 hider.hide();
-                Toast.makeText(getApplicationContext(),"Please a Choose a Requirement",Toast.LENGTH_SHORT).show();            }
+                String toastText = getString(R.string.please_a_choose_a_requirement);
+                Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_SHORT).show();            }
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -375,7 +377,8 @@ public class DonorSelectItems extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 

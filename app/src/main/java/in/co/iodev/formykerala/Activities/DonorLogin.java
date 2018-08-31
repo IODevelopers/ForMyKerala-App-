@@ -47,6 +47,7 @@ public class DonorLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_donor_login);
         phone=findViewById(R.id.phone);
         otp1=findViewById(R.id.otp1);
@@ -100,7 +101,8 @@ public class DonorLogin extends AppCompatActivity {
 
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
-            Toast.makeText(this,"Please Enter Valid Phone and PIN",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_ph_no);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else {
          hider.show();
@@ -114,9 +116,6 @@ public class DonorLogin extends AppCompatActivity {
         Log.i("jisjoe",StringData);
 
         new HTTPAsyncTask2().execute(request_post_url);}
-
-
-
     }
 
     @Override
