@@ -29,7 +29,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit Quantity of the Items"/>
+            android:text="@string/edit_quantity_of_the_items"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="6"
                     android:gravity="center"
-                    android:text="Product"
+                    android:text="@string/product"
                     android:textSize="20sp" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="6"
                     android:gravity="center"
-                    android:text="Quantity"
+                    android:text="@string/quantity"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -81,7 +81,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="10dp"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"></ListView>
+                android:dividerHeight="0dp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -105,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#4885ED"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#4885ED"
-            android:text="Edit"
+            android:text="@string/edit"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 

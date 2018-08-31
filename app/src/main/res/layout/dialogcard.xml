@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Receiver Name"
+        android:text="@string/receiver_name"
         android:textSize="22sp" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="5"
             android:gravity="center"
-            android:text="Product"
+            android:text="@string/product"
             android:textSize="15sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:textSize="15sp" />
         <TextView
             android:id="@+id/edit_quantity"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Your Quantity"
+            android:text="@string/your_quantity"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -62,7 +62,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="10dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"></ListView>
+        android:dividerHeight="0dp"/>
     <LinearLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00f74a"
-                android:text="Accept"
+                android:text="@string/accept"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#e7094c"
-                android:text="Decline"
+                android:text="@string/decline"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>

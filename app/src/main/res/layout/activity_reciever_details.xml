@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="-20dp"
-            android:text="Register"
+            android:text="@string/register"
             android:textColor="@android:color/white"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -42,9 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-
             android:layout_marginTop="20dp"
-            android:text="Name"
+            android:text="@string/name"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -68,8 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-
-            android:text="Address"
+            android:text="@string/address"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -93,8 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-
-            android:text="District"
+            android:text="@string/district"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -116,9 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-
             android:layout_marginTop="5dp"
-            android:text="Taluk"
+            android:text="@string/taluk"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -156,7 +152,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@color/colorPrimaryBlue" />
     <ProgressBar
         android:visibility="invisible"
@@ -186,7 +182,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:gravity="center"
-            android:text="Log Out"
+            android:text="@string/log_out"
             android:textColor="@color/colorPrimaryBlue" />
 
 

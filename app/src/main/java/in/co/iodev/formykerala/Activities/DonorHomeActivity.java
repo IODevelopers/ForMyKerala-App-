@@ -46,6 +46,7 @@ public class DonorHomeActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_donor_home);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -154,7 +155,8 @@ public class DonorHomeActivity extends FragmentActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
 

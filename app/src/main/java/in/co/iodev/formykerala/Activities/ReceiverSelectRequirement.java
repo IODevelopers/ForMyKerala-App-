@@ -59,6 +59,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_reciever_select_requirement);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
@@ -377,7 +378,8 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
 

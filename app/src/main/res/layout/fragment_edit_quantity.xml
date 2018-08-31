@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="People You Can Help"
+                android:text="@string/people_you_can_help"
                 android:textSize="22sp" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Receiver"
+                        android:text="@string/receiver"
                         android:textSize="15dp" />
 
                     <TextView
@@ -55,7 +55,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Product"
+                        android:text="@string/product"
                         android:textSize="15sp" />
 
                     <TextView
@@ -64,7 +64,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Quantity"
+                        android:text="@string/quantity"
                         android:textSize="15sp" />
                     <TextView
                         android:layout_width="0dp"
@@ -72,7 +72,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Status"
+                        android:text="@string/status"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -96,14 +96,14 @@
                         android:layout_marginBottom="30dp"
                         android:layout_marginTop="10dp"
                         android:divider="@android:color/transparent"
-                        android:dividerHeight="0dp"></ListView>
+                        android:dividerHeight="0dp"/>
 
                     <TextView
                         android:id="@+id/no_entry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="No Verified Requests"
+                        android:text="@string/no_verified_requests"
                         android:visibility="invisible" />
 
                     <TextView
@@ -111,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Your account is yet to be verified"
+                        android:text="@string/your_account_is_yet_to_be_verified"
                         android:visibility="invisible" />
                 </RelativeLayout>
 

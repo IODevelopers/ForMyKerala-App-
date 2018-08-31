@@ -61,6 +61,7 @@ public class ReceiverDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_reciever_details);
         districts=new ArrayList<String>();
         new HTTPAsyncTask2().execute(url2);
@@ -133,7 +134,8 @@ public class ReceiverDetails extends AppCompatActivity {
                 /*District=district.getText().toString();
                 Taluk=taluk.getText().toString();*/
                 if(Name.equals("")||Address.equals("")){
-                    Toast.makeText(getApplicationContext(),"Please provide all fields", Toast.LENGTH_LONG).show();
+                    String toastText = getString(R.string.toast_all_fields);
+                    Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
                 }
                 else {
 
@@ -257,7 +259,8 @@ public class ReceiverDetails extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
 

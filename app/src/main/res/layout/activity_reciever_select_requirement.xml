@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="-20dp"
-                android:text="Select Requirements"
+                android:text="@string/select_requirements"
                 android:textColor="@android:color/white"
                 android:textSize="23sp"
                 android:textStyle="bold" />
@@ -78,7 +78,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
                                 android:gravity="center"
-                                android:hint="Search your items"
+                                android:hint="@string/search_your_items"
                                 android:lines="1"
                                 android:textColor="@android:color/black"
                                 android:textStyle="bold" />
@@ -109,7 +109,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="6"
                             android:gravity="center"
-                            android:text="Name"
+                            android:text="@string/name"
                             android:textSize="20sp" />
 
                         <TextView
@@ -118,7 +118,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="6"
                             android:gravity="center"
-                            android:text="Quantity"
+                            android:text="@string/quantity"
                             android:textSize="20sp" />
                     </LinearLayout>
 
@@ -139,7 +139,7 @@
                         android:layout_marginTop="10dp"
                         android:divider="@android:color/transparent"
                         android:dividerHeight="0dp"
-                        android:layout_marginBottom="20dp"></ListView>
+                        android:layout_marginBottom="20dp"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textColor="@color/colorPrimaryBlue"
             android:textStyle="bold" />
 
@@ -202,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:text="Loog Out"
+                android:text="@string/log_out"
                 android:textColor="@color/colorPrimaryBlue"
                 android:textStyle="bold" />
 

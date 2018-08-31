@@ -47,6 +47,7 @@ public class ForgotPin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
@@ -75,7 +76,8 @@ public class ForgotPin extends AppCompatActivity {
         StringData=phone.getText().toString();
         if(StringData.equals(""))
         {   hider.hide();
-            Toast.makeText(this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_ph_no);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else{
         StringData=phone.getText().toString();
