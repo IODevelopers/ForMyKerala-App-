@@ -103,7 +103,7 @@ public class DonorHomeActivity extends FragmentActivity {
                     return tab1;
                 case 1:
 
-                  EditQuantityFragment tab2=new EditQuantityFragment();
+                  EditQuantityFragment_New tab2=new EditQuantityFragment_New();
                     Log.d("logout",sharedPref.getString("TimeIndex",""));
                     Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab2;
