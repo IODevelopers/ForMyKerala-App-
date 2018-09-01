@@ -134,15 +134,19 @@ Boolean noupdate=true,internet=true;
     }
 
     public void receiver() {
-        startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
+        Intent intent = new Intent(MainActivity.this,ReceiverLogin.class);
+        startActivity(intent);
         MainActivity.this.finish();
     }
     public void donor() {
-        startActivity(new Intent(MainActivity.this,DonorLogin.class));
+        Intent intent = new Intent(MainActivity.this,DonorLogin.class);
+        startActivity(intent);
         MainActivity.this.finish();
     }
     private void help_view() {
-        startActivity(new Intent(MainActivity.this,Help_view.class));
+        Intent intent = new Intent(MainActivity.this,Help_view.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     public void redirect()
