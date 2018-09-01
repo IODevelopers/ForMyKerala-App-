@@ -246,7 +246,8 @@ public class AcceptedItemFragment extends Fragment {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
             progress=new ProgressDialog(context);
-            progress.setMessage("Loading...");
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();

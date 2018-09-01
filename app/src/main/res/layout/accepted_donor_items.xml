@@ -20,7 +20,7 @@
             android:layout_weight="6"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Name" />
+            android:text="@string/name" />
         <TextView
             android:id="@+id/requested_quantity"
             android:layout_width="0dp"

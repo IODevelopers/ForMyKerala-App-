@@ -75,7 +75,8 @@ public class DOTPValidation extends AppCompatActivity {
         resend_otp=findViewById(R.id.otp_resend);
         back=findViewById(R.id.back_button);
         TextView phone=findViewById(R.id.phone);
-        phone.setText("to "+sharedPref.getString("PhoneNumber",""));
+        String text = getString(R.string.to)+sharedPref.getString("PhoneNumber","");
+        phone.setText(text);
         hider=new ProgressBarHider(verify.getRootView(),verify);
         timer();
         new Timer().schedule(new resendotp(),delay);
@@ -125,7 +126,7 @@ public class DOTPValidation extends AppCompatActivity {
             public void onFinish() {
                 minutes=2;
                 seconds=0;
-                textTimer.setText("try again");
+                textTimer.setText(R.string.try_again);
             }
 
         }.start();

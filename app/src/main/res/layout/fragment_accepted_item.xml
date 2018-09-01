@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#4885ED"
-                android:text="@string/log_out"
+                android:text="@string/logout"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 

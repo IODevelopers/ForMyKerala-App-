@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:gravity="center"
-            android:text="@string/log_out"
+            android:text="@string/logout"
             android:textColor="@color/colorPrimaryBlue" />
 
 

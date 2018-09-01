@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:hint="Your Quantity"
+        android:hint="@string/your_quantity"
         android:inputType="number"
         android:textSize="15sp" />
 </LinearLayout>

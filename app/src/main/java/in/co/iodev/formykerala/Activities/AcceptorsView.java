@@ -227,7 +227,8 @@ public class AcceptorsView extends AppCompatActivity {
             Log.d("Tm",StringData.toString());
 
             progress=new ProgressDialog(AcceptorsView.this);
-            progress.setMessage("Loading...");
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();

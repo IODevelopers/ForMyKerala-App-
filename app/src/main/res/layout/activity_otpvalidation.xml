@@ -103,7 +103,8 @@
                         android:id="@+id/otp3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@android:color/white"  android:maxLength="1"
+                        android:background="@android:color/white"
+                        android:maxLength="1"
                         android:gravity="center"
                         android:inputType="number" />
                 </android.support.v7.widget.CardView>
