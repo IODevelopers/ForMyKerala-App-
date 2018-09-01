@@ -46,6 +46,32 @@
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:paddingLeft="8dp"
+                android:text="@string/your_country" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10px"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp">
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/countrycode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="10dp"
+                    android:background="@android:color/white"
+
+                    /></android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:paddingLeft="8dp"
                 android:text="@string/your_10_digit_phone_number" />
 
             <android.support.v7.widget.CardView

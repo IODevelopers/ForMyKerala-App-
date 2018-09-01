@@ -76,7 +76,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }*/
 
         TimeIndex=sharedPref.getString("TimeIndex","");
-        if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+        if(sharedPref.getBoolean(TimeIndex+"FirstLogin",FALSE))
         {
             /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
             final AlertDialog.Builder builder;
@@ -93,7 +93,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
                     })
 
             .show();
-            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
 
         try{

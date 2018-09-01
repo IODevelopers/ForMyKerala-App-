@@ -165,9 +165,9 @@
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/colorPrimaryBlue"
             android:text="@string/submit"
-            android:textColor="@color/colorPrimaryBlue"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
 

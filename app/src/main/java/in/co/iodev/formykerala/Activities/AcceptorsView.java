@@ -242,7 +242,7 @@ public class AcceptorsView extends AppCompatActivity {
                 if (!submit)
                 {Log.d("ResponseitemA",String.valueOf(result.length()));
 
-                    if(result.equals("{}"))
+                    if(result.equals("{\"Items\": \"\"}"))
                     {
                         product_status_list.setVisibility(View.INVISIBLE);
                        findViewById(R.id.no_entry).setVisibility(View.VISIBLE);

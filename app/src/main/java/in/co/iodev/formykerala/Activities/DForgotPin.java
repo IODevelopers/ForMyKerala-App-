@@ -67,6 +67,7 @@ public class DForgotPin extends AppCompatActivity {
                 R.layout.spinner_layout, data.countryNames);
         adapter.setDropDownViewResource(R.layout.drop_down_tems);
         countryCodeSpinner.setAdapter(adapter);
+        countryCodeSpinner.setSelection(79);
         countrycode= data.countryAreaCodes;
         countryCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

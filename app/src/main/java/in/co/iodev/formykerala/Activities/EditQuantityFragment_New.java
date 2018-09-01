@@ -46,6 +46,7 @@ import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 
@@ -82,7 +83,7 @@ public class EditQuantityFragment_New extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPref=getDefaultSharedPreferences(getContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
-        if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+        if(sharedPref.getBoolean(TimeIndex+"FirstLogin",FALSE))
         {
             /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
             final AlertDialog.Builder builder;
@@ -99,7 +100,7 @@ public class EditQuantityFragment_New extends Fragment {
                     })
 
                     .show();
-            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
 
         items=new JSONObject();

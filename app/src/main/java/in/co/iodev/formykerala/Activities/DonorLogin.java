@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
 import in.co.iodev.formykerala.Controllers.OTPTextEditor;
+import in.co.iodev.formykerala.Models.data;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -43,13 +47,17 @@ public class DonorLogin extends AppCompatActivity {
     TextView forgot,register;
     Context context;
     String StringData,StringData1,request_post_url=Donor_Login,TimeIndex;
-
+    Spinner countryCodeSpinner;
+    String countrycode[];
+    String code;
+    ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
+
         setContentView(R.layout.activity_donor_login);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         phone=findViewById(R.id.phone);
         otp1=findViewById(R.id.otp1);
         otp2=findViewById(R.id.otp2);
@@ -73,6 +81,25 @@ public class DonorLogin extends AppCompatActivity {
         submit=findViewById(R.id.request_otp_button);
         hider=new ProgressBarHider(submit.getRootView(),submit);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
+        countryCodeSpinner=findViewById(R.id.countrycode);
+        adapter= new ArrayAdapter<String>(this,
+                R.layout.spinner_layout, data.countryNames);
+        adapter.setDropDownViewResource(R.layout.drop_down_tems);
+        countryCodeSpinner.setAdapter(adapter);
+        countryCodeSpinner.setSelection(79);
+        countrycode= data.countryAreaCodes;
+        countryCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                code="+"+countrycode[i];
+                /*Toast.makeText(getApplicationContext(),String.valueOf(i),Toast.LENGTH_SHORT).show();*/
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +112,13 @@ public class DonorLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DonorLogin.this,DOTPVerification.class));
+                DonorLogin.this.finish();
             }
         });  forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DonorLogin.this,DForgotPin.class));
+                DonorLogin.this.finish();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +130,13 @@ public class DonorLogin extends AppCompatActivity {
     }
 
     public void verify() {
-        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
+        if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")||phone.getText().toString().equals("")){
             String toastText = getString(R.string.toast_valid_ph_no);
             Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else {
          hider.show();
-        StringData=phone.getText().toString();
+        StringData=code+phone.getText().toString();
         StringData1=otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
 
         d=new DataModel();
@@ -123,7 +152,6 @@ public class DonorLogin extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(DonorLogin.this,MainActivity.class));
         DonorLogin.this.finish();
-        super.onBackPressed();
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
 
@@ -173,9 +201,18 @@ public class DonorLogin extends AppCompatActivity {
                SharedPreferences.Editor editor = sharedPref.edit();
                editor.putString("TimeIndex", responseObject.getString("TimeIndex"));
                editor.putString("PhoneNumber", d.getPhoneNumber());
+
                editor.apply();
 
                TimeIndex=sharedPref.getString("TimeIndex","");
+               if(responseObject.getString("Details_Entered").equals("False"))
+               {editor.putBoolean(TimeIndex+"FirstLogin",true);
+                   editor.putBoolean(TimeIndex+"DEditedR", false);
+               }
+               else
+               {   editor.putBoolean(TimeIndex+"FirstLogin",false);
+                   editor.putBoolean(TimeIndex+"DEditedR", true);
+               }
                editor.putBoolean(TimeIndex+"DLogin", true);
              //  editor.putBoolean(TimeIndex+"DEditedR", true);
                //editor.putBoolean(TimeIndex+"DEdited", true);

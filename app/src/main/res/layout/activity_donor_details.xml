@@ -132,10 +132,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@android:color/white"
+                android:background="@color/colorPrimaryBlue"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:text="@string/submit"
-                android:textColor="@color/colorPrimaryBlue"/>
+                android:textColor="@android:color/white"/>
 
             <ProgressBar
                 android:visibility="invisible"
