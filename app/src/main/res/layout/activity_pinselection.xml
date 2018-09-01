@@ -107,8 +107,6 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/white"
                         android:gravity="center"
-
-
                         android:inputType="number"
                         android:maxLength="1" />
                 </android.support.v7.widget.CardView>
@@ -125,8 +123,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/white"
-
-
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="1" />

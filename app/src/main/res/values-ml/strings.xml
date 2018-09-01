@@ -28,7 +28,7 @@
     <string name="no_network_ncheck_your_connection_and_restart_app">നെറ്റ്വർക്കില്ല. നിങ്ങളുടെ കണക്ഷൻ പരിശോധിച്ച് അപ്ലിക്കേഷൻ പുനരാരംഭിക്കുക.</string>
     <string name="verification_code">വെരിഫിക്കേഷൻ കോഡ്</string>
     <string name="please_enter_the_verification_code_sent">വെരിഫിക്കേഷൻ കോഡ് നൽകുക</string>
-    <string name="to">to</string>
+    <string name="to">-> </string>
     <string name="resend_otp_in">OTP  വീണ്ടും അയക്കുന്നു : </string>
     <string name="resend_otp">OTP  വീണ്ടും അയക്കുക</string>
     <string name="pin_for_security">പിൻ നൽകുക</string>
@@ -57,7 +57,6 @@
     <string name="accepted_requests">അംഗീകരിച്ച അഭ്യർത്ഥനകൾ</string>
     <string name="phone">ഫോൺ</string>
     <string name="no_accepted_items">സ്വീകരിച്ചവയുടെ എണ്ണം</string>
-    <string name="log_out">Log Out</string>
     <string name="edit_quantity_of_the_items">അളവ് തിരുത്തുക</string>
     <string name="submit">സമർപ്പിക്കുക</string>
     <string name="edit">തിരുത്തുക</string>
@@ -81,6 +80,10 @@
     <string name="toast_valid_pin">ദയവായി, ശരിയായ PIN നമ്പർ നൽകുക</string>
     <string name="toast_all_fields">എല്ലാ ഫീൽഡുകളും നൽകുക</string>
     <string name="info_alert">ഞങ്ങളുടെ വോളന്റിയർ 24 മണിക്കൂറിനുള്ളിൽ രജിസ്റ്റർ ചെയ്ത ഫോൺ നമ്പറിൽ നിങ്ങളെ ബന്ധപെടുന്നതായിരിക്കും.</string>
+    <string name="try_again">വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="loading">ലോഡിംഗ്</string>
+    <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>
+    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
 
     <string-array name="District">
 

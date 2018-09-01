@@ -120,7 +120,8 @@ public class DonorEdit extends Fragment {
 
                 {
                     hider.hide();
-                    Toast.makeText(getContext(),"Please a Choose a Requirement",Toast.LENGTH_SHORT).show();            }
+                    String toastText = getString(R.string.please_a_choose_a_requirement);
+                    Toast.makeText(getContext(), toastText,Toast.LENGTH_LONG).show();           }
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {

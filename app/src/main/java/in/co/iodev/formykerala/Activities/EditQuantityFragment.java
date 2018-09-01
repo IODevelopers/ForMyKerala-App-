@@ -292,7 +292,8 @@ public class EditQuantityFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             progress=new ProgressDialog(getContext());
-            progress.setMessage("Loading...");
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();
@@ -536,7 +537,8 @@ public class EditQuantityFragment extends Fragment {
                             {
                             if(Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
                             {
-                                Toast.makeText(getContext(),"Your Value should be less than or equal to the required quantity ",Toast.LENGTH_SHORT).show();
+                                String toastText = getString(R.string.toast_reqiured_quantity);
+                                Toast.makeText(getContext(), toastText,Toast.LENGTH_LONG).show();
                                 finalHolder.Product.setText("");
                             }}
 
