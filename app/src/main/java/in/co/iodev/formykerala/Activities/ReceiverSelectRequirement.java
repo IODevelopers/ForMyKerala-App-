@@ -348,7 +348,8 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
 
                     editor.putBoolean(TimeIndex+"EditedR", TRUE);
-                    editor.commit();
+                    editor.putBoolean(TimeIndex+"FirstLogin", TRUE);
+                    editor.apply();
                     Intent intent = new Intent(ReceiverSelectRequirement.this, ReceiverRequirementsStatus.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 

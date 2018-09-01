@@ -233,6 +233,7 @@ public class DonorDetails extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(TimeIndex+"DEdited", TRUE);
                     editor.putBoolean(TimeIndex+"DEditedR", TRUE);
+                    editor.putBoolean(TimeIndex+"FirstLogin",TRUE);
                     editor.apply();
                     Intent intent = new Intent(DonorDetails.this, DonorHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

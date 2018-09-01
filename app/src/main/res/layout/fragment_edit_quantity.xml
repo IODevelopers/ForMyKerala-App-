@@ -111,6 +111,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
                         android:text="@string/your_account_is_yet_to_be_verified"
                         android:visibility="invisible" />
                 </RelativeLayout>
