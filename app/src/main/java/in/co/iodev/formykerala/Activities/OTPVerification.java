@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.gson.Gson;
 
@@ -21,6 +24,7 @@ import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
+import in.co.iodev.formykerala.Models.data;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -39,7 +43,10 @@ public class OTPVerification extends AppCompatActivity {
     ProgressBarHider hider;
 
     String StringData,request_post_url=Generate_OTP,TimeIndex;
-
+    Spinner countryCodeSpinner;
+    String countrycode[];
+    String code;
+    ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +54,26 @@ public class OTPVerification extends AppCompatActivity {
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         submit=findViewById(R.id.request_otp_button);
+        hider =new ProgressBarHider(submit.getRootView(),submit);
         back=findViewById(R.id.back_button);
-        hider=new ProgressBarHider(submit.getRootView(),submit);
+        countryCodeSpinner=findViewById(R.id.countrycode);
+        adapter= new ArrayAdapter<String>(this,
+                R.layout.spinner_layout, data.countryNames);
+        adapter.setDropDownViewResource(R.layout.drop_down_tems);
+        countryCodeSpinner.setAdapter(adapter);
+        countrycode= data.countryAreaCodes;
+        countryCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                code="+"+countrycode[i];
+                //Toast.makeText(getApplicationContext(),code,Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         context=this;
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         if(sharedPref.getString("TimeIndex","").equals("")){
@@ -75,12 +99,13 @@ public class OTPVerification extends AppCompatActivity {
 
     public void verify() {
 
-        StringData=phone.getText().toString();
-        if(StringData.equals("")){
+
+        if(phone.getText().toString().equals("")){
             String toastText =getString(R.string.toast_valid_ph_no);
             Toast.makeText(OTPVerification.this, toastText,Toast.LENGTH_LONG).show();
         }
         else {
+            StringData=code+phone.getText().toString();
             hider.show();
             d = new DataModel();
             d.setPhoneNumber(StringData);

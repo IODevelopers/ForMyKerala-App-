@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Models.data;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -161,6 +162,7 @@ public class DonorHomeActivity extends FragmentActivity {
     }
     private class FireBaseRegistration extends AsyncTask<String, Void, String> {
         String response="Network Error";
+
 
         @Override
         protected String doInBackground(String... urls) {
