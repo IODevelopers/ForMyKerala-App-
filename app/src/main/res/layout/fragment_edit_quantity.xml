@@ -94,11 +94,10 @@
                         android:id="@+id/donor_items_edit_listview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="30dp"
                         android:layout_marginTop="10dp"
 
                         android:divider="@android:color/transparent"
-                        android:dividerHeight="10dp"></ListView>
+                        android:dividerHeight="5dp"></ListView>
 
                     <TextView
                         android:id="@+id/no_entry"

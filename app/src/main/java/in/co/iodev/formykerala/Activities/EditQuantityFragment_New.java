@@ -338,7 +338,7 @@ public class EditQuantityFragment_New extends Fragment {
         protected String doInBackground(String... urls) {
             String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
-            try {
+
                 try {
                     if(!submit)
                     {    Log.d("sj69",StringData.toString());
@@ -351,9 +351,10 @@ public class EditQuantityFragment_New extends Fragment {
                     e.printStackTrace();
                     return "Error!";
                 }
-            } catch (Exception e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
+                finally {
+                    progress.cancel();
+                }
+
         }
         @Override
         protected void onPreExecute() {
@@ -439,7 +440,7 @@ public class EditQuantityFragment_New extends Fragment {
         protected String doInBackground(String... urls) {
             String response="Network Error";
             // params comes from the execute() call: params[0] is the url.
-            try {
+
                 try {
                     Log.d("sj_new",StringData.toString());
                         response= HTTPPostGet.getJsonResponse(url,StringData);
@@ -449,9 +450,10 @@ public class EditQuantityFragment_New extends Fragment {
                     e.printStackTrace();
                     return "Error!";
                 }
-            } catch (Exception e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
+                finally {
+                    progress.cancel();
+                }
+
         }
         @Override
         protected void onPreExecute() {
@@ -463,6 +465,10 @@ public class EditQuantityFragment_New extends Fragment {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+            progress.cancel();
+
+
+
             JSONObject responseObject= null;
             try {
                 if (!submit)

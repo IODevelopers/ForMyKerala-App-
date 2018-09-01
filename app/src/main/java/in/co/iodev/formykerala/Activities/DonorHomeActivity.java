@@ -127,10 +127,9 @@ public class DonorHomeActivity extends FragmentActivity {
             switch (position)
             {
                 case 0:
-                    return "tokens";
+                    return "edit quanity";
                 case 1:
-                    return "jobs";
-                case 2:return "search";
+                    return "accepted items";
 
                 default: return null;
 
