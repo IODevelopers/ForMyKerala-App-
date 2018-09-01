@@ -139,7 +139,7 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
 
     @Override
         public void onBackPressed() {
-            startActivity(new Intent(getApplicationContext(),ForgotPin.class));
+            startActivity(new Intent(getApplicationContext(),DForgotPin.class));
             DForgotPinOTPValidation.this.finish();
             super.onBackPressed();
         }

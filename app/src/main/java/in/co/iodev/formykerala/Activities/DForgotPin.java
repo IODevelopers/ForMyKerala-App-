@@ -208,7 +208,7 @@ public class DForgotPin extends AppCompatActivity {
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
                 startActivity(new Intent(DForgotPin.this,DForgotPinOTPValidation.class));
-
+                DForgotPin.this.finish();
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -208,7 +208,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         int j=0;
             for (int i=0;i<Mainproducts.length();i++)
             {     final JSONObject object=new JSONObject(String.valueOf(Mainproducts.getJSONObject(i)));
-                if(object.getString("name").toLowerCase().contains(item_search.getText().toString()))
+                if(object.getString("name").toLowerCase().contains(item_search.getText().toString().toLowerCase()))
                 {
                     products.put(j,object);
                     j++;

@@ -66,7 +66,7 @@
     <string name="quantity">അളവ്</string>
     <string name="status">അവസ്ഥ</string>
     <string name="no_verified_requests">പരിശോധിച്ചുറപ്പിക്കാത്ത അഭ്യർത്ഥനകൾ</string>
-    <string name="your_account_is_yet_to_be_verified">നിങ്ങളുടെ അക്കൌണ്ട് പരിശോധിക്കപ്പെടേണ്ടതാണ്</string>
+    <string name="your_account_is_yet_to_be_verified">നിങ്ങളുടെ അക്കൌണ്ട് പരിശോധിക്കപ്പെടേണ്ടതാണ്. രജിസ്റ്റർ ചെയ്തതിനു ശേഷം 24 മണിക്കൂറിനുള്ളിൽ ഞങ്ങളുടെ വോളന്റിയറിൽ നിന്ന് നിങ്ങൾക്ക് ഒരു കോൾ ലഭിക്കും. ഒരു ഉടനടിയായ  പരിശോധന ആവശ്യമുണ്ടെങ്കിൽ, ഒരു Whatsapp  സന്ദേശം അല്ലെങ്കിൽ എസ്എംഎസ് \ 'QV \' 7902661414 ലേക്ക് അയയ്ക്കുക.</string>
     <string name="name">പേര്</string>
    <string name="receiver_name">സ്വീകർത്താവിന്റെ പേര്</string>
    <string name="login">ലോഗിൻ</string>
@@ -79,7 +79,7 @@
     <string name="wrong_otp">ക്ഷമിക്കണം, തെറ്റായ OTP!</string>
     <string name="toast_valid_pin">ദയവായി, ശരിയായ PIN നമ്പർ നൽകുക</string>
     <string name="toast_all_fields">എല്ലാ ഫീൽഡുകളും നൽകുക</string>
-    <string name="info_alert">നിങ്ങളുടെ അക്കൌണ്ട് പരിശോധിക്കപ്പെടേണ്ടതാണ്. രജിസ്റ്റർ ചെയ്തതിനു ശേഷം 24 മണിക്കൂറിനുള്ളിൽ ഞങ്ങളുടെ വോളന്റിയറിൽ നിന്ന് നിങ്ങൾക്ക് ഒരു കോൾ ലഭിക്കും. ഒരു ഉടനടിയായ  പരിശോധന ആവശ്യമുണ്ടെങ്കിൽ, ഒരു Whatsapp  സന്ദേശം അല്ലെങ്കിൽ എസ്എംഎസ് \ 'QV \' 7902661414 ലേക്ക് അയയ്ക്കുക.</string>
+    <string name="info_alert">ഞങ്ങളുടെ വോളന്റിയർ 24 മണിക്കൂറിനുള്ളിൽ രജിസ്റ്റർ ചെയ്ത ഫോൺ നമ്പറിലേക്ക് നിങ്ങളെ വിളിച്ചു പരിശോധന നടത്തുന്നതാരിക്കും .</string>
     <string name="try_again">വീണ്ടും ശ്രമിക്കുക</string>
     <string name="loading">ലോഡിംഗ്</string>
     <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>

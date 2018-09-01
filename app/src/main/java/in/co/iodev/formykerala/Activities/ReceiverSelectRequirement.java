@@ -152,7 +152,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         {products.clear();
             for (int i=0;i<Mainproducts.size();i++)
             {
-                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString()))
+                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString().toLowerCase()))
                 {
                     products.add(Mainproducts.get(i));
 
