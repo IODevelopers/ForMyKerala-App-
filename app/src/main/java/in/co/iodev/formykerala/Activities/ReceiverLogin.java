@@ -58,7 +58,11 @@ public class ReceiverLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        try {
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         setContentView(R.layout.activity_reciever_login);
         MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
@@ -159,7 +163,11 @@ public class ReceiverLogin extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(ReceiverLogin.this,MainActivity.class));
         ReceiverLogin.this.finish();
-        overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        try {
+            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {

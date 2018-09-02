@@ -81,13 +81,13 @@ Boolean noupdate=true,internet=true;
             receiver.setVisibility(View.GONE);
             donor.setVisibility(View.GONE);
             help.setVisibility(View.GONE);
-            mTextView.setText("Choose Language\n(Your selection cannot be reversed)");
+            mTextView.setText("Choose Language\n(remember your selection will be final)");
         }else{
             mSpinner.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, R.layout.language_spinner);
-        mAdapter.setDropDownViewResource(R.layout.drop_down_tems);
+        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, android.R.layout.simple_spinner_item);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(mAdapter);
         int initialSelectedPosition=mSpinner.getSelectedItemPosition();
         mSpinner.setSelection(initialSelectedPosition, false);
@@ -146,7 +146,11 @@ Boolean noupdate=true,internet=true;
     private void help_view() {
         Intent intent = new Intent(MainActivity.this,Help_view.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        try {
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void redirect()
