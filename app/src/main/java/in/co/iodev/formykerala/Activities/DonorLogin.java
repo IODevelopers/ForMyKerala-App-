@@ -54,7 +54,11 @@ public class DonorLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        try {
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         setContentView(R.layout.activity_donor_login);
         MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
@@ -152,7 +156,11 @@ public class DonorLogin extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(DonorLogin.this,MainActivity.class));
         DonorLogin.this.finish();
-        overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        try {
+            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void forgot(View view) {

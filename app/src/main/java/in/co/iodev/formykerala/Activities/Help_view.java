@@ -17,6 +17,10 @@ public class Help_view extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        try {
+            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
