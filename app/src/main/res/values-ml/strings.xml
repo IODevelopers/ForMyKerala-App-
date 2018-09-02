@@ -83,7 +83,7 @@
     <string name="try_again">വീണ്ടും ശ്രമിക്കുക</string>
     <string name="loading">ലോഡിംഗ്</string>
     <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>
-    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
+    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് പൂജ്യത്തിൽ കൂടുതലും  ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
     <string name="your_country">നിങ്ങളുടെ രാജ്യം</string>
     <string-array name="District">
 

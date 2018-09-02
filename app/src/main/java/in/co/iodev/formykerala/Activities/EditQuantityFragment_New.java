@@ -731,7 +731,8 @@ public class EditQuantityFragment_New extends Fragment {
 
                         @Override
                         public void afterTextChanged(Editable editable) {
-                            if(!finalHolder.Product.getText().toString().equals("")&&Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
+                            if (!finalHolder.Product.getText().toString().equals(""))
+                            {if(finalHolder.Product.getText().toString().equals("0")||Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
                             {
                                 String toastText = getString(R.string.toast_reqiured_quantity);
                                 Toast.makeText(getContext(), toastText,Toast.LENGTH_LONG).show();
@@ -747,6 +748,12 @@ public class EditQuantityFragment_New extends Fragment {
                             }
 
                         }}
+                        if(finalHolder.Product.getText().toString().equals(""))
+                            {
+                                items2.remove(finalHolder.ProductName.getText().toString());
+                            }
+                        Log.d("test",items2.toString());
+                        }
                     });
 
                 }catch (Exception e){

@@ -88,9 +88,11 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 StringData=timeindex.toString();
+                Log.d("test",StringData);
                 submit=true;
                 hider.show();
-                new HTTPAsyncTask2().execute(url);}
+                new HTTPAsyncTask2().execute(url);
+                    }
                 else
                 {
                     hider.hide();
@@ -248,13 +250,20 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                         finalHolder.selected.setChecked(FALSE);
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
 
-                        finalHolder.selected.setChecked(TRUE);
+                        if(!finalHolder.Quantity.getText().toString().equals("0"))
+                            finalHolder.selected.setChecked(TRUE);
+                        else {
+                            finalHolder.Quantity.setText("");
+                            finalHolder.selected.setChecked(FALSE);
+                            Toast.makeText(getApplicationContext(), "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 });

@@ -86,7 +86,7 @@ After editing the count you can view the list of receivers which are already ver
     <string name="try_again">try again</string>
     <string name="loading">Loading</string>
     <string name="toast_value">Please enter a value</string>
-    <string name="toast_reqiured_quantity">Your Value shoulde be less than or equal to the required quantity</string>
+    <string name="toast_reqiured_quantity">Your Value shoulde be greater than 0 and less than or equal to the required quantity</string>
     <string name="your_country">Your Country</string>
 
     <string-array name="available_languages">
