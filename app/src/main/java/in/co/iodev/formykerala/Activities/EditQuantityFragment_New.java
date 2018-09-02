@@ -125,13 +125,17 @@ public class EditQuantityFragment_New extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 JSONObject object=null;
                 String name=null;
+                String status=null;
                 try {
                     object=products.getJSONObject(position);
                    name=object.getString("Name");
+                   status=object.getString("Status_Now");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                DialogBox dialogBox=new DialogBox(getActivity(),name,position);
+                if(!status.equals("Completed"))
+                {  DialogBox dialogBox=new DialogBox(getActivity(),name,position);
                 dialogBox.show();
                 //Adding width and blur
                 Window window=dialogBox.getWindow();
@@ -139,6 +143,10 @@ public class EditQuantityFragment_New extends Fragment {
                 lp.dimAmount=0.8f;
                 dialogBox.getWindow().setAttributes(lp);
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+            else {
+                    Toast.makeText(getContext(),"This Request has been completed",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         new HTTPAsyncTask2().execute(url);
@@ -246,7 +254,12 @@ public class EditQuantityFragment_New extends Fragment {
                 final ViewHolder1 finalHolder = holder;
 
                 JSONObject object=products.getJSONObject(position);
+                Log.d("seby", String.valueOf(object));
                 JSONObject object1=object.getJSONObject("Items");
+                Log.d("seby", String.valueOf(object.getString("Status_Now")));
+                String status= String.valueOf(object.getString("Status_Now"));
+                if(status.equals("Accepted"))
+                    status="Partially Accepted";
                 String product="",qty="";
                 Iterator<String> iter = object1.keys();
                 while (iter.hasNext()) {
@@ -274,7 +287,7 @@ public class EditQuantityFragment_New extends Fragment {
                         holder.selected.setChecked(FALSE);
                         holder.Quantity.setText("");
                     }*/
-
+                 holder.Status.setText(status);
                 holder.Quantity.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -316,7 +329,7 @@ public class EditQuantityFragment_New extends Fragment {
     }
     private class ViewHolder1 {
         TextView ProductName;
-        TextView Quantity,Product;
+        TextView Quantity,Product,Status;
 
 
 
@@ -324,7 +337,7 @@ public class EditQuantityFragment_New extends Fragment {
             ProductName = (TextView) v.findViewById(R.id.product_name);
             Quantity=v.findViewById(R.id.requested_quantity);
             Product=v.findViewById(R.id.products);
-
+             Status=v.findViewById(R.id.Status);
 
 
 

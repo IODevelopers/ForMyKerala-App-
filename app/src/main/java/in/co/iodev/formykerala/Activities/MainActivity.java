@@ -86,8 +86,8 @@ Boolean noupdate=true,internet=true;
             mSpinner.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, android.R.layout.simple_spinner_item);
-        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, R.layout.language_spinner);
+        mAdapter.setDropDownViewResource(R.layout.drop_down_tems);
         mSpinner.setAdapter(mAdapter);
         int initialSelectedPosition=mSpinner.getSelectedItemPosition();
         mSpinner.setSelection(initialSelectedPosition, false);
