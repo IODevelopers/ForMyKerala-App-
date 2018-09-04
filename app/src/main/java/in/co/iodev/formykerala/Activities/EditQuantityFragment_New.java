@@ -104,7 +104,10 @@ public class EditQuantityFragment_New extends Fragment {
                     .show();
             sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
-
+        //
+        //
+        //
+        //
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
 
