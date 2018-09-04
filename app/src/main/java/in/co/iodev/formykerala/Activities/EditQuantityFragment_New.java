@@ -9,9 +9,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -119,7 +121,35 @@ public class EditQuantityFragment_New extends Fragment {
         setListViewFooter();
         setListOnScrollListener();
         adapter=new Product_Request_Adapter();
-        
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final FloatingActionButton voice=view.findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
+
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getContext(),R.raw.donorhome_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getContext(),R.raw.donorhome_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         product_request_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -122,7 +123,36 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.checkstat_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.checkstat_eng);
+                        mp.start();
+
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         search_button=findViewById(R.id.search_button);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,19 +60,44 @@ Boolean noupdate=true,internet=true;
         super.onCreate(savedInstanceState);
         languagePreferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = languagePreferences.edit();
-        String localeCode = languagePreferences.getString("LOCALE_CODE",null);
+        final String localeCode = languagePreferences.getString("LOCALE_CODE",null);
         if(localeCode != null){
             setAppLocale(languagePreferences.getString("LOCALE_CODE", null), getResources());
         }
         setContentView(R.layout.activity_main);
-
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex = sharedPref.getString("TimeIndex","");
         role = findViewById(R.id.role_selection);
         updater = findViewById(R.id.updater);
         network = findViewById(R.id.internet);
         new HTTPAsyncTask3().execute(url);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_mal);
+                    mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         mTextView = findViewById(R.id.tv_main);
         receiver = findViewById(R.id.role_receiver);
         donor = findViewById(R.id.role_Donor);
