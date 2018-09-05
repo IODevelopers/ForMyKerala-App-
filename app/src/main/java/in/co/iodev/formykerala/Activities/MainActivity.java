@@ -52,7 +52,7 @@ TextView mTextView;
 Spinner mSpinner;
 public static SharedPreferences languagePreferences;
 SharedPreferences.Editor editor;
-
+ImageView voice;
 Boolean noupdate=true,internet=true;
     SharedPreferences sharedPref;
     @Override
@@ -71,7 +71,7 @@ Boolean noupdate=true,internet=true;
         updater = findViewById(R.id.updater);
         network = findViewById(R.id.internet);
         new HTTPAsyncTask3().execute(url);
-        final ImageView voice=findViewById(R.id.voice);
+        voice=findViewById(R.id.voice);
         voice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +79,12 @@ Boolean noupdate=true,internet=true;
                 MediaPlayer mp = new MediaPlayer();
 
                 try {
-                    if(localeCode.equals("ml"))
+                    if (localeCode==null)
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+                    else if(localeCode.equals("ml"))
                     { mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_mal);
                     mp.start();}
                     else if (localeCode.equals("en"))
@@ -87,6 +92,7 @@ Boolean noupdate=true,internet=true;
                         mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
                         mp.start();
                     }
+
                     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -108,6 +114,7 @@ Boolean noupdate=true,internet=true;
             receiver.setVisibility(View.GONE);
             donor.setVisibility(View.GONE);
             help.setVisibility(View.GONE);
+            voice.setVisibility(View.GONE);
             mTextView.setText("Choose Language\n(remember your selection will be final)");
         }else{
             mSpinner.setVisibility(View.GONE);
@@ -142,6 +149,7 @@ Boolean noupdate=true,internet=true;
         receiver.setVisibility(View.VISIBLE);
         donor.setVisibility(View.VISIBLE);
         help.setVisibility(View.VISIBLE);
+        voice.setVisibility(View.VISIBLE);
         mSpinner.setVisibility(View.GONE);
 
     }

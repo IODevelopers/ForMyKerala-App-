@@ -160,7 +160,7 @@ public class EditQuantityFragment_New extends Fragment {
                     .show();
             sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
-
+        
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
 
@@ -375,36 +375,7 @@ public class EditQuantityFragment_New extends Fragment {
                         holder.Quantity.setText("");
                     }*/
                  holder.Status.setText(status);
-                holder.Quantity.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        try {
-                            items.remove(finalHolder.ProductName.getText().toString());
-                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        try {
-                            items.remove(finalHolder.ProductName.getText().toString());
-                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
 
             }catch (Exception e){
             }
