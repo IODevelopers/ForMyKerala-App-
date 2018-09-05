@@ -79,7 +79,7 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
                         android:background="@android:color/transparent"
-                        android:src="@mipmap/close" />
+                        android:src="@mipmap/refresh" />
 
                 </LinearLayout>
 
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
                     <TextView

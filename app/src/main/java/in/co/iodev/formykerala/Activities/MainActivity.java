@@ -55,12 +55,13 @@ SharedPreferences.Editor editor;
 ImageView voice;
 Boolean noupdate=true,internet=true;
     SharedPreferences sharedPref;
+String localeCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         languagePreferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = languagePreferences.edit();
-        final String localeCode = languagePreferences.getString("LOCALE_CODE",null);
+        localeCode = languagePreferences.getString("LOCALE_CODE",null);
         if(localeCode != null){
             setAppLocale(languagePreferences.getString("LOCALE_CODE", null), getResources());
         }
@@ -134,10 +135,12 @@ Boolean noupdate=true,internet=true;
         Toast.makeText(adapterView.getContext(), spinnerText, Toast.LENGTH_SHORT).show();
         if(spinnerText.equals("Malayalam")){
             editor.putString("LOCALE_CODE","ml");
+            localeCode="ml";
             editor.commit();
             setAppLocale("ml", getResources());
         }else if(spinnerText.equals("English")){
             editor.putString("LOCALE_CODE","en");
+            localeCode="en";
             editor.commit();
             setAppLocale("en", getResources());
         }

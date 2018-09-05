@@ -105,6 +105,7 @@ public class EditQuantityFragment_New extends Fragment {
             @Override
             public void onClick(View view) {
                 item_search.setText("");
+                close_button.setImageResource(R.mipmap.refresh);
                 scroll=true;
                 JSONObject timeindex=new JSONObject();
 
@@ -116,6 +117,25 @@ public class EditQuantityFragment_New extends Fragment {
                 StringData=timeindex.toString();
                 submit=false;
                 new HTTPAsyncTask2().execute(url);
+            }
+        });
+        item_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                  close_button.setImageResource(R.mipmap.close);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                    if(item_search.getText().toString().equals(""))
+                    {
+                        close_button.setImageResource(R.mipmap.refresh);
+                    }
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +180,7 @@ public class EditQuantityFragment_New extends Fragment {
                     .show();
             sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
-        
+
         items=new JSONObject();
         JSONObject timeindex=new JSONObject();
 
@@ -468,6 +488,7 @@ public class EditQuantityFragment_New extends Fragment {
                     { product_request_list.setVisibility(View.INVISIBLE);
                         getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
                         getView().findViewById(R.id.not_verified).setVisibility(View.VISIBLE);
+                        item_search.setEnabled(false);
                     }
                     else if(products.length()==0)
                     {
@@ -476,6 +497,7 @@ public class EditQuantityFragment_New extends Fragment {
                         getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
                         Log.d("msg",products.toString());
                         product_request_list.setAdapter(adapter);
+                        item_search.setEnabled(false);
                     }
                     else {
                         product_request_list.setVisibility(View.VISIBLE);
@@ -483,6 +505,7 @@ public class EditQuantityFragment_New extends Fragment {
                         getView().findViewById(R.id.not_verified).setVisibility(View.INVISIBLE);
                        Log.d("msg",products.toString());
                        product_request_list.setAdapter(adapter);
+                       item_search.setEnabled(true);
                     }
 
 
