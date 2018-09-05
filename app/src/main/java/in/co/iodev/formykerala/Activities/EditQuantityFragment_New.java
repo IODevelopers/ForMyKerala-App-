@@ -723,6 +723,13 @@ public class EditQuantityFragment_New extends Fragment {
                             progressBar.setVisibility(View.GONE);
                         }
                     }
+
+
+
+
+
+
+
                     else {
                         progressBar.setVisibility(View.GONE);
                     }
