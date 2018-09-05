@@ -29,6 +29,8 @@ public class Constants {
     public static String Get_Accepted_Request_Receiver = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/get-accepted-donor";
     public static String FireBAseRegistrationURL = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/firebase/registration";
 
+    public static String Search_Requests = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/search-name";
+
     public static String Get_District = " https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/general/get-districts-and-taluks";
     public static String Get_App_Version ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getAppVersion";
 }

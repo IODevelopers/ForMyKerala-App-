@@ -52,6 +52,7 @@ After editing the count you can view the list of receivers which are already ver
     <string name="new_user_register_now">New User? Register Now!</string>
     <string name="select_requirements">Select Requirements</string>
     <string name="search_your_items">Search your items</string>
+    <string name="search_requests">Search Requests by Name</string>
     <string name="your_quantity">Your Quantity</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>

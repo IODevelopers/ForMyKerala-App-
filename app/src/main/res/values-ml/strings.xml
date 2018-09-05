@@ -50,6 +50,7 @@
     <string name="new_user_register_now">താങ്ങൾ പുതിയ ഉപയോക്താവാണോ? എങ്കിൽ ഇവിടെ റെജിസ്റ്റർ ചെയ്യുക!</string>
     <string name="select_requirements">ആവശ്യമുള്ളവ തിരഞ്ഞെടുക്കുക</string>
     <string name="search_your_items">തിരയുക</string>
+    <string name="search_requests">തിരയുക</string>
     <string name="your_quantity">അളവ്</string>
     <string name="accept">അംഗീകരിക്കുക</string>
     <string name="decline">നിരസിക്കുക</string>
