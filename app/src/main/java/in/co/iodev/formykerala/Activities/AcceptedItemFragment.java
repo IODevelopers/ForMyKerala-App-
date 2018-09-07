@@ -51,6 +51,7 @@ public class AcceptedItemFragment extends Fragment {
     JSONObject items;
     Context context;
     ProgressDialog progress;
+    Button logout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,7 +80,8 @@ public class AcceptedItemFragment extends Fragment {
 
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
         adapter=new Product_Request_Adapter();
-        view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+        logout=view.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences sharedPref=getDefaultSharedPreferences(getContext());
@@ -245,6 +247,7 @@ public class AcceptedItemFragment extends Fragment {
         protected void onPreExecute() {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
+            logout.setClickable(false);
             progress=new ProgressDialog(context);
             String loadingMessage = getString(R.string.loading);
             progress.setMessage(loadingMessage);
@@ -256,6 +259,7 @@ public class AcceptedItemFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progress.cancel();
+            logout.setClickable(true);
             JSONObject responseObject= null;
             try {
                 if (!submit)

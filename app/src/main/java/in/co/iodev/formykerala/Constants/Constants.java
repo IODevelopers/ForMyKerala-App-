@@ -23,7 +23,7 @@ public class Constants {
     public static String Get_Donation_items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/get-donor-items";
     public static String Get_Donor_accepted_Items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accepted-request";
     public static String Get_Biased_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/getbaisedrequest";
-    public static String Accept_Request = "   https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accept-request/accepted-items";
+    public static String Accept_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accept-request/accepted-items";
     public static String Get_Accepted_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accepted-request";
     public static String Get_Receivers_Requirement="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/get-receiver-items";
     public static String Get_Accepted_Request_Receiver = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/get-accepted-donor";

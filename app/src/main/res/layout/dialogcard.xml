@@ -13,6 +13,15 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
+    <ImageView
+        android:id="@+id/decline"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="start"
+        android:background="@android:color/transparent"
+        android:text="@string/decline"
+        android:src="@mipmap/close"/>
     <TextView
         android:id="@+id/receiver_namw"
         android:layout_width="match_parent"
@@ -89,7 +98,7 @@
                 android:id="@+id/accept"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00f74a"
+                android:background="#239112"
                 android:text="@string/accept"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
@@ -104,11 +113,11 @@
             >
 
             <Button
-                android:id="@+id/decline"
+                android:id="@+id/accept_all"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#e7094c"
-                android:text="@string/decline"
+                android:background="@color/colorPrimaryBlue"
+                android:text="@string/accept_all"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>

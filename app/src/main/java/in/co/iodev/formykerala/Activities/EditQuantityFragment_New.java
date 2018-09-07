@@ -144,7 +144,7 @@ public class EditQuantityFragment_New extends Fragment {
                 StringData=item_search.getText().toString();
                 if(StringData.equals(""))
                 {
-                  Toast.makeText(getContext(),"Please enter a Name to Search",Toast.LENGTH_LONG).show();
+                  Toast.makeText(getContext(),getResources().getString(R.string.search_null),Toast.LENGTH_LONG).show();
                 }
                 else{
                     scroll=false;
@@ -594,7 +594,7 @@ public class EditQuantityFragment_New extends Fragment {
                     else if(products.length()==0)
                     {
                         product_request_list.setVisibility(View.GONE);
-                      Toast.makeText(getContext(),"Searched Item Not Found",Toast.LENGTH_LONG).show();
+                      Toast.makeText(getContext(),getResources().getString(R.string.search_fail),Toast.LENGTH_LONG).show();
                         JSONObject timeindex=new JSONObject();
 
                         try {
@@ -606,7 +606,7 @@ public class EditQuantityFragment_New extends Fragment {
                         submit=false;
                         getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
                         TextView t=getView().findViewById(R.id.no_entry);
-                        t.setText("Searched Item Not Found");
+                        t.setText(getResources().getString(R.string.search_fail));
 
                     }
                     else {
@@ -758,7 +758,8 @@ public class EditQuantityFragment_New extends Fragment {
         int position;
         public Boolean status;
         public TextView Name;
-        Button accept,decline;
+        Button accept,acceptall;
+        ImageView decline;
         public Activity activity;
         public DialogBox(Activity activity,String name,int position) {
             super(activity);
@@ -805,6 +806,36 @@ public class EditQuantityFragment_New extends Fragment {
                }
                Log.d("prods",products2.toString());
             accept=findViewById(R.id.accept);
+            acceptall=findViewById(R.id.accept_all);
+            acceptall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    items2=new JSONObject();
+                    for (int j=0;j<products2.length();j++)
+                    {
+                        try {
+                            items2.put(products2.getJSONObject(j).getString("name"),products2.getJSONObject(j).getString("number"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    JSONObject data=new JSONObject();
+                    try { JSONObject object=products.getJSONObject(position);
+                        //Log.d("sj",object.getString("TimeIndex"));
+                        data.put("Donor_TimeIndex",TimeIndex);
+                        data.put("Request_TimeIndex",object.get("TimeIndex"));
+                        data.put("Items",items2);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    StringData=data.toString();
+                    submit=true;
+                    Log.d("test",data.toString());
+                    new HTTPAsyncTask2().execute(url);
+                    DialogBox.super.dismiss();}
+
+            });
             decline=findViewById(R.id.decline);
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -823,6 +854,7 @@ public class EditQuantityFragment_New extends Fragment {
                     }
                     StringData=data.toString();
                     submit=true;
+                    Log.d("test",data.toString());
                     new HTTPAsyncTask2().execute(url);
                     DialogBox.super.dismiss();}
                     else {

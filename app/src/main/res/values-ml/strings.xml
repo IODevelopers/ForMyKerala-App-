@@ -86,6 +86,9 @@
     <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>
     <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് പൂജ്യത്തിൽ കൂടുതലും  ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
     <string name="your_country">നിങ്ങളുടെ രാജ്യം</string>
+    <string name="search_fail">നിങ്ങൾ തിരഞ്ഞ ഇനം കണ്ടെത്തിയില്ല</string>
+    <string name="search_null">ദയവായി തിരയുന്നതിനു വേണ്ടി ഒരു പേര് നൽകുക </string>
+    <string name="accept_all">എല്ലാം അംഗീകരിക്കുക</string>
     <string-array name="District">
 
         <item><string-array name="Kottayam">
