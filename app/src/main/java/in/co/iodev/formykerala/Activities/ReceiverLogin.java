@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +22,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Time;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
@@ -76,6 +75,35 @@ public class ReceiverLogin extends AppCompatActivity {
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
+
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.login_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.login_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         context=this;
         back=findViewById(R.id.back_button);

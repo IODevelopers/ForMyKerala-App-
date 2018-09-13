@@ -9,18 +9,22 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -55,15 +59,16 @@ public class EditQuantityFragment_New extends Fragment {
     SharedPreferences sharedPref;
     String url= Constants.Get_Biased_Request;
     String url2=Constants.Accept_Request;
+    String url3=Constants.Search_Requests;
     JSONArray Mainproducts,products;
     ListView product_request_list;
     String TimeIndex;
     String StringData;
     JSONObject LastIndex;
     Product_Request_Adapter adapter;
-    Boolean submit=false;
+    Boolean submit=false,scroll=true;
     Button submit_button;
-    ImageView search_button;
+    ImageView search_button,close_button;
     EditText item_search;
     JSONObject items;
 
@@ -83,6 +88,79 @@ public class EditQuantityFragment_New extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPref=getDefaultSharedPreferences(getContext());
         TimeIndex=sharedPref.getString("TimeIndex","");
+        search_button=view.findViewById(R.id.search_button);
+        close_button=view.findViewById(R.id.close_button);
+        item_search=view.findViewById(R.id.item_search);
+        item_search.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    search_button.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                item_search.setText("");
+                close_button.setImageResource(R.mipmap.refresh);
+                scroll=true;
+                JSONObject timeindex=new JSONObject();
+
+                try {
+                    timeindex.put("TimeIndex",TimeIndex);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                StringData=timeindex.toString();
+                submit=false;
+                new HTTPAsyncTask2().execute(url);
+            }
+        });
+        item_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                  close_button.setImageResource(R.mipmap.close);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                    if(item_search.getText().toString().equals(""))
+                    {
+                        close_button.setImageResource(R.mipmap.refresh);
+                    }
+            }
+        });
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringData=item_search.getText().toString();
+                if(StringData.equals(""))
+                {
+                  Toast.makeText(getContext(),getResources().getString(R.string.search_null),Toast.LENGTH_LONG).show();
+                }
+                else{
+                    scroll=false;
+
+                JSONObject timeindex=new JSONObject();
+                try {
+                    timeindex.put("Name",StringData);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                StringData=timeindex.toString();
+                new HTTPAsyncTask4().execute(url3);
+
+            }
+            }
+        });
         if(sharedPref.getBoolean(TimeIndex+"FirstLogin",FALSE))
         {
             /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
@@ -116,22 +194,55 @@ public class EditQuantityFragment_New extends Fragment {
         Log.d("sj",StringData.toString());
 
         product_request_list=view.findViewById(R.id.donor_items_edit_listview);
+
         setListViewFooter();
         setListOnScrollListener();
         adapter=new Product_Request_Adapter();
-        
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final FloatingActionButton voice=view.findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
+
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getContext(),R.raw.donorhome_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getContext(),R.raw.donorhome_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         product_request_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 JSONObject object=null;
                 String name=null;
+                String status=null;
                 try {
                     object=products.getJSONObject(position);
                    name=object.getString("Name");
+                   status=object.getString("Status_Now");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                DialogBox dialogBox=new DialogBox(getActivity(),name,position);
+                if(!status.equals("Completed"))
+                {  DialogBox dialogBox=new DialogBox(getActivity(),name,position);
                 dialogBox.show();
                 //Adding width and blur
                 Window window=dialogBox.getWindow();
@@ -139,6 +250,10 @@ public class EditQuantityFragment_New extends Fragment {
                 lp.dimAmount=0.8f;
                 dialogBox.getWindow().setAttributes(lp);
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+            else {
+                    Toast.makeText(getContext(),"This Request has been completed",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         new HTTPAsyncTask2().execute(url);
@@ -155,7 +270,7 @@ public class EditQuantityFragment_New extends Fragment {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if(scrollState == SCROLL_STATE_IDLE && product_request_list.getLastVisiblePosition() ==
-                        products.length()){
+                        products.length()&&scroll==true){
                     progressBar.setVisibility(View.VISIBLE);
                     JSONObject timeindex=new JSONObject();
                     try {
@@ -246,7 +361,12 @@ public class EditQuantityFragment_New extends Fragment {
                 final ViewHolder1 finalHolder = holder;
 
                 JSONObject object=products.getJSONObject(position);
+                Log.d("seby", String.valueOf(object));
                 JSONObject object1=object.getJSONObject("Items");
+                Log.d("seby", String.valueOf(object.getString("Status_Now")));
+                String status= String.valueOf(object.getString("Status_Now"));
+                if(status.equals("Accepted"))
+                    status="Partially Accepted";
                 String product="",qty="";
                 Iterator<String> iter = object1.keys();
                 while (iter.hasNext()) {
@@ -274,37 +394,8 @@ public class EditQuantityFragment_New extends Fragment {
                         holder.selected.setChecked(FALSE);
                         holder.Quantity.setText("");
                     }*/
+                 holder.Status.setText(status);
 
-                holder.Quantity.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        try {
-                            items.remove(finalHolder.ProductName.getText().toString());
-                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        try {
-                            items.remove(finalHolder.ProductName.getText().toString());
-                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
 
             }catch (Exception e){
             }
@@ -316,7 +407,7 @@ public class EditQuantityFragment_New extends Fragment {
     }
     private class ViewHolder1 {
         TextView ProductName;
-        TextView Quantity,Product;
+        TextView Quantity,Product,Status;
 
 
 
@@ -324,7 +415,7 @@ public class EditQuantityFragment_New extends Fragment {
             ProductName = (TextView) v.findViewById(R.id.product_name);
             Quantity=v.findViewById(R.id.requested_quantity);
             Product=v.findViewById(R.id.products);
-
+             Status=v.findViewById(R.id.Status);
 
 
 
@@ -397,6 +488,7 @@ public class EditQuantityFragment_New extends Fragment {
                     { product_request_list.setVisibility(View.INVISIBLE);
                         getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
                         getView().findViewById(R.id.not_verified).setVisibility(View.VISIBLE);
+                        item_search.setEnabled(false);
                     }
                     else if(products.length()==0)
                     {
@@ -405,6 +497,7 @@ public class EditQuantityFragment_New extends Fragment {
                         getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
                         Log.d("msg",products.toString());
                         product_request_list.setAdapter(adapter);
+                        item_search.setEnabled(false);
                     }
                     else {
                         product_request_list.setVisibility(View.VISIBLE);
@@ -412,6 +505,7 @@ public class EditQuantityFragment_New extends Fragment {
                         getView().findViewById(R.id.not_verified).setVisibility(View.INVISIBLE);
                        Log.d("msg",products.toString());
                        product_request_list.setAdapter(adapter);
+                       item_search.setEnabled(true);
                     }
 
 
@@ -436,6 +530,113 @@ public class EditQuantityFragment_New extends Fragment {
 
 
     }
+
+    private class HTTPAsyncTask4 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response="Network Error";
+            // params comes from the execute() call: params[0] is the url.
+
+            try {
+                    response= HTTPPostGet.getJsonResponse(url3,StringData);
+                Log.d("sj",StringData.toString());
+                return response;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+            finally {
+                progress.cancel();
+            }
+
+        }
+        @Override
+        protected void onPreExecute() {
+            progress=new ProgressDialog(getContext());
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
+
+            CheckInternet CI=new CheckInternet();
+            CI.isOnline(getContext());
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            progress.cancel();
+            JSONObject responseObject= null;
+            try {
+                JSONObject jsonObject=new JSONObject(result);
+                    JSONArray parentObject=null;
+                    if(!jsonObject.has("Message"))
+                        parentObject = new JSONObject(result).getJSONArray("Items");
+                    try {
+                        LastIndex = jsonObject.getJSONObject("LastEvaluatedKey");
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                    /*   JSONArray parentObject2 = new JSONObject(result).getJSONArray("0");*/
+                    Log.d("ResponseitemA",jsonObject.toString());
+                    products = new JSONArray();
+                    Mainproducts=new JSONArray();
+                    Mainproducts=parentObject;
+                    products=parentObject;
+                    if(jsonObject.has("Message"))
+                    { product_request_list.setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.not_verified).setVisibility(View.VISIBLE);
+                    }
+                    else if(products.length()==0)
+                    {
+                        product_request_list.setVisibility(View.GONE);
+                      Toast.makeText(getContext(),getResources().getString(R.string.search_fail),Toast.LENGTH_LONG).show();
+                        JSONObject timeindex=new JSONObject();
+
+                        try {
+                            timeindex.put("TimeIndex",TimeIndex);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        StringData=timeindex.toString();
+                        submit=false;
+                        getView().findViewById(R.id.no_entry).setVisibility(View.VISIBLE);
+                        TextView t=getView().findViewById(R.id.no_entry);
+                        t.setText(getResources().getString(R.string.search_fail));
+
+                    }
+                    else {
+
+                        product_request_list.setVisibility(View.VISIBLE);
+                        getView().findViewById(R.id.no_entry).setVisibility(View.INVISIBLE);
+                        getView().findViewById(R.id.not_verified).setVisibility(View.INVISIBLE);
+                        Log.d("msg",products.toString());
+                        product_request_list.setAdapter(adapter);
+                        progressBar.setVisibility(View.GONE);
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }    }
+
+
+    }
+
     private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
 
         @Override
@@ -516,6 +717,13 @@ public class EditQuantityFragment_New extends Fragment {
                             progressBar.setVisibility(View.GONE);
                         }
                     }
+
+
+
+
+
+
+
                     else {
                         progressBar.setVisibility(View.GONE);
                     }
@@ -550,7 +758,8 @@ public class EditQuantityFragment_New extends Fragment {
         int position;
         public Boolean status;
         public TextView Name;
-        Button accept,decline;
+        Button accept,acceptall;
+        ImageView decline;
         public Activity activity;
         public DialogBox(Activity activity,String name,int position) {
             super(activity);
@@ -597,6 +806,36 @@ public class EditQuantityFragment_New extends Fragment {
                }
                Log.d("prods",products2.toString());
             accept=findViewById(R.id.accept);
+            acceptall=findViewById(R.id.accept_all);
+            acceptall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    items2=new JSONObject();
+                    for (int j=0;j<products2.length();j++)
+                    {
+                        try {
+                            items2.put(products2.getJSONObject(j).getString("name"),products2.getJSONObject(j).getString("number"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    JSONObject data=new JSONObject();
+                    try { JSONObject object=products.getJSONObject(position);
+                        //Log.d("sj",object.getString("TimeIndex"));
+                        data.put("Donor_TimeIndex",TimeIndex);
+                        data.put("Request_TimeIndex",object.get("TimeIndex"));
+                        data.put("Items",items2);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    StringData=data.toString();
+                    submit=true;
+                    Log.d("test",data.toString());
+                    new HTTPAsyncTask2().execute(url);
+                    DialogBox.super.dismiss();}
+
+            });
             decline=findViewById(R.id.decline);
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -615,6 +854,7 @@ public class EditQuantityFragment_New extends Fragment {
                     }
                     StringData=data.toString();
                     submit=true;
+                    Log.d("test",data.toString());
                     new HTTPAsyncTask2().execute(url);
                     DialogBox.super.dismiss();}
                     else {
@@ -718,7 +958,8 @@ public class EditQuantityFragment_New extends Fragment {
 
                         @Override
                         public void afterTextChanged(Editable editable) {
-                            if(!finalHolder.Product.getText().toString().equals("")&&Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
+                            if (!finalHolder.Product.getText().toString().equals(""))
+                            {if(finalHolder.Product.getText().toString().equals("0")||Integer.parseInt(finalHolder.Product.getText().toString())>Integer.parseInt(finalHolder.Quantity.getText().toString()))
                             {
                                 String toastText = getString(R.string.toast_reqiured_quantity);
                                 Toast.makeText(getContext(), toastText,Toast.LENGTH_LONG).show();
@@ -734,6 +975,12 @@ public class EditQuantityFragment_New extends Fragment {
                             }
 
                         }}
+                        if(finalHolder.Product.getText().toString().equals(""))
+                            {
+                                items2.remove(finalHolder.ProductName.getText().toString());
+                            }
+                        Log.d("test",items2.toString());
+                        }
                     });
 
                 }catch (Exception e){

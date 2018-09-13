@@ -8,18 +8,24 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,27 +56,59 @@ TextView mTextView;
 Spinner mSpinner;
 public static SharedPreferences languagePreferences;
 SharedPreferences.Editor editor;
-
+FloatingActionButton voice;
 Boolean noupdate=true,internet=true;
     SharedPreferences sharedPref;
+String localeCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         languagePreferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = languagePreferences.edit();
-        String localeCode = languagePreferences.getString("LOCALE_CODE",null);
+        localeCode = languagePreferences.getString("LOCALE_CODE",null);
         if(localeCode != null){
             setAppLocale(languagePreferences.getString("LOCALE_CODE", null), getResources());
         }
         setContentView(R.layout.activity_main);
-
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         TimeIndex = sharedPref.getString("TimeIndex","");
         role = findViewById(R.id.role_selection);
         updater = findViewById(R.id.updater);
         network = findViewById(R.id.internet);
         new HTTPAsyncTask3().execute(url);
+        voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if (localeCode==null)
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+                    else if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_mal);
+                    mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         mTextView = findViewById(R.id.tv_main);
         receiver = findViewById(R.id.role_receiver);
         donor = findViewById(R.id.role_Donor);
@@ -81,13 +119,22 @@ Boolean noupdate=true,internet=true;
             receiver.setVisibility(View.GONE);
             donor.setVisibility(View.GONE);
             help.setVisibility(View.GONE);
-            mTextView.setText("Choose Language\n(remember your selection will be final)");
+            voice.setVisibility(View.GONE);
+            mTextView.setText("Choose Language");
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast,
+                    null);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM, 10, 10);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
         }else{
             mSpinner.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, android.R.layout.simple_spinner_item);
-        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, R.layout.language_spinner);
+        mAdapter.setDropDownViewResource(R.layout.drop_down_tems);
         mSpinner.setAdapter(mAdapter);
         int initialSelectedPosition=mSpinner.getSelectedItemPosition();
         mSpinner.setSelection(initialSelectedPosition, false);
@@ -100,10 +147,12 @@ Boolean noupdate=true,internet=true;
         Toast.makeText(adapterView.getContext(), spinnerText, Toast.LENGTH_SHORT).show();
         if(spinnerText.equals("Malayalam")){
             editor.putString("LOCALE_CODE","ml");
+            localeCode="ml";
             editor.commit();
             setAppLocale("ml", getResources());
         }else if(spinnerText.equals("English")){
             editor.putString("LOCALE_CODE","en");
+            localeCode="en";
             editor.commit();
             setAppLocale("en", getResources());
         }
@@ -115,6 +164,7 @@ Boolean noupdate=true,internet=true;
         receiver.setVisibility(View.VISIBLE);
         donor.setVisibility(View.VISIBLE);
         help.setVisibility(View.VISIBLE);
+        voice.setVisibility(View.VISIBLE);
         mSpinner.setVisibility(View.GONE);
 
     }

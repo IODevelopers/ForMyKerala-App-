@@ -50,6 +50,7 @@
     <string name="new_user_register_now">താങ്ങൾ പുതിയ ഉപയോക്താവാണോ? എങ്കിൽ ഇവിടെ റെജിസ്റ്റർ ചെയ്യുക!</string>
     <string name="select_requirements">ആവശ്യമുള്ളവ തിരഞ്ഞെടുക്കുക</string>
     <string name="search_your_items">തിരയുക</string>
+    <string name="search_requests">തിരയുക</string>
     <string name="your_quantity">അളവ്</string>
     <string name="accept">അംഗീകരിക്കുക</string>
     <string name="decline">നിരസിക്കുക</string>
@@ -83,8 +84,11 @@
     <string name="try_again">വീണ്ടും ശ്രമിക്കുക</string>
     <string name="loading">ലോഡിംഗ്</string>
     <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>
-    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
+    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് പൂജ്യത്തിൽ കൂടുതലും  ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
     <string name="your_country">നിങ്ങളുടെ രാജ്യം</string>
+    <string name="search_fail">നിങ്ങൾ തിരഞ്ഞ ഇനം കണ്ടെത്തിയില്ല</string>
+    <string name="search_null">ദയവായി തിരയുന്നതിനു വേണ്ടി ഒരു പേര് നൽകുക </string>
+    <string name="accept_all">എല്ലാം അംഗീകരിക്കുക</string>
     <string-array name="District">
 
         <item><string-array name="Kottayam">

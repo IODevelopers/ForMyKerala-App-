@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -62,6 +63,34 @@ public class DForgotPinOTPValidation extends AppCompatActivity {
             otp4=findViewById(R.id.otp4);
             verify=findViewById(R.id.otp_verify);
             otp_resend=findViewById(R.id.resend_otp);
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
+
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.otpvalidation_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.otpvalidation_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         TextView phone=findViewById(R.id.phone);
         phone.setText("to "+sharedPref.getString("PhoneNumber",""));
             hider=new ProgressBarHider(verify.getRootView(),verify);

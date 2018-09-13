@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +56,34 @@ ProgressBarHider hider;
         back=findViewById(R.id.back_button);
         verify=findViewById(R.id.otp_verify);
         hider=new ProgressBarHider(verify.getRootView(),verify);
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.selectpin_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.selectpin_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         context=this;
         otp1.addTextChangedListener(new OTPTextEditor(otp1,otp1.getRootView()));
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
