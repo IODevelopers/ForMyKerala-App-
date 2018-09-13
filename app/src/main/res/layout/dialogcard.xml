@@ -13,17 +13,75 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
+    <ImageView
+        android:id="@+id/decline"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="start"
+        android:background="@android:color/transparent"
+        android:text="@string/decline"
+        android:src="@mipmap/close"/>
     <TextView
         android:id="@+id/receiver_namw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Receiver Name"
+        android:text="@string/receiver_name"
         android:textSize="22sp" />
-
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/prod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/product"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/quantity"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/edit_quantity"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/your_quantity"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <View
+        android:id="@+id/separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/black" />
+
+    <ListView
+        android:id="@+id/donor_items_edit_listview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -40,8 +98,8 @@
                 android:id="@+id/accept"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00f74a"
-                android:text="Accept"
+                android:background="#239112"
+                android:text="@string/accept"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
 
@@ -55,11 +113,11 @@
             >
 
             <Button
-                android:id="@+id/decline"
+                android:id="@+id/accept_all"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#e7094c"
-                android:text="Decline"
+                android:background="@color/colorPrimaryBlue"
+                android:text="@string/accept_all"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>

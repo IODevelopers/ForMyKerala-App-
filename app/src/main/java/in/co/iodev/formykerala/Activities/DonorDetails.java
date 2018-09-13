@@ -61,6 +61,7 @@ public class DonorDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_donor_details);
         districts=new ArrayList<String>();
         new HTTPAsyncTask2().execute(url2);
@@ -133,7 +134,8 @@ public class DonorDetails extends AppCompatActivity {
                 /*District=district.getText().toString();
                 Taluk=taluk.getText().toString();*/
                 if(Name.equals("")){
-                    Toast.makeText(getApplicationContext(),"Please provide all fields", Toast.LENGTH_LONG).show();
+                    String toastText = getString(R.string.toast_all_fields);
+                    Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
                 }
                 else {
 
@@ -230,8 +232,10 @@ public class DonorDetails extends AppCompatActivity {
                 if(responseObject.getString("Message").equals("Success")) {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(TimeIndex+"DEdited", TRUE);
+                    editor.putBoolean(TimeIndex+"DEditedR", TRUE);
+                    editor.putBoolean(TimeIndex+"FirstLogin",TRUE);
                     editor.apply();
-                    Intent intent = new Intent(DonorDetails.this, DonorSelectItems.class);
+                    Intent intent = new Intent(DonorDetails.this, DonorHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(intent);

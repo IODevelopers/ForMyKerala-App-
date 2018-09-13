@@ -4,11 +4,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F7F8"
+    android:nestedScrollingEnabled="true"
     android:fillViewport="true"
     tools:context="in.co.iodev.formykerala.Activities.EditItemFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="50dp"
         android:elevation="5dp"
         app:cardCornerRadius="5dp"
         android:layout_height="match_parent">
@@ -23,8 +30,61 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="People You Can Help"
+                android:text="@string/people_you_can_help"
                 android:textSize="22sp" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D3D3D3"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/search_button"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="visible"
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/search" />
+
+                    <EditText
+                        android:id="@+id/item_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:hint="@string/search_requests"
+                        android:imeOptions="actionDone"
+                        android:lines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/close_button"
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/refresh" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -37,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -46,7 +106,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Receiver"
+                        android:text="@string/receiver"
                         android:textSize="15dp" />
 
                     <TextView
@@ -55,7 +115,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Product"
+                        android:text="@string/product"
                         android:textSize="15sp" />
 
                     <TextView
@@ -64,7 +124,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Quantity"
+                        android:text="@string/quantity"
                         android:textSize="15sp" />
                     <TextView
                         android:layout_width="0dp"
@@ -72,7 +132,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Status"
+                        android:text="@string/status"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -93,17 +153,16 @@
                         android:id="@+id/donor_items_edit_listview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="30dp"
                         android:layout_marginTop="10dp"
                         android:divider="@android:color/transparent"
-                        android:dividerHeight="0dp"></ListView>
+                        android:dividerHeight="5dp"></ListView>
 
                     <TextView
                         android:id="@+id/no_entry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="No Verified Requests"
+                        android:text="@string/no_verified_requests"
                         android:visibility="invisible" />
 
                     <TextView
@@ -111,8 +170,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Your account is yet to be verified"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        android:text="@string/your_account_is_yet_to_be_verified"
                         android:visibility="invisible" />
+
+
                 </RelativeLayout>
 
                 <android.support.v7.widget.CardView
@@ -130,6 +193,15 @@
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:tint="@android:color/white"
+            android:src="@mipmap/volume" />
+    </RelativeLayout>
 
 </ScrollView>

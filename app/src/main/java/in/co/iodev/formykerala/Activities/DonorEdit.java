@@ -1,15 +1,19 @@
 package in.co.iodev.formykerala.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -34,11 +38,16 @@ import in.co.iodev.formykerala.Controllers.HTTPGet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.R;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-public class DonorSelectItems extends AppCompatActivity {
+/**
+ * Created by seby on 8/30/2018.
+ */
+
+public class DonorEdit extends Fragment {
 
     SharedPreferences sharedPref;
     String url= Constants.Get_Item_list;
@@ -58,45 +67,61 @@ public class DonorSelectItems extends AppCompatActivity {
     ProgressBarHider hider;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donor_select_items);
-        sharedPref=getDefaultSharedPreferences(getApplicationContext());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_donor_select_items, container, false);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        sharedPref=getDefaultSharedPreferences(getContext());
 
         TimeIndex=sharedPref.getString("TimeIndex","");
 
         items=new JSONObject();
-        context=this;
-        product_request_list=findViewById(R.id.product_request_listview);
+        try{
+        JSONArray array=new JSONArray(getArguments().getString("products"));
+        for (int i=0;i<array.length();i++)
+        {
+            final JSONObject object=new JSONObject(String.valueOf(array.getJSONObject(i)));
+            items.put(object.getString("name"),object.getString("number"));
+        }}
+        catch (Exception e)
+        {
+
+        }
+        context=getContext();
+        product_request_list=view.findViewById(R.id.product_request_listview);
         adapter=new Product_Request_Adapter();
         new HTTPAsyncTask2().execute(url);
-        submit_button=findViewById(R.id.submit_button);
-        search_button=findViewById(R.id.search_button);
-        item_search=findViewById(R.id.item_search);
-        back=findViewById(R.id.back_button);
-        logout=findViewById(R.id.logout);
+        submit_button=view.findViewById(R.id.submit_button);
+        search_button=view.findViewById(R.id.search_button);
+        item_search=view.findViewById(R.id.item_search);
+        back=view.findViewById(R.id.back_button);
+        logout=view.findViewById(R.id.logout);
         hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(items.length()!=0)
                 { JSONObject timeindex=new JSONObject();
-                try {
-                    timeindex.put("TimeIndex",TimeIndex);
-                    timeindex.put("DonationItems",items);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                StringData=timeindex.toString();
-                Log.d("seby",StringData.toString());
-                submit=true;
-                hider.show();
-                new HTTPAsyncTask2().execute(url);}
+                    try {
+                        timeindex.put("TimeIndex",TimeIndex);
+                        timeindex.put("DonationItems",items);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    StringData=timeindex.toString();
+                    Log.d("seby",StringData.toString());
+                    submit=true;
+                    hider.show();
+                    new HTTPAsyncTask2().execute(url);}
                 else
 
-            {
-                hider.hide();
-                Toast.makeText(getApplicationContext(),"Please a Choose a Requirement",Toast.LENGTH_SHORT).show();            }
+                {
+                    hider.hide();
+                    String toastText = getString(R.string.please_a_choose_a_requirement);
+                    Toast.makeText(getContext(), toastText,Toast.LENGTH_LONG).show();           }
             }
         });
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -124,28 +149,10 @@ public class DonorSelectItems extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getFragmentManager().popBackStack();
             }
         });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(TimeIndex+"DLogin",FALSE);
-                editor.remove("TimeIndex");
-              /*  editor.putBoolean("Edited",FALSE);
-                editor.putBoolean("EditedR",FALSE);
-*/
-                editor.commit();
-                sharedPref.edit().apply();
-
-                startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-
-            }
-
-        });
-    }
+       logout.setVisibility(View.GONE);}
 
     private void search() {
         if(!item_search.getText().toString().equals(""))
@@ -175,7 +182,6 @@ public class DonorSelectItems extends AppCompatActivity {
     }
 
     private class Product_Request_Adapter extends BaseAdapter {
-
         @Override
         public int getCount() {
 
@@ -208,26 +214,25 @@ public class DonorSelectItems extends AppCompatActivity {
 
 
             try {
+
+
                 final ViewHolder1 finalHolder = holder;
                 holder.ProductName.setText(String.valueOf(products.get(position)));
                 if(items.has(holder.ProductName.getText().toString())) {
                     Log.d("Items",items.getString(holder.ProductName.getText().toString()));
                     holder.Quantity.setText(items.getString(holder.ProductName.getText().toString()));
-                    holder.selected.setChecked(true);
-
                 }
                 else {
                     holder.selected.setChecked(FALSE);
                     holder.Quantity.setText("");
                 }
+
                 holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                         try
                         {if(isChecked)
                         {
-                            if(!finalHolder.Quantity.getText().toString().equals(""))
-                                items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
                         }
                         else
                         {
@@ -239,23 +244,41 @@ public class DonorSelectItems extends AppCompatActivity {
 
                     }
                 });
-                holder.Quantity.addTextChangedListener(new TextWatcher() {
+                holder.Quantity.addTextChangedListener(new TextWatcher()  {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        items.remove(finalHolder.ProductName.getText().toString());
+                        try {
+                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         finalHolder.selected.setChecked(FALSE);
+
 
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        items.remove(finalHolder.ProductName.getText().toString());
+                        try {
+                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         finalHolder.selected.setChecked(FALSE);
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
-
+                        items.remove(finalHolder.ProductName.getText().toString());
+                        try {
+                            items.put(finalHolder.ProductName.getText().toString(),finalHolder.Quantity.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         finalHolder.selected.setChecked(TRUE);
-
+                        Log.d("sjt2",items.toString());
                     }
                 });
                 if(finalHolder.Quantity.getText().toString().equals(""))
@@ -348,41 +371,26 @@ public class DonorSelectItems extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(TimeIndex+"DEditedR", TRUE);
                     editor.apply();
-                    Intent intent = new Intent(DonorSelectItems.this, DonorHomeActivity.class);
+                    Intent intent = new Intent(getActivity(), DonorHomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
                     startActivity(intent);
 
+
                     submit=false;
-                   DonorSelectItems.this.finish();
 
                 }
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }    }
 
-
-    }
-    boolean doubleBackToExitPressedOnce = false;
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+            }
         }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+
     }
+
 }
+

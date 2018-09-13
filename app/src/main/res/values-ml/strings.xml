@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">For My Kerala</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_usage_help">ഫോർ മൈ കേരള  ഉപയോഗിക്കുന്ന ഹെൽപ്പ്ലൈൻ ഇതാ.
+
+നിങ്ങൾ റിസീവർ അല്ലെങ്കിൽ ഡോണർ എന്നത് ആദ്യം തിരഞ്ഞെടുക്കുക.
+സഹായം നൽകുന്നതിന് തയ്യാറാകുന്ന ഒരു വ്യക്തിയാണ്. ഡോണർ സഹായം ആവശ്യമുള്ള വ്യക്തിയാണ് റിസീവർ. തിരഞ്ഞെടുപ്പിന് ശേഷം, നിങ്ങളുടെ മൊബൈൽ ഫോൺ നമ്പർ ഉപയോഗിച്ച് നിങ്ങളുടെ അക്കൗണ്ട് രജിസ്റ്റർ ചെയ്യേണ്ടതാണ്. ഒരു OTP ഉപയോഗിച്ച് മൊബൈൽ ഫോൺ പരിശോധിച്ചുറപ്പിക്കും. അതിനുശേഷം നിങ്ങൾക്കു 4 അക്ക PIN ഉപയോഗിക്കാൻ കഴിയും, ഇത് നിങ്ങളുടെ ലോഗിൻ പാസ്വേർഡായി ഉപയോഗിക്കും.
+അടുത്തതായി, നിങ്ങളുടെ മേൽവിലാസം ജില്ലയും താലൂക്കും പോലുള്ള വിവരങ്ങൾ നൽകാം. അതിനുശേഷം സ്ക്രീനിൽ ഡോണറാൽ ലഭ്യമായ ഇനങ്ങളുടെ പട്ടിക കാണാം.
+ നിങ്ങൾ ഒരു ഡോണറാണെങ്കിൽ നിങ്ങൾക്ക് റിസീവറിന് നൽകാൻ പറ്റുന്ന സാധനങ്ങളുടെ ലിസ്റ്റ് കാണാം.
+റിസീവറിന്റെ ഭാഗത്തുനിന്ന് നിങ്ങൾ തിരഞ്ഞെടുക്കുന്നതിനു ശേഷം നിങ്ങൾ, ആവശ്യമുള്ള ഇനങ്ങളുടെ എണ്ണം നിങ്ങൾക്ക് സംഭാവന നൽകാൻ കഴിയുന്ന ഒരു സ്ക്രീനിൽ കാണിക്കും. ഇതിനിടയിൽ ഞങ്ങളുടെ വോളന്റിയർ നിങ്ങളെ വിളിക്കുകയും നിങ്ങളുടെ  അഭ്യർത്ഥന  പരിശോധിക്കുകയും ചെയ്യും. ഇതേ പരിശോധന ഡോണേർസിനിടയിലും നടക്കുന്നു.
+പരിശോധിച്ചുറപ്പിച്ചതിന് ശേഷം നിങ്ങൾക്ക് ഇനങ്ങൾ നൽകാൻ കഴിയുന്ന പേജിലേക്ക് റീഡയറക്ട് ചെയ്യുകയും എപ്പോൾ വേണമെങ്കിലും  എഡിറ്റുചെയ്യുകയും ചെയ്യാം.
+എണ്ണത്തെ എഡിറ്റുചെയ്തതിനുശേഷം ഞങ്ങളുടെ വോളന്റിയർ സ്വീകരിച്ചിട്ടുള്ള റിസീവർമാരുടെ പട്ടിക നിങ്ങൾക്ക് കാണാൻ കഴിയും. നിങ്ങൾക്കു അതു സ്വീകരിക്കുകയും ,
+ സ്വീകരിക്കേണ്ട അഭ്യർത്ഥനയുടെ സ്റ്റാറ്റസ് ഒരു ടാബിൽ എല്ലായ്പ്പോഴും കാണാൻ കഴിയുകയും ചെയ്യാം. കൂടാതെ ഞങ്ങളുടെ വോളന്റിയർ നിങ്ങളുടെ കേസ് അവസാനിപ്പിക്കുന്നതിനുവേണ്ട നടപടികൾ കൈകാര്യം ചെയ്യുകയും ചെയ്യും</string>
+
+    <string name="accepted_donors">അംഗീകരിച്ച ദാതാക്കൾ</string>
+    <string name="donor_name">ദാതാവിന്റെ പേര്</string>
+    <string name="phone_number">ഫോൺ നമ്പർ</string>
+    <string name="no_donors_accepted">ദാതാക്കളെ സ്വീകരിച്ചില്ല</string>
+    <string name="donor_login">ദാതാവിന്റെ ലോഗിൻ</string>
+    <string name="what_can_you_donate">നിങ്ങൾക്ക് എന്തു സംഭാവന നൽകാം?</string>
+    <string name="help_title">ഫോർ മൈ കേരള ആപ്പ് എങ്ങനെ ഉപയോഗിക്കാം!</string>
+    <string name="select_your_role">നിങ്ങളുടെ റോൾ തിരഞ്ഞെടുക്കുക</string>
+    <string name="donor">ദാതാവ്</string>
+    <string name="help">സഹായം</string>
+    <string name="checking_for_updates">അപ്ഡേറ്റുകൾക്കായി പരിശോധിക്കുന്നു</string>
+    <string name="no_network_ncheck_your_connection_and_restart_app">നെറ്റ്വർക്കില്ല. നിങ്ങളുടെ കണക്ഷൻ പരിശോധിച്ച് അപ്ലിക്കേഷൻ പുനരാരംഭിക്കുക.</string>
+    <string name="verification_code">വെരിഫിക്കേഷൻ കോഡ്</string>
+    <string name="please_enter_the_verification_code_sent">വെരിഫിക്കേഷൻ കോഡ് നൽകുക</string>
+    <string name="to">-> </string>
+    <string name="resend_otp_in">OTP  വീണ്ടും അയക്കുന്നു : </string>
+    <string name="resend_otp">OTP  വീണ്ടും അയക്കുക</string>
+    <string name="pin_for_security">പിൻ നൽകുക</string>
+    <string name="please_enter_a_4_digit_pin_for_your_login">ദയവായി നിങ്ങളുടെ ലോഗിനു  ഒരു 4 അക്ക പിൻ നൽകുക</string>
+    <string name="please_remember_the_same_for_later_login">(ദയവായി പിന്നീട് ലോഗിൻ ചെയ്യുന്നതിന് ഓർമ്മിക്കുക)</string>
+    <string name="save">സേവ് ചെയ്യുക</string>
+    <string name="register_request">ഇതു വരെ ആവശ്യപ്പെട്ടവ</string>
+    <string name="no_of_items_requested">ആവശ്യപ്പെട്ട സാധനങ്ങളുടെ എണ്ണം</string>
+    <string name="check_status">സ്ഥിതി പരിശോധിക്കുക</string>
+    <string name="view_registered_requests">രജിസ്റ്റർ ചെയ്ത അഭ്യർത്ഥനകൾ കാണുക</string>
+    <string name="register">രജിസ്റ്റർ ചെയ്യുക</string>
+    <string name="address">വിലാസം</string>
+    <string name="district">ജില്ല</string>
+    <string name="taluk">താലൂക്ക്</string>
+    <string name="receiver_login">സ്വീകർത്താവിന്റെ ലോഗിൻ</string>
+    <string name="your_10_digit_phone_number">നിങ്ങളുടെ 10 അക്ക ഫോൺ നമ്പർ</string>
+    <string name="your_4_digit_pin">നിങ്ങളുടെ 4 അക്ക പിൻ</string>
+    <string name="forgot_pin">പിൻ മറന്നോ?</string>
+    <string name="new_user_register_now">താങ്ങൾ പുതിയ ഉപയോക്താവാണോ? എങ്കിൽ ഇവിടെ റെജിസ്റ്റർ ചെയ്യുക!</string>
+    <string name="select_requirements">ആവശ്യമുള്ളവ തിരഞ്ഞെടുക്കുക</string>
+    <string name="search_your_items">തിരയുക</string>
+    <string name="search_requests">തിരയുക</string>
+    <string name="your_quantity">അളവ്</string>
+    <string name="accept">അംഗീകരിക്കുക</string>
+    <string name="decline">നിരസിക്കുക</string>
+    <string name="verified">പരിശോധിച്ചു</string>
+    <string name="accepted_requests">അംഗീകരിച്ച അഭ്യർത്ഥനകൾ</string>
+    <string name="phone">ഫോൺ</string>
+    <string name="no_accepted_items">സ്വീകരിച്ചവയുടെ എണ്ണം</string>
+    <string name="edit_quantity_of_the_items">അളവ് തിരുത്തുക</string>
+    <string name="submit">സമർപ്പിക്കുക</string>
+    <string name="edit">തിരുത്തുക</string>
+    <string name="people_you_can_help">നിങ്ങൾക്ക് സഹായിക്കാൻ കഴിയുന്ന ആളുകൾ</string>
+    <string name="receiver">സ്വീകർത്താവ്</string>
+    <string name="product">ഉൽപ്പന്നം</string>
+    <string name="quantity">അളവ്</string>
+    <string name="status">അവസ്ഥ</string>
+    <string name="no_verified_requests">പരിശോധിച്ചുറപ്പിക്കാത്ത അഭ്യർത്ഥനകൾ</string>
+    <string name="your_account_is_yet_to_be_verified">നിങ്ങളുടെ അക്കൌണ്ട് പരിശോധിക്കപ്പെടേണ്ടതാണ്. രജിസ്റ്റർ ചെയ്തതിനു ശേഷം 24 മണിക്കൂറിനുള്ളിൽ ഞങ്ങളുടെ വോളന്റിയറിൽ നിന്ന് നിങ്ങൾക്ക് ഒരു കോൾ ലഭിക്കും. ഒരു ഉടനടിയായ  പരിശോധന ആവശ്യമുണ്ടെങ്കിൽ, ഒരു Whatsapp  സന്ദേശം അല്ലെങ്കിൽ എസ്എംഎസ് \'QV\' 7902661414 ലേക്ക് അയയ്ക്കുക.</string>
+    <string name="name">പേര്</string>
+   <string name="receiver_name">സ്വീകർത്താവിന്റെ പേര്</string>
+   <string name="login">ലോഗിൻ</string>
+   <string name="logout">ലോഗൗട്ട്</string>
+   <string name="please_a_choose_a_requirement">ദയവായി ഒരു ആവശ്യകത തിരഞ്ഞെടുക്കുക</string>
+   <string name="please_click_back_again_to_exit">പുറത്തുകടക്കാൻ ബാക്ക് ബട്ടൺ ക്ലിക്കുചെയ്യുക</string>
+    <string name="verify">OTP പരിശോധിക്കുക</string>
+    <string name="toast_valid_ph_no">ദയവായി, ശരിയായ ഫോൺ നമ്പർ നൽകുക</string>
+    <string name="toast_valid_otp">ദയവായി, ശരിയായ OTP നൽകുക</string>
+    <string name="wrong_otp">ക്ഷമിക്കണം, തെറ്റായ OTP!</string>
+    <string name="toast_valid_pin">ദയവായി, ശരിയായ PIN നമ്പർ നൽകുക</string>
+    <string name="toast_all_fields">എല്ലാ ഫീൽഡുകളും നൽകുക</string>
+    <string name="info_alert">ഞങ്ങളുടെ വോളന്റിയർ 24 മണിക്കൂറിനുള്ളിൽ രജിസ്റ്റർ ചെയ്ത ഫോൺ നമ്പറിലേക്ക് നിങ്ങളെ വിളിച്ചു പരിശോധന നടത്തുന്നതാരിക്കും .</string>
+    <string name="try_again">വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="loading">ലോഡിംഗ്</string>
+    <string name="toast_value">ദയവായി ഒരു വാല്യൂ നൽകുക</string>
+    <string name="toast_reqiured_quantity">നിങ്ങളുടെ അളവ് പൂജ്യത്തിൽ കൂടുതലും  ആവശ്യമായ അളവിൽ കുറവോ തുല്യമോ ആയിരിക്കണം</string>
+    <string name="your_country">നിങ്ങളുടെ രാജ്യം</string>
+    <string name="search_fail">നിങ്ങൾ തിരഞ്ഞ ഇനം കണ്ടെത്തിയില്ല</string>
+    <string name="search_null">ദയവായി തിരയുന്നതിനു വേണ്ടി ഒരു പേര് നൽകുക </string>
+    <string name="accept_all">എല്ലാം അംഗീകരിക്കുക</string>
+    <string-array name="District">
+
+        <item><string-array name="Kottayam">
+            <item>മുണ്ടക്കയം</item>
+        </string-array></item>
+    </string-array>
+
+</resources>

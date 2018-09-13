@@ -7,16 +7,28 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"></LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="end"
+            android:tint="@android:color/white"
+            android:src="@mipmap/volume" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:src="@mipmap/logomerged" />
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/logonew" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,12 +41,30 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginTop="40dp"
-                    android:text="Select Your Role"
+                    android:text="@string/select_your_role"
                     android:textSize="22sp" />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="25dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="20dp">
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:background="@color/colorPrimaryBlue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dropDownWidth="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"/>
+                </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -51,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:text="Receiver"
+                        android:text="@string/receiver"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>
@@ -72,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#4885ED"
-                        android:text="Donor"
+                        android:text="@string/donor"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>
@@ -93,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#239112"
-                        android:text="Help"
+                        android:text="@string/help"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>
@@ -112,8 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="60dp"
-                    android:text="Checking for Updates"
-                    android:textSize="22sp" />
+                    android:text="@string/checking_for_updates"/>
 
                 <ProgressBar
                     android:layout_width="match_parent"
@@ -127,7 +156,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="No network.\nCheck your connection and restart app. "
+                android:text="@string/no_network_ncheck_your_connection_and_restart_app"
                 android:textSize="22sp"
                 android:visibility="invisible" />
         </RelativeLayout>

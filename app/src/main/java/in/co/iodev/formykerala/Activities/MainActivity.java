@@ -6,18 +6,34 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPGet;
@@ -28,41 +44,163 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static in.co.iodev.formykerala.Constants.Constants.Get_App_Version;
 import static java.lang.Boolean.FALSE;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 Button receiver,donor,help;
 String url=Get_App_Version;
 String appversion;
-    String TimeIndex;
+String TimeIndex;
 LinearLayout role,updater;
 TextView network;
+
+TextView mTextView;
+Spinner mSpinner;
+public static SharedPreferences languagePreferences;
+SharedPreferences.Editor editor;
+FloatingActionButton voice;
 Boolean noupdate=true,internet=true;
     SharedPreferences sharedPref;
+String localeCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        languagePreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = languagePreferences.edit();
+        localeCode = languagePreferences.getString("LOCALE_CODE",null);
+        if(localeCode != null){
+            setAppLocale(languagePreferences.getString("LOCALE_CODE", null), getResources());
+        }
         setContentView(R.layout.activity_main);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
-        TimeIndex=sharedPref.getString("TimeIndex","");
+        TimeIndex = sharedPref.getString("TimeIndex","");
         role = findViewById(R.id.role_selection);
         updater = findViewById(R.id.updater);
         network = findViewById(R.id.internet);
         new HTTPAsyncTask3().execute(url);
+        voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if (localeCode==null)
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+                    else if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_mal);
+                    mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.mainactivity_eng);
+                        mp.start();
+                    }
+
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        mTextView = findViewById(R.id.tv_main);
         receiver = findViewById(R.id.role_receiver);
         donor = findViewById(R.id.role_Donor);
-        help=findViewById(R.id.help);
+        help = findViewById(R.id.help);
+        mSpinner =findViewById(R.id.spinner);
+
+        if(localeCode == null) {
+            receiver.setVisibility(View.GONE);
+            donor.setVisibility(View.GONE);
+            help.setVisibility(View.GONE);
+            voice.setVisibility(View.GONE);
+            mTextView.setText("Choose Language");
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast,
+                    null);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM, 10, 10);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }else{
+            mSpinner.setVisibility(View.GONE);
+        }
+
+        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this, R.array.available_languages, R.layout.language_spinner);
+        mAdapter.setDropDownViewResource(R.layout.drop_down_tems);
+        mSpinner.setAdapter(mAdapter);
+        int initialSelectedPosition=mSpinner.getSelectedItemPosition();
+        mSpinner.setSelection(initialSelectedPosition, false);
+        mSpinner.setOnItemSelectedListener(this);
       }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        String spinnerText = adapterView.getItemAtPosition(position).toString();
+        Toast.makeText(adapterView.getContext(), spinnerText, Toast.LENGTH_SHORT).show();
+        if(spinnerText.equals("Malayalam")){
+            editor.putString("LOCALE_CODE","ml");
+            localeCode="ml";
+            editor.commit();
+            setAppLocale("ml", getResources());
+        }else if(spinnerText.equals("English")){
+            editor.putString("LOCALE_CODE","en");
+            localeCode="en";
+            editor.commit();
+            setAppLocale("en", getResources());
+        }
+
+        mTextView.setText(getString(R.string.select_your_role));
+        receiver.setText(getString(R.string.receiver));
+        donor.setText(R.string.donor);
+        help.setText(R.string.help);
+        receiver.setVisibility(View.VISIBLE);
+        donor.setVisibility(View.VISIBLE);
+        help.setVisibility(View.VISIBLE);
+        voice.setVisibility(View.VISIBLE);
+        mSpinner.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {}
+
+    public static void setAppLocale(String localeCode, Resources res){
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            conf.setLocale(new Locale(localeCode.toLowerCase()));
+        }else{
+            conf.locale = new Locale(localeCode.toLowerCase());
+        }
+        res.updateConfiguration(conf,dm);
+    }
+
     public void receiver() {
-        startActivity(new Intent(MainActivity.this,ReceiverLogin.class));
+        Intent intent = new Intent(MainActivity.this,ReceiverLogin.class);
+        startActivity(intent);
         MainActivity.this.finish();
     }
     public void donor() {
-        startActivity(new Intent(MainActivity.this,DonorLogin.class));
+        Intent intent = new Intent(MainActivity.this,DonorLogin.class);
+        startActivity(intent);
         MainActivity.this.finish();
     }
     private void help_view() {
-        startActivity(new Intent(MainActivity.this,Help_view.class));
+        Intent intent = new Intent(MainActivity.this,Help_view.class);
+        startActivity(intent);
+        try {
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void redirect()
@@ -91,11 +229,6 @@ Boolean noupdate=true,internet=true;
                     startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class)); //TO VIEW ADDED REQUESTS
                     MainActivity.this.finish();
                 }
-                else
-                if(sharedPref.getBoolean(TimeIndex+"DEdited",FALSE)){
-                    startActivity(new Intent(getApplicationContext(),DonorSelectItems.class)); //TO SELECT ITEMS
-                    MainActivity.this.finish();
-                }
                 else{
                     startActivity(new Intent(getApplicationContext(),DonorDetails.class)); //TO ADD NEW REQUEST
                     MainActivity.this.finish();
@@ -106,6 +239,7 @@ Boolean noupdate=true,internet=true;
                 role.setVisibility(View.VISIBLE);
                 updater.setVisibility(View.INVISIBLE);
     }
+
     private class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
         String response="Network Error";
         @Override

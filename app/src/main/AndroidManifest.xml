@@ -12,43 +12,62 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
-
-        </activity>
-        <activity android:name=".Activities.OTPVerification" />
-        <activity android:name=".Activities.OTPValidation" />
-        <activity android:name=".Activities.ReceiverRoleSelectActivity" />
-        <activity android:name=".Activities.PinSelection" />
-        <activity
-            android:name=".Activities.ReceiverLogin"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity
-            android:name=".Activities.DonorLogin"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Activities.ReceiverSelectRequirement">
+        <activity android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.OTPVerification"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.OTPValidation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ReceiverRoleSelectActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.PinSelection"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.ReceiverLogin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Activities.DonorLogin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.ReceiverSelectRequirement"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.ReceiverRequirementsStatus"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Activities.ReceiverDetails"></activity>
-        <activity android:name=".Activities.AcceptorsView"></activity>
-        <activity android:name=".Activities.PinReset"></activity>
-        <activity android:name=".Activities.ForgotPinOTPValidation" />
-        <activity android:name=".Activities.ForgotPin" />
-        <activity android:name=".Activities.DonorDetails" />
-        <activity android:name=".Activities.DForgotPin" />
-        <activity android:name=".Activities.DOTPValidation" />
-        <activity android:name=".Activities.DPinSelection" />
-        <activity android:name=".Activities.DOTPVerification" />
-        <activity android:name=".Activities.DForgotPinOTPValidation" />
-        <activity android:name=".Activities.DPinReset" />
-        <activity android:name=".Activities.DonorSelectItems"></activity>
-        <activity android:name=".Activities.DonorHomeActivity"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.ReceiverDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AcceptorsView"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.PinReset"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ForgotPinOTPValidation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ForgotPin"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DonorDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DForgotPin"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DOTPValidation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DPinSelection"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DOTPVerification"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DForgotPinOTPValidation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DPinReset"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DonorHomeActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".Controllers.ForMyKeralaMessagingService">
             <intent-filter>
@@ -60,7 +79,8 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".Activities.Help_view"></activity>
+        <activity android:name=".Activities.Help_view"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +25,7 @@ import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
 import in.co.iodev.formykerala.Controllers.ProgressBarHider;
 import in.co.iodev.formykerala.Models.DataModel;
+import in.co.iodev.formykerala.Models.data;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -39,7 +43,10 @@ public class DForgotPin extends AppCompatActivity {
     Context context;
     ProgressBarHider hider;
 
-
+    Spinner countryCodeSpinner;
+    String countrycode[];
+    String code;
+    ArrayAdapter adapter;
 
 
     String StringData,request_post_url=DForgot_PIN_Generate,request_post_url1=Generate_OTP_Forget,TimeIndex;
@@ -47,6 +54,7 @@ public class DForgotPin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpverification);
         phone=findViewById(R.id.phone);
         back=findViewById(R.id.back_button);
@@ -54,7 +62,25 @@ public class DForgotPin extends AppCompatActivity {
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         context=this;
         hider=new ProgressBarHider(submit.getRootView(),submit);
+        countryCodeSpinner=findViewById(R.id.countrycode);
+        adapter= new ArrayAdapter<String>(this,
+                R.layout.spinner_layout, data.countryNames);
+        adapter.setDropDownViewResource(R.layout.drop_down_tems);
+        countryCodeSpinner.setAdapter(adapter);
+        countryCodeSpinner.setSelection(79);
+        countrycode= data.countryAreaCodes;
+        countryCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                code="+"+countrycode[i];
+                //Toast.makeText(getApplicationContext(),code,Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +99,14 @@ public class DForgotPin extends AppCompatActivity {
     public void verify() {
         hider.show();
 
-        StringData=phone.getText().toString();
-        if(StringData.equals(""))
+
+        if(phone.getText().toString().equals(""))
         {   hider.hide();
-            Toast.makeText(DForgotPin.this,"Please enter a Valid Phone number",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_ph_no);
+            Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
         }
         else {
+            StringData=code+phone.getText().toString();
             d = new DataModel();
             d.setPhoneNumber(StringData);
             StringData = gson.toJson(d);
@@ -180,7 +208,7 @@ public class DForgotPin extends AppCompatActivity {
                 editor.putString("PhoneNumber", d.getPhoneNumber());
                 editor.apply();
                 startActivity(new Intent(DForgotPin.this,DForgotPinOTPValidation.class));
-
+                DForgotPin.this.finish();
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -18,11 +18,12 @@
             android:layout_gravity="center"
             android:layout_weight="6"
             android:gravity="start"
-            android:text="Name"
+            android:text="@string/name"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <EditText
+            android:enabled="false"
             android:id="@+id/requested_quantity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -30,6 +31,6 @@
             android:layout_weight="6"
             android:gravity="center"
             android:inputType="number"
-            android:textSize="20sp"></EditText>
+            android:textSize="20sp"/>
     </LinearLayout>
 </LinearLayout>

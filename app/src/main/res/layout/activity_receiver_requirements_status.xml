@@ -16,14 +16,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="30dp">
+                android:paddingBottom="80dp">
 
-                <ImageView
-                    android:id="@+id/back_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
-                    android:src="@mipmap/back" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/back_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:src="@mipmap/back" />
+                    <ImageView
+                        android:id="@+id/voice"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="20dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/volume"
+                        android:tint="@android:color/white"
+                        android:background="@android:color/transparent"/>
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/textView"
@@ -31,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="-20dp"
-                    android:text="Registered Requirements"
+                    android:text="@string/register_request"
                     android:textColor="@android:color/white"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -82,7 +97,7 @@
                                     android:background="@android:color/transparent"
                                     android:gravity="center"
 
-                                    android:hint="Search your items"
+                                    android:hint="@string/search_your_items"
                                     android:textColor="@android:color/black"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -101,27 +116,27 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_weight="6"
+                                android:layout_weight="3"
                                 android:gravity="center"
-                                android:text="Name"
+                                android:text="@string/name"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_weight="8"
+                                android:gravity="center"
+                                android:text="@string/no_of_items_requested"
                                 android:textSize="20sp" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_weight="6"
+                                android:layout_weight="3"
                                 android:gravity="center"
-                                android:text="No. of Items Requested"
-                                android:textSize="20sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="6"
-                                android:gravity="center"
-                                android:text="Status"
+                                android:text="@string/status"
                                 android:textSize="20sp" />
 
                         </LinearLayout>
@@ -143,7 +158,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
                             android:divider="@android:color/transparent"
-                            android:dividerHeight="0dp"></ListView>
+                            android:dividerHeight="0dp"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -157,7 +172,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:elevation="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="55dp"
         app:cardCornerRadius="20dp">
 
         <Button
@@ -165,20 +180,31 @@
             android:id="@+id/check_status"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:text="Check Status"
-            android:textColor="@color/colorPrimaryBlue"
+            android:background="@color/colorPrimaryBlue"
+            android:text="@string/check_status"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
+           </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:elevation="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="20dp">
+
         <Button
+
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:layout_gravity="center_vertical|center_horizontal"
             android:background="@android:color/white"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:text="Log Out"
-            android:textColor="@color/colorPrimaryBlue"/>
-           </android.support.v7.widget.CardView>
+            android:text="@string/logout"
+            android:textColor="@color/colorPrimaryBlue"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

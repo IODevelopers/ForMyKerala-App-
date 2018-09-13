@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_reciever_select_requirement);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
 
@@ -74,6 +76,33 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         logout=findViewById(R.id.logout);
         item_search=findViewById(R.id.item_search);
         back=findViewById(R.id.back_button);
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MediaPlayer mp = new MediaPlayer();
+                voice.setClickable(false);
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.selectreq_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.selectreq_eng);
+                        mp.start();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        voice.setClickable(true);
+                    }
+                });
+            }
+        });
         hider=new ProgressBarHider(submit_button.getRootView(),submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +116,11 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 StringData=timeindex.toString();
+                Log.d("test",StringData);
                 submit=true;
                 hider.show();
-                new HTTPAsyncTask2().execute(url);}
+                new HTTPAsyncTask2().execute(url);
+                    }
                 else
                 {
                     hider.hide();
@@ -151,7 +182,7 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         {products.clear();
             for (int i=0;i<Mainproducts.size();i++)
             {
-                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString()))
+                if(Mainproducts.get(i).toString().toLowerCase().contains(item_search.getText().toString().toLowerCase()))
                 {
                     products.add(Mainproducts.get(i));
 
@@ -247,13 +278,20 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                         finalHolder.selected.setChecked(FALSE);
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
 
-                        finalHolder.selected.setChecked(TRUE);
+                        if(!finalHolder.Quantity.getText().toString().equals("0"))
+                            finalHolder.selected.setChecked(TRUE);
+                        else {
+                            finalHolder.Quantity.setText("");
+                            finalHolder.selected.setChecked(FALSE);
+                            Toast.makeText(getApplicationContext(), "Please enter a valid quantity", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 });
@@ -347,7 +385,8 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
 
                     editor.putBoolean(TimeIndex+"EditedR", TRUE);
-                    editor.commit();
+                    editor.putBoolean(TimeIndex+"FirstLogin", TRUE);
+                    editor.apply();
                     Intent intent = new Intent(ReceiverSelectRequirement.this, ReceiverRequirementsStatus.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -377,7 +416,8 @@ public class ReceiverSelectRequirement extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
 

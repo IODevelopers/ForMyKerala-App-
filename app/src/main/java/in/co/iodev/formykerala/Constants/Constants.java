@@ -23,11 +23,13 @@ public class Constants {
     public static String Get_Donation_items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/get-donor-items";
     public static String Get_Donor_accepted_Items = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accepted-request";
     public static String Get_Biased_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/getbaisedrequest";
-    public static String Accept_Request = "   https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accept-request";
+    public static String Accept_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accept-request/accepted-items";
     public static String Get_Accepted_Request = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/accepted-request";
     public static String Get_Receivers_Requirement="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/get-receiver-items";
     public static String Get_Accepted_Request_Receiver = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/recievers/get-accepted-donor";
     public static String FireBAseRegistrationURL = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/firebase/registration";
+
+    public static String Search_Requests = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/search-name";
 
     public static String Get_District = " https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/general/get-districts-and-taluks";
     public static String Get_App_Version ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getAppVersion";

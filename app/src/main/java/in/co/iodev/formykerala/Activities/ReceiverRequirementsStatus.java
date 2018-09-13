@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -64,6 +65,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_receiver_requirements_status);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         logout=findViewById(R.id.logout);
@@ -75,7 +77,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }*/
 
         TimeIndex=sharedPref.getString("TimeIndex","");
-        if(!sharedPref.contains(TimeIndex+"FirstLogin"))
+        if(sharedPref.getBoolean(TimeIndex+"FirstLogin",FALSE))
         {
             /*Toast.makeText(getApplicationContext(),"In",Toast.LENGTH_SHORT).show();*/
             final AlertDialog.Builder builder;
@@ -84,15 +86,15 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder
-                    .setMessage("Our volunteer will contact you to the registered phone number within 24 hours for verification purpose.")
+            String infoAlert = getString(R.string.info_alert);
+            builder.setMessage(infoAlert)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     })
 
             .show();
-            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",TRUE).apply();
+            sharedPref.edit().putBoolean(TimeIndex+"FirstLogin",FALSE).apply();
         }
 
         try{
@@ -121,7 +123,36 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }
         product_status_list=findViewById(R.id.product_status_listview);
         adapter=new Product_Request_Adapter();
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
 
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.checkstat_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.checkstat_eng);
+                        mp.start();
+
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         search_button=findViewById(R.id.search_button);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +238,7 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         int j=0;
             for (int i=0;i<Mainproducts.length();i++)
             {     final JSONObject object=new JSONObject(String.valueOf(Mainproducts.getJSONObject(i)));
-                if(object.getString("name").toLowerCase().contains(item_search.getText().toString()))
+                if(object.getString("name").toLowerCase().contains(item_search.getText().toString().toLowerCase()))
                 {
                     products.put(j,object);
                     j++;
@@ -346,7 +377,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
             CheckInternet CI=new CheckInternet();
             CI.isOnline(context);
             progress=new ProgressDialog(ReceiverRequirementsStatus.this);
-            progress.setMessage("Loading...");
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();
@@ -398,7 +430,8 @@ public class ReceiverRequirementsStatus extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 

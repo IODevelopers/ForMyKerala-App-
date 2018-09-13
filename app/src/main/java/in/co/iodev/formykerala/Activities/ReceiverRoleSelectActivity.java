@@ -13,6 +13,7 @@ public class ReceiverRoleSelectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_receiver_role_select);
         register_request=findViewById(R.id.receiver_register_request);
         register_request.setOnClickListener(new View.OnClickListener() {

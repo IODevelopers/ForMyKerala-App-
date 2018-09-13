@@ -52,6 +52,7 @@ public class AcceptorsView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_acceptors_view);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         context=this;
@@ -226,7 +227,8 @@ public class AcceptorsView extends AppCompatActivity {
             Log.d("Tm",StringData.toString());
 
             progress=new ProgressDialog(AcceptorsView.this);
-            progress.setMessage("Loading...");
+            String loadingMessage = getString(R.string.loading);
+            progress.setMessage(loadingMessage);
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
             progress.show();
@@ -238,7 +240,7 @@ public class AcceptorsView extends AppCompatActivity {
             progress.cancel();
             try {
                 if (!submit)
-                {Log.d("Responseitem",result);
+                {Log.d("ResponseitemA",String.valueOf(result.length()));
 
                     if(result.equals("{\"Items\": \"\"}"))
                     {

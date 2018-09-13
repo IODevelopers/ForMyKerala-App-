@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_weight="6"
             android:gravity="left"
-            android:text="Name"
+            android:text="@string/name"
             android:textSize="20sp"
             android:textStyle="bold" />
 

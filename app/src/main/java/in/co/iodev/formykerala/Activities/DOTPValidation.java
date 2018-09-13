@@ -3,6 +3,7 @@ package in.co.iodev.formykerala.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -52,6 +53,7 @@ public class DOTPValidation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_otpvalidation);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         otp1=findViewById(R.id.otp1);
@@ -64,6 +66,34 @@ public class DOTPValidation extends AppCompatActivity {
         otp2.addTextChangedListener(new OTPTextEditor(otp2,otp2.getRootView()));
         otp3.addTextChangedListener(new OTPTextEditor(otp3,otp3.getRootView()));
         otp4.addTextChangedListener(new OTPTextEditor(otp4,otp4.getRootView()));
+        final String localeCode=MainActivity.languagePreferences.getString("LOCALE_CODE", null);
+        final ImageView voice=findViewById(R.id.voice);
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voice.setClickable(false);
+                MediaPlayer mp = new MediaPlayer();
+
+                try {
+                    if(localeCode.equals("ml"))
+                    { mp=MediaPlayer.create(getApplicationContext(),R.raw.otpvalidation_mal);
+                        mp.start();}
+                    else if (localeCode.equals("en"))
+                    {
+                        mp=MediaPlayer.create(getApplicationContext(),R.raw.otpvalidation_eng);
+                        mp.start();
+                    }
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            voice.setClickable(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +104,8 @@ public class DOTPValidation extends AppCompatActivity {
         resend_otp=findViewById(R.id.otp_resend);
         back=findViewById(R.id.back_button);
         TextView phone=findViewById(R.id.phone);
-        phone.setText("to "+sharedPref.getString("PhoneNumber",""));
+        String text = getString(R.string.to)+sharedPref.getString("PhoneNumber","");
+        phone.setText(text);
         hider=new ProgressBarHider(verify.getRootView(),verify);
         timer();
         new Timer().schedule(new resendotp(),delay);
@@ -105,7 +136,8 @@ public class DOTPValidation extends AppCompatActivity {
         new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                textTimer.setText("Resend OTP in "+minutes+":"+checkDigit(seconds));
+                String reSentOTP = getString(R.string.resend_otp_in)+minutes+":"+checkDigit(seconds);
+                textTimer.setText(reSentOTP);
 
                 if(seconds==0)
                 {
@@ -123,7 +155,7 @@ public class DOTPValidation extends AppCompatActivity {
             public void onFinish() {
                 minutes=2;
                 seconds=0;
-                textTimer.setText("try again");
+                textTimer.setText(R.string.try_again);
             }
 
         }.start();
@@ -153,7 +185,8 @@ public class DOTPValidation extends AppCompatActivity {
 
     public void verify() {
         if(otp1.getText().toString().equals("")||otp2.getText().toString().equals("")||otp3.getText().toString().equals("")||otp4.getText().toString().equals("")){
-            Toast.makeText(DOTPValidation.this,"Please Enter Valid OTP",Toast.LENGTH_LONG).show();
+            String toastText = getString(R.string.toast_valid_otp);
+            Toast.makeText(DOTPValidation.this,toastText,Toast.LENGTH_LONG).show();
         }
         else {
             hider.show();
@@ -220,7 +253,8 @@ public class DOTPValidation extends AppCompatActivity {
                 finish();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Wrong OTP ",Toast.LENGTH_LONG).show();
+                    String toastText = getString(R.string.wrong_otp);
+                    Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {

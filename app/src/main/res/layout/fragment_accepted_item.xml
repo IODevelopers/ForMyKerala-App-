@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F7F8"
     android:fillViewport="true"
-    tools:context="in.co.iodev.formykerala.Activities.EditItemFragment">
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Accepted Requests"
+                android:text="@string/accepted_requests"
                 android:textSize="22sp" />
 
             <LinearLayout
@@ -55,7 +55,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Receiver"
+                        android:text="@string/receiver"
                         android:textSize="12sp" />
 
                     <TextView
@@ -64,7 +64,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Product"
+                        android:text="@string/product"
                         android:textSize="12sp" />
 
                     <TextView
@@ -73,7 +73,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Quantity"
+                        android:text="@string/quantity"
                         android:textSize="12sp" />
 
 
@@ -83,7 +83,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="6"
                         android:gravity="center"
-                        android:text="Phone"
+                        android:text="@string/phone"
                         android:textSize="12sp" />
 
 
@@ -107,14 +107,14 @@
                     android:layout_marginBottom="40dp"
                     android:layout_marginTop="10dp"
                     android:divider="@android:color/transparent"
-                    android:dividerHeight="0dp"></ListView>
+                    android:dividerHeight="0dp"/>
 
     <TextView
         android:id="@+id/no_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="No Accepted Items"
+        android:text="@string/no_accepted_items"
         android:visibility="invisible" />
 </RelativeLayout>
 
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#4885ED"
-                android:text="Log Out"
+                android:text="@string/logout"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 

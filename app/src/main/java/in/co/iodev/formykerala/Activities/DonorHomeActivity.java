@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import in.co.iodev.formykerala.Constants.Constants;
 import in.co.iodev.formykerala.Controllers.CheckInternet;
 import in.co.iodev.formykerala.Controllers.HTTPPostGet;
+import in.co.iodev.formykerala.Models.data;
 import in.co.iodev.formykerala.R;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -31,7 +32,7 @@ import static java.lang.Boolean.FALSE;
 public class DonorHomeActivity extends FragmentActivity {
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static int NUM_PAGES = 3;
+    private static int NUM_PAGES = 2;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -46,12 +47,13 @@ public class DonorHomeActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.setAppLocale(MainActivity.languagePreferences.getString("LOCALE_CODE", null), getResources());
         setContentView(R.layout.activity_donor_home);
         sharedPref=getDefaultSharedPreferences(getApplicationContext());
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager)findViewById(R.id.container);
         context=this;
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(0);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(TimeIndex+"DLogin", true);
@@ -95,19 +97,13 @@ public class DonorHomeActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position)
             {
-                case 0:
+                 case 0:
 
-                    EditItemFragment tab1=new EditItemFragment();
-                    Log.d("logout",sharedPref.getString("TimeIndex",""));
-                    Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
-                    return tab1;
-                case 1:
-
-                  EditQuantityFragment tab2=new EditQuantityFragment();
+                  EditQuantityFragment_New tab2=new EditQuantityFragment_New();
                     Log.d("logout",sharedPref.getString("TimeIndex",""));
                     Log.d("logout",String.valueOf(sharedPref.getBoolean(TimeIndex+"DLogin",FALSE)));
                     return tab2;
-                case 2:
+                case 1:
 
                    AcceptedItemFragment tab3=new AcceptedItemFragment();
                     Log.d("logout",sharedPref.getString("TimeIndex",""));
@@ -132,10 +128,9 @@ public class DonorHomeActivity extends FragmentActivity {
             switch (position)
             {
                 case 0:
-                    return "tokens";
+                    return "edit quanity";
                 case 1:
-                    return "jobs";
-                case 2:return "search";
+                    return "accepted items";
 
                 default: return null;
 
@@ -154,7 +149,8 @@ public class DonorHomeActivity extends FragmentActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        String toastText = getString(R.string.please_click_back_again_to_exit);
+        Toast.makeText(getApplicationContext(), toastText,Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
 
@@ -166,6 +162,7 @@ public class DonorHomeActivity extends FragmentActivity {
     }
     private class FireBaseRegistration extends AsyncTask<String, Void, String> {
         String response="Network Error";
+
 
         @Override
         protected String doInBackground(String... urls) {
