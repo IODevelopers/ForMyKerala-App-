@@ -1,3 +1,5 @@
+[![Amal Jyothi College](https://img.shields.io/badge/Amal%20Jyothi-College-orange.svg)](https://www.ajce.in/)
+
 ## [ForMyKerala-App](https://play.google.com/store/apps/details?id=in.co.iodev.formykerala)
 An app to help Kerala Recover from the recent natural disaster
 
